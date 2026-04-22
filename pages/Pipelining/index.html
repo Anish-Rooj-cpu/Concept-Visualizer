@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced CPU Pipelining Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Advanced CPU Pipelining Visualizer</h1>
+        <p>Interactive RISC Pipeline with Hazards, Data Flow, and Cycle Animation</p>
+    </header>
+
+    <div class="container">
+        <div class="panel controls-panel">
+            <h2>Instruction Queue</h2>
+            
+            <div class="input-group">
+                <label>Load Scenario:</label>
+                <select id="scenarioSelect" onchange="loadScenario()">
+                    <option value="raw">Data Hazard (RAW)</option>
+                    <option value="forwarding">Data Hazard (with Forwarding)</option>
+                    <option value="control">Control Hazard (Branching)</option>
+                    <option value="ideal">Ideal Pipeline (No Dependencies)</option>
+                </select>
+            </div>
+
+            <textarea id="instructionInput" rows="6" spellcheck="false">
+ADD R1, R2, R3
+SUB R4, R1, R5
+LW R6, 0(R1)
+ADD R7, R6, R2</textarea>
+            <p class="hint">Format: OP DEST, SRC1, SRC2 (e.g., ADD R1, R2, R3). Registers R0-R7.</p>
+            
+            <div class="settings-group">
+                <label>
+                    <input type="checkbox" id="enableForwarding"> Enable Data Forwarding
+                </label>
+            </div>
+
+            <div class="button-group">
+                <button onclick="loadInstructions()" class="btn-primary">Load & Reset</button>
+                <button onclick="stepCycle()" class="btn-step" id="stepBtn">Step Cycle ⏱️</button>
+                <button onclick="toggleAutoRun()" class="btn-auto" id="autoBtn">Auto-Run ▶</button>
+            </div>
+
+            <div class="stats-panel" id="statsDisplay">
+                <h3>Pipeline Metrics</h3>
+                <div class="stat-row"><span>Clock Cycle:</span> <strong id="cycleCount">0</strong></div>
+                <div class="stat-row"><span>Instructions Completed:</span> <strong id="completedCount">0</strong></div>
+                <div class="stat-row"><span>CPI (Cycles/Inst):</span> <strong id="cpiValue">0.00</strong></div>
+            </div>
+        </div>
+
+        <div class="panel visualization-panel">
+            
+            <h2>Data Flow / Hardware View</h2>
+            <div class="hardware-pipeline">
+                <div class="stage-block" title="Instruction Fetch: Fetches instruction from memory">
+                    <div class="stage-name">IF</div>
+                    <div class="stage-content" id="hw-if">Empty</div>
+                </div>
+                <div class="arrow">➔</div>
+                <div class="stage-block" title="Instruction Decode: Reads registers and decodes op">
+                    <div class="stage-name">ID</div>
+                    <div class="stage-content" id="hw-id">Empty</div>
+                </div>
+                <div class="arrow">➔</div>
+                <div class="stage-block" title="Execute: ALU operations, address calc, branch resolution">
+                    <div class="stage-name">EX</div>
+                    <div class="stage-content" id="hw-ex">Empty</div>
+                </div>
+                <div class="arrow">➔</div>
+                <div class="stage-block" title="Memory: Data memory access (Load/Store)">
+                    <div class="stage-name">MEM</div>
+                    <div class="stage-content" id="hw-mem">Empty</div>
+                </div>
+                <div class="arrow">➔</div>
+                <div class="stage-block" title="Write Back: Writes result back to register file">
+                    <div class="stage-name">WB</div>
+                    <div class="stage-content" id="hw-wb">Empty</div>
+                </div>
+            </div>
+
+            <h2>Space-Time Diagram</h2>
+            <div class="table-wrapper">
+                <table id="pipelineTable">
+                    <thead>
+                        <tr id="cycleHeaderRow">
+                            <th>Instruction</th>
+                            </tr>
+                    </thead>
+                    <tbody id="pipelineBody">
+                        </tbody>
+                </table>
+            </div>
+
+            <h2>Register File</h2>
+            <div class="register-file" id="registerGrid">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
