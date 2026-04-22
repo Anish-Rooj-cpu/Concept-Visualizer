@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Fourier Transform Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-titles">
+                <h1>Fourier Series & Transform Explorer</h1>
+                <p>Understand how complex signals are built from simple sine waves in both the Time and Frequency domains.</p>
+            </div>
+            <div class="header-controls">
+                <button id="btn-play-pause" class="btn-primary">Pause ⏸</button>
+                <div class="speed-control">
+                    <label>Speed:</label>
+                    <input type="range" id="speed-slider" min="0" max="2" step="0.1" value="1">
+                </div>
+                <div class="toggle-control">
+                    <label><input type="checkbox" id="toggle-error"> Show Ideal Wave</label>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <aside class="controls-panel">
+                <div class="panel-section">
+                    <h2>Waveform Generator</h2>
+                    <select id="wave-selector">
+                        <option value="square">Square Wave</option>
+                        <option value="sawtooth">Sawtooth Wave</option>
+                        <option value="triangle">Triangle Wave</option>
+                        <option value="custom">Custom (Drag Spectrum)</option>
+                        <option value="reset">Zero Signal (Flat)</option>
+                    </select>
+                </div>
+
+                <div class="panel-section">
+                    <h2>Harmonics Editor</h2>
+                    <p class="hint">Adjust amplitude and phase. Hover to highlight.</p>
+                    <div id="harmonics-container">
+                        </div>
+                </div>
+            </aside>
+
+            <section class="visualization-panel">
+                
+                <div class="equation-box" id="math-equation">
+                    f(t) = 0
+                </div>
+
+                <div class="canvas-wrapper main-canvas-wrapper">
+                    <h3 class="overlay-title">Time Domain (Epicycles & Waveform)</h3>
+                    <canvas id="timeCanvas"></canvas>
+                </div>
+
+                <div class="canvas-wrapper spectrum-wrapper">
+                    <h3 class="overlay-title">Frequency Domain (Amplitude Spectrum) - <span class="hint">Drag bars to edit!</span></h3>
+                    <canvas id="freqCanvas"></canvas>
+                </div>
+            </section>
+            
+            <aside class="guide-panel">
+                <h2>What am I seeing?</h2>
+                <div id="guide-content">
+                    <p><strong>The Big Idea:</strong> Any repeating wave can be broken down into a sum of basic sine waves.</p>
+                    <hr>
+                    <p id="dynamic-guide">Watch the circles (epicycles). The first circle is the fundamental frequency. Each attached circle spins faster, representing higher harmonics. Their vertical positions add up to draw the wave!</p>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
