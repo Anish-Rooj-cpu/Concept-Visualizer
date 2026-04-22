@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFT Butterfly Algorithm Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <div class="header-titles">
+                <h1>FFT Butterfly Algorithm Explorer</h1>
+                <p>Interactive Cooley–Tukey Decimation-in-Time (DIT) Signal Flow Graph.</p>
+            </div>
+            <div class="header-controls">
+                <label for="fft-size">FFT Size (N): </label>
+                <select id="fft-size" class="select-dropdown">
+                    <option value="2">N = 2</option>
+                    <option value="4">N = 4</option>
+                    <option value="8" selected>N = 8</option>
+                    <option value="16">N = 16</option>
+                </select>
+            </div>
+        </header>
+
+        <main class="grid-container">
+            <!-- INFO PANEL -->
+            <aside class="panel info-panel">
+                <div class="panel-header">
+                    <h2>How it Works</h2>
+                </div>
+
+                <div class="panel-content">
+                    <p>
+                        The Cooley–Tukey algorithm recursively breaks down a Discrete Fourier Transform (DFT)
+                        of size <strong>N</strong> into two smaller DFTs of size <strong>N/2</strong>.
+                    </p>
+
+                    <h3>Key Concepts:</h3>
+                    <ul class="concept-list">
+
+                        <li>
+                            <strong>Bit-Reversal:</strong>
+                            Notice the inputs on the left x[n]. They are not in order (0, 1, 2...).
+                            They are bit-reversed to allow in-place computation.
+                        </li>
+
+                        <li>
+                            <strong>Stages:</strong>
+                            There are exactly <strong>log<sub>2</sub>(N)</strong> stages of computation.
+                        </li>
+
+                        <li>
+                            <strong>The Butterfly (✖):</strong>
+                            Two inputs combine to create two outputs.
+                            <br><br>
+                            Top Output: <strong>A + W · B</strong><br>
+                            Bottom Output: <strong>A − W · B</strong>
+                        </li>
+
+                        <li>
+                            <strong>Twiddle Factor:</strong>
+                            The complex exponential multiplier 
+                            <strong>W<sub>N</sub><sup>k</sup></strong> applied to the bottom branch.
+                        </li>
+
+                    </ul>
+
+                    <div class="instruction-box">
+                        <strong>Interactive Mode:</strong><br>
+                        Hover your mouse over any node to trace its dependency path backward.
+                    </div>
+                </div>
+            </aside>
+
+            <!-- VISUALIZER -->
+            <section class="panel visualizer-panel">
+                <div class="panel-header">
+                    <h2>Signal Flow Graph</h2>
+
+                    <div class="legend">
+                        <span class="legend-item">
+                            <span class="line-sample normal-line"></span>
+                            Data Path
+                        </span>
+
+                        <span class="legend-item">
+                            <span class="line-sample mult-line"></span>
+                            Multiplier (W<sub>N</sub><sup>k</sup>)
+                        </span>
+
+                        <span class="legend-item">
+                            <span class="line-sample sub-line"></span>
+                            Subtraction (−1)
+                        </span>
+                    </div>
+                </div>
+
+                <div class="canvas-wrapper">
+                    <canvas id="butterflyCanvas"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
