@@ -8,7 +8,7 @@ Instead of relying only on equations, this project focuses on **learning through
 
 ## 🌐 Live Demo
 
-👉 https://your-username.github.io/your-repo-name/
+👉 https://anish-rooj-cpu.github.io/Concept-Visualizer/
 
 ---
 
