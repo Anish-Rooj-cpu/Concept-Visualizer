@@ -27,7 +27,6 @@ This project transforms abstract mathematical ideas into **intuitive, interactiv
 - Convolution & Correlation (step-by-step visualization)
 - Sampling & Aliasing (Nyquist theorem intuition)
 - Fourier Transform (harmonic decomposition & synthesis)
-- Fast Fourier Transform (FFT) Explorer
 - Butterfly Structure (Cooley–Tukey signal flow graph)
 
 ---
