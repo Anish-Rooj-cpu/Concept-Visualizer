@@ -1,492 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>State Space Phase Portrait Visualizer</title>
-    <style>
-        :root {
-            --bg-dark: #11111b;
-            --bg-panel: #1e1e2e;
-            --bg-input: #313244;
-            --text-main: #cdd6f4;
-            --text-muted: #a6adc8;
-            --accent-blue: #89b4fa;
-            --accent-pink: #f38ba8;
-            --accent-green: #a6e3a1;
-            --accent-yellow: #f9e2af;
-            --border-color: #45475a;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        h1 {
-            color: var(--accent-blue);
-            margin-bottom: 5px;
-            text-align: center;
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-size: 15px;
-            text-align: center;
-        }
-
-        .dashboard {
-            display: flex;
-            gap: 20px;
-            max-width: 1000px;
-            width: 100%;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .panel {
-            background-color: var(--bg-panel);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--bg-input);
-        }
-
-        .controls-panel {
-            flex: 1;
-            min-width: 320px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .matrix-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            background: var(--bg-dark);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px dashed var(--border-color);
-            position: relative;
-        }
-
-        .matrix-label {
-            position: absolute;
-            top: 50%;
-            left: -25px;
-            transform: translateY(-50%);
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--accent-yellow);
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        label {
-            color: var(--text-muted);
-            font-size: 12px;
-        }
-
-        input[type="number"] {
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-panel);
-            color: var(--text-main);
-            font-family: monospace;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        select,
-        button {
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background-color: var(--bg-input);
-            color: var(--text-main);
-            font-size: 14px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button.primary {
-            background-color: var(--accent-blue);
-            color: var(--bg-dark);
-            border: none;
-            transition: background-color 0.2s;
-        }
-
-        button.primary:hover {
-            background-color: #74c7ec;
-        }
-
-        .metrics-box {
-            background-color: var(--bg-dark);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            line-height: 1.6;
-            border-left: 4px solid var(--accent-blue);
-        }
-
-        .highlight {
-            color: var(--accent-pink);
-            font-weight: bold;
-        }
-
-        .visual-panel {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            min-width: 500px;
-            align-items: center;
-        }
-
-        .canvas-container {
-            position: relative;
-            background-color: var(--bg-dark);
-            border-radius: 8px;
-            border: 2px solid var(--border-color);
-            cursor: crosshair;
-        }
-
-        canvas {
-            display: block;
-            border-radius: 6px;
-        }
-
-        .instruction {
-            text-align: center;
-            color: var(--accent-green);
-            font-size: 14px;
-            font-weight: bold;
-        }
-    </style>
+    <title>Advanced State Space Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-    <h1>State Space Phase Portrait</h1>
-    <div class="subtitle">dx/dt = Ax (Unforced Autonomous System)</div>
+    <h1>Advanced State Space Phase Portrait</h1>
+    <div class="subtitle">dx/dt = Ax | Interactive Dynamics, Animation, & Time Response</div>
 
     <div class="dashboard">
         <div class="panel controls-panel">
-
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <label style="color: var(--text-main); font-weight: bold; font-size: 14px;">System
-                    Matrix (A)</label>
-                <div class="matrix-container">
+            
+            <div class="control-section">
+                <label class="section-label">System Matrix (A)</label>
+                <div class="matrix-wrapper">
                     <div class="matrix-label">A =</div>
-                    <div class="input-group"><input type="number" id="a11" value="-0.5" step="0.1"></div>
-                    <div class="input-group"><input type="number" id="a12" value="1" step="0.1"></div>
-                    <div class="input-group"><input type="number" id="a21" value="-1" step="0.1"></div>
-                    <div class="input-group"><input type="number" id="a22" value="-0.5" step="0.1"></div>
+                    <div class="matrix-grid">
+                        <input type="number" id="a11" value="-0.5" step="0.1">
+                        <input type="number" id="a12" value="1" step="0.1">
+                        <input type="number" id="a21" value="-1" step="0.1">
+                        <input type="number" id="a22" value="-0.5" step="0.1">
+                    </div>
                 </div>
             </div>
 
-            <select id="presetSelect">
-                <option value="custom">-- Choose a Preset System --</option>
-                <option value="center">Simple Harmonic Oscillator (Center)</option>
-                <option value="stable_focus">Damped Oscillator (Stable Focus)</option>
-                <option value="saddle">Saddle Point</option>
-                <option value="stable_node">Overdamped (Stable Node)</option>
-                <option value="unstable_node">Unstable Node</option>
-            </select>
+            <div class="control-section">
+                <label class="section-label">Presets</label>
+                <select id="presetSelect">
+                    <option value="stable_focus">Damped Oscillator (Stable Focus)</option>
+                    <option value="center">Harmonic Oscillator (Center)</option>
+                    <option value="saddle">Saddle Point</option>
+                    <option value="stable_node">Overdamped (Stable Node)</option>
+                    <option value="unstable_node">Unstable Node</option>
+                    <option value="unstable_focus">Unstable Focus</option>
+                </select>
+            </div>
 
-            <button class="primary" onclick="updateSystem()">Update Vector Field</button>
-            <button onclick="clearTrajectories()">Clear Trajectories</button>
+            <div class="control-section">
+                <div class="slider-header">
+                    <label class="section-label">Vector Field Density</label>
+                    <span id="densityLabel">Medium (40px)</span>
+                </div>
+                <input type="range" id="densitySlider" min="20" max="80" step="5" value="40">
+            </div>
+
+            <div class="button-group">
+                <button class="primary" id="updateBtn">Update Vector Field</button>
+                <button class="secondary" onclick="clearAllTrajectories()">Clear Trajectories</button>
+            </div>
 
             <div class="metrics-box" id="metricsReadout">
-            </div>
+                </div>
         </div>
 
-        <div class="panel visual-panel">
-            <div class="instruction">Click anywhere on the graph to drop a particle and trace its
-                trajectory!</div>
+        <div class="visual-panel">
+            <div class="instruction">
+                <strong>Left Click:</strong> Drop Particle &nbsp;|&nbsp; <strong>Right-Click Drag:</strong> Pan &nbsp;|&nbsp; <strong>Scroll:</strong> Zoom
+            </div>
+            
             <div class="canvas-container">
-                <canvas id="phaseCanvas" width="600" height="600"></canvas>
+                <canvas id="phaseCanvas" width="650" height="450"></canvas>
+            </div>
+            
+            <div class="canvas-container" style="margin-top: 15px;">
+                <div class="chart-title">System Response x(t) (Last Clicked Trajectory)</div>
+                <canvas id="timeCanvas" width="650" height="200"></canvas>
             </div>
         </div>
     </div>
 
-    <script>
-        const canvas = document.getElementById('phaseCanvas');
-        const ctx = canvas.getContext('2d');
-        const a11Input = document.getElementById('a11');
-        const a12Input = document.getElementById('a12');
-        const a21Input = document.getElementById('a21');
-        const a22Input = document.getElementById('a22');
-        const presetSelect = document.getElementById('presetSelect');
-        const metricsReadout = document.getElementById('metricsReadout');
-
-        // Coordinate System Params
-        const width = canvas.width;
-        const height = canvas.height;
-        const origin = { x: width / 2, y: height / 2 };
-        const viewLimit = 5; // Graph ranges from -5 to 5 on both axes
-        const scale = width / (viewLimit * 2);
-
-        let trajectories = [];
-        let A = [[0, 0], [0, 0]];
-
-        const presets = {
-            center: [-0.0, 1, -1, 0.0],
-            stable_focus: [-0.5, 1, -1, -0.5],
-            saddle: [1, 1, 4, -2],
-            stable_node: [-2, 1, 0, -1],
-            unstable_node: [2, 1, 0, 1]
-        };
-
-        presetSelect.addEventListener('change', (e) => {
-            const val = e.target.value;
-            if (presets[val]) {
-                a11Input.value = presets[val][0];
-                a12Input.value = presets[val][1];
-                a21Input.value = presets[val][2];
-                a22Input.value = presets[val][3];
-                updateSystem();
-            }
-        });
-
-        function getMatrix() {
-            A[0][0] = parseFloat(a11Input.value) || 0;
-            A[0][1] = parseFloat(a12Input.value) || 0;
-            A[1][0] = parseFloat(a21Input.value) || 0;
-            A[1][1] = parseFloat(a22Input.value) || 0;
-        }
-
-        // --- Math & Stability Analysis ---
-        function analyzeStability() {
-            const tr = A[0][0] + A[1][1];
-            const det = A[0][0] * A[1][1] - A[0][1] * A[1][0];
-            const delta = tr * tr - 4 * det;
-
-            let lambda1_r, lambda1_i, lambda2_r, lambda2_i;
-            let type = "Unknown";
-            let color = "#cdd6f4";
-
-            if (delta >= 0) {
-                // Real roots
-                lambda1_r = (tr + Math.sqrt(delta)) / 2;
-                lambda2_r = (tr - Math.sqrt(delta)) / 2;
-                lambda1_i = 0; lambda2_i = 0;
-
-                if (det < 0) { type = "Saddle Point"; color = "#f9e2af"; }
-                else if (tr > 0) { type = "Unstable Node"; color = "#f38ba8"; }
-                else if (tr < 0) { type = "Stable Node"; color = "#a6e3a1"; }
-                else { type = "Line of fixed points"; }
-            } else {
-                // Complex roots
-                lambda1_r = tr / 2;
-                lambda2_r = tr / 2;
-                lambda1_i = Math.sqrt(-delta) / 2;
-                lambda2_i = -Math.sqrt(-delta) / 2;
-
-                if (tr > 0) { type = "Unstable Focus (Spiral Out)"; color = "#f38ba8"; }
-                else if (tr < 0) { type = "Stable Focus (Spiral In)"; color = "#a6e3a1"; }
-                else { type = "Center (Undamped)"; color = "#89b4fa"; }
-            }
-
-            const formatLambda = (r, i) => {
-                if (i === 0) return r.toFixed(3);
-                const sign = i > 0 ? "+" : "-";
-                return `${r.toFixed(3)} ${sign} j${Math.abs(i).toFixed(3)}`;
-            };
-
-            metricsReadout.innerHTML = `
-                <div style="margin-bottom: 5px;"><strong>Trace (τ):</strong> ${tr.toFixed(3)}</div>
-                <div style="margin-bottom: 5px;"><strong>Determinant (Δ):</strong> ${det.toFixed(3)}</div>
-                <div style="margin: 10px 0; border-top: 1px solid var(--border-color);"></div>
-                <div style="margin-bottom: 5px;"><strong>Eigenvalues (λ):</strong></div>
-                <div style="font-family: monospace; color: var(--accent-yellow);">λ₁ = ${formatLambda(lambda1_r, lambda1_i)}</div>
-                <div style="font-family: monospace; color: var(--accent-yellow);">λ₂ = ${formatLambda(lambda2_r, lambda2_i)}</div>
-                <div style="margin-top: 15px; font-size: 16px; font-weight: bold; color: ${color};">${type}</div>
-            `;
-        }
-
-        // --- Plotting ---
-        function drawAxes() {
-            ctx.strokeStyle = '#45475a';
-            ctx.lineWidth = 1;
-
-            // Grid
-            for (let i = -viewLimit; i <= viewLimit; i++) {
-                ctx.beginPath(); ctx.moveTo(0, origin.y + i * scale); ctx.lineTo(width, origin.y + i * scale); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(origin.x + i * scale, 0); ctx.lineTo(origin.x + i * scale, height); ctx.stroke();
-            }
-
-            // Main Axes
-            ctx.strokeStyle = '#a6adc8'; ctx.lineWidth = 2;
-            ctx.beginPath(); ctx.moveTo(0, origin.y); ctx.lineTo(width, origin.y); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(origin.x, 0); ctx.lineTo(origin.x, height); ctx.stroke();
-
-            ctx.fillStyle = '#a6adc8'; ctx.font = '14px sans-serif';
-            ctx.fillText('x₁', width - 20, origin.y - 10);
-            ctx.fillText('x₂', origin.x + 10, 20);
-        }
-
-        function drawVectorField() {
-            ctx.strokeStyle = 'rgba(137, 180, 250, 0.4)'; // Faint blue for vectors
-            ctx.lineWidth = 1.5;
-
-            const spacing = 0.5; // Space between grid points
-
-            for (let x = -viewLimit; x <= viewLimit; x += spacing) {
-                for (let y = -viewLimit; y <= viewLimit; y += spacing) {
-                    if (x === 0 && y === 0) continue;
-
-                    // Compute derivative dx/dt = Ax
-                    const dx = A[0][0] * x + A[0][1] * y;
-                    const dy = A[1][0] * x + A[1][1] * y;
-
-                    // Normalize and scale arrow length
-                    const mag = Math.sqrt(dx * dx + dy * dy);
-                    if (mag < 0.001) continue;
-
-                    const len = Math.min(0.35, mag * 0.15); // Cap length
-                    const udx = (dx / mag) * len;
-                    const udy = (dy / mag) * len;
-
-                    // Canvas coordinates (y is inverted)
-                    const cx = origin.x + x * scale;
-                    const cy = origin.y - y * scale;
-                    const endX = origin.x + (x + udx) * scale;
-                    const endY = origin.y - (y + udy) * scale;
-
-                    // Draw arrow shaft
-                    ctx.beginPath();
-                    ctx.moveTo(cx, cy);
-                    ctx.lineTo(endX, endY);
-                    ctx.stroke();
-
-                    // Draw arrow head
-                    const angle = Math.atan2(-udy, udx); // Negative because canvas Y goes down
-                    const headLen = 4;
-                    ctx.beginPath();
-                    ctx.moveTo(endX, endY);
-                    ctx.lineTo(endX - headLen * Math.cos(angle - Math.PI / 6), endY - headLen * Math.sin(angle - Math.PI / 6));
-                    ctx.lineTo(endX - headLen * Math.cos(angle + Math.PI / 6), endY - headLen * Math.sin(angle + Math.PI / 6));
-                    ctx.lineTo(endX, endY);
-                    ctx.fillStyle = 'rgba(137, 180, 250, 0.6)';
-                    ctx.fill();
-                }
-            }
-        }
-
-        // Runge-Kutta 4th Order Integrator
-        function integrateRK4(x0, y0, dt, steps) {
-            let path = [{ x: x0, y: y0 }];
-            let x = x0, y = y0;
-
-            for (let i = 0; i < steps; i++) {
-                const f = (valX, valY) => ({
-                    dx: A[0][0] * valX + A[0][1] * valY,
-                    dy: A[1][0] * valX + A[1][1] * valY
-                });
-
-                const k1 = f(x, y);
-                const k2 = f(x + 0.5 * dt * k1.dx, y + 0.5 * dt * k1.dy);
-                const k3 = f(x + 0.5 * dt * k2.dx, y + 0.5 * dt * k2.dy);
-                const k4 = f(x + dt * k3.dx, y + dt * k3.dy);
-
-                x += (dt / 6) * (k1.dx + 2 * k2.dx + 2 * k3.dx + k4.dx);
-                y += (dt / 6) * (k1.dy + 2 * k2.dy + 2 * k3.dy + k4.dy);
-
-                path.push({ x, y });
-
-                // Stop if it flies out of bounds too far
-                if (Math.abs(x) > viewLimit * 3 || Math.abs(y) > viewLimit * 3) break;
-            }
-            return path;
-        }
-
-        function drawTrajectories() {
-            ctx.lineWidth = 2;
-
-            trajectories.forEach((traj, index) => {
-                // Give each trajectory a slightly different color
-                const colors = ['#f38ba8', '#a6e3a1', '#f9e2af', '#cba6f7', '#89dceb'];
-                ctx.strokeStyle = colors[index % colors.length];
-
-                ctx.beginPath();
-                for (let i = 0; i < traj.length; i++) {
-                    const cx = origin.x + traj[i].x * scale;
-                    const cy = origin.y - traj[i].y * scale;
-                    if (i === 0) ctx.moveTo(cx, cy);
-                    else ctx.lineTo(cx, cy);
-                }
-                ctx.stroke();
-
-                // Draw initial dot
-                ctx.fillStyle = '#ffffff';
-                ctx.beginPath();
-                ctx.arc(origin.x + traj[0].x * scale, origin.y - traj[0].y * scale, 4, 0, Math.PI * 2);
-                ctx.fill();
-            });
-        }
-
-        function render() {
-            ctx.clearRect(0, 0, width, height);
-            drawAxes();
-            drawVectorField();
-            drawTrajectories();
-        }
-
-        function updateSystem() {
-            getMatrix();
-            analyzeStability();
-            render();
-        }
-
-        function clearTrajectories() {
-            trajectories = [];
-            render();
-        }
-
-        // --- Interaction ---
-        canvas.addEventListener('mousedown', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const mouseX = e.clientX - rect.left;
-            const mouseY = e.clientY - rect.top;
-
-            // Convert to state space coordinates
-            const x0 = (mouseX - origin.x) / scale;
-            const y0 = -(mouseY - origin.y) / scale;
-
-            // Integrate forward in time
-            const pathForward = integrateRK4(x0, y0, 0.02, 500);
-
-            // Integrate backward in time (to show where it came from)
-            let pathBackward = integrateRK4(x0, y0, -0.02, 500);
-            pathBackward.reverse(); // Reverse so it flows naturally
-
-            // Combine
-            const fullPath = pathBackward.concat(pathForward);
-            trajectories.push(fullPath);
-
-            render();
-        });
-
-        // Init
-        presetSelect.value = "stable_focus";
-        updateSystem();
-
-    </script>
+    <script src="script.js"></script>
 </body>
-
 </html>
