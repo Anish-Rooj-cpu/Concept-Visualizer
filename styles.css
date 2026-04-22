@@ -1,0 +1,120 @@
+* {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+}
+
+body {
+          font-family: 'Poppins', sans-serif;
+          background: linear-gradient(135deg, #0f172a, #1e293b);
+          color: #e2e8f0;
+}
+
+/* Header */
+header {
+          padding: 20px 60px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+}
+
+header h1 {
+          font-size: 24px;
+          font-weight: 600;
+          color: #38bdf8;
+}
+
+nav a {
+          margin-left: 25px;
+          text-decoration: none;
+          color: #cbd5f5;
+          transition: 0.3s;
+}
+
+nav a:hover {
+          color: #38bdf8;
+}
+
+/* Hero */
+.hero {
+          text-align: center;
+          padding: 100px 20px 60px;
+}
+
+.hero h2 {
+          font-size: 42px;
+          margin-bottom: 20px;
+}
+
+.hero p {
+          font-size: 18px;
+          color: #94a3b8;
+          max-width: 600px;
+          margin: auto;
+}
+
+/* Container */
+.container {
+          padding: 40px 60px;
+}
+
+.section-title {
+          font-size: 28px;
+          margin-bottom: 30px;
+}
+
+/* Cards */
+.card-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 25px;
+}
+
+.card {
+          background: #1e293b;
+          padding: 25px;
+          border-radius: 16px;
+          transition: 0.3s;
+          text-decoration: none;
+          color: white;
+          border: 1px solid transparent;
+}
+
+.card:hover {
+          transform: translateY(-8px);
+          border: 1px solid #38bdf8;
+          box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+}
+
+.card h3 {
+          margin-bottom: 10px;
+          color: #38bdf8;
+}
+
+.card p {
+          font-size: 14px;
+          color: #94a3b8;
+}
+
+/* Footer */
+footer {
+          text-align: center;
+          padding: 30px;
+          color: #64748b;
+          margin-top: 50px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+          header {
+                    padding: 20px;
+          }
+
+          .container {
+                    padding: 20px;
+          }
+
+          .hero h2 {
+                    font-size: 32px;
+          }
+}
