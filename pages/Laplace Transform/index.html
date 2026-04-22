@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Laplace Transform & System Dynamics Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <div class="header-titles">
+                <h1>Advanced Laplace Systems Explorer</h1>
+                <p>Interactive s-plane, time-domain simulation, and frequency response (Bode).</p>
+            </div>
+            <div class="header-controls">
+                <button id="btn-add-pole-real" class="btn pole-btn">+ Add Real Pole (✖)</button>
+                <button id="btn-add-pole-complex" class="btn pole-btn">+ Add Complex Poles (✖)</button>
+                <button id="btn-add-zero" class="btn zero-btn">+ Add Zero (〇)</button>
+                <button id="btn-clear" class="btn clear-btn">Clear All</button>
+            </div>
+        </header>
+
+        <main class="grid-container">
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>s-Plane (Complex Plane)</h2>
+                    <div class="toggles">
+                        <label><input type="checkbox" id="toggle-snap" checked> Snap to Grid</label>
+                    </div>
+                </div>
+                <div class="canvas-wrapper splane-wrapper">
+                    <canvas id="sPlaneCanvas"></canvas>
+                    <div id="tooltip" class="tooltip"></div>
+                    <div class="splane-hint">Scroll to Zoom | Drag to Pan</div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Time Domain Response f(t)</h2>
+                    <div class="toggles">
+                        <select id="response-type">
+                            <option value="impulse">Impulse Response δ(t)</option>
+                            <option value="step" selected>Step Response u(t)</option>
+                        </select>
+                        <label><input type="checkbox" id="toggle-envelope" checked> Show Envelope</label>
+                    </div>
+                </div>
+                <div class="canvas-wrapper time-wrapper">
+                    <canvas id="timeCanvas"></canvas>
+                </div>
+            </section>
+
+            <section class="panel math-panel">
+                <h2>Mathematical Decomposition (Partial Fractions)</h2>
+                <div id="math-decomposition" class="math-content">
+                    <p class="placeholder-text">Add poles/zeros to see the exact time-domain equation...</p>
+                </div>
+                <div class="intuition-guide">
+                    <strong>Intuition Guide:</strong><br>
+                    <span style="color:var(--pole-color)">σ (Real axis)</span> controls exponential <strong>Decay / Growth</strong>.<br>
+                    <span style="color:var(--zero-color)">jω (Imag axis)</span> controls <strong>Oscillation Frequency</strong>.<br>
+                    <span style="color:var(--envelope-color)">ROC</span> (Region of Convergence) must include the jω axis for a stable, causal system.
+                </div>
+            </section>
+
+            <section class="panel freq-panel">
+                <h2>Frequency Response (Bode Magnitude Plot)</h2>
+                <p class="subtitle">Evaluated along the jω axis (s = jω)</p>
+                <div class="canvas-wrapper freq-wrapper">
+                    <canvas id="freqCanvas"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
