@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Z-Transform & DSP Visualizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <div class="header-titles">
+                <h1>Z-Transform & DSP System Explorer</h1>
+                <p>Interactive z-plane, discrete time-domain simulation, and digital frequency response.</p>
+            </div>
+            <div class="header-controls">
+                <button id="btn-add-pole" class="btn pole-btn">+ Add Pole (✖)</button>
+                <button id="btn-add-pole-complex" class="btn pole-btn">+ Add Conjugate Poles</button>
+                <button id="btn-add-zero" class="btn zero-btn">+ Add Zero (〇)</button>
+                <button id="btn-clear" class="btn clear-btn">Clear All</button>
+            </div>
+        </header>
+
+        <main class="grid-container">
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>z-Plane (Complex Plane)</h2>
+                    <div class="toggles">
+                        <label><input type="checkbox" id="toggle-snap" checked> Snap to Grid</label>
+                    </div>
+                </div>
+                <div class="canvas-wrapper splane-wrapper">
+                    <canvas id="zPlaneCanvas"></canvas>
+                    <div id="tooltip" class="tooltip"></div>
+                    <div class="hint">Stability boundary is the Unit Circle (|z| = 1)</div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Time Domain Response (Discrete y[n])</h2>
+                    <div class="toggles">
+                        <select id="response-type">
+                            <option value="impulse">Impulse Response δ[n]</option>
+                            <option value="step" selected>Step Response u[n]</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="canvas-wrapper time-wrapper">
+                    <canvas id="timeCanvas"></canvas>
+                </div>
+            </section>
+
+            <section class="panel math-panel">
+                <h2>System Function H(z)</h2>
+                <div id="math-decomposition" class="math-content">
+                    <p class="placeholder-text">Add poles/zeros to see the transfer function...</p>
+                </div>
+                <div class="intuition-guide">
+                    <strong>DSP Intuition Guide:</strong><br>
+                    • <strong>Inside Unit Circle:</strong> Signal decays (Stable).<br>
+                    • <strong>Outside Unit Circle:</strong> Signal grows infinitely (Unstable).<br>
+                    • <strong>Angle (θ):</strong> Determines the digital frequency of oscillation.<br>
+                    • <strong>Zeros on Unit Circle:</strong> Completely blocks that specific frequency.
+                </div>
+            </section>
+
+            <section class="panel freq-panel">
+                <h2>Frequency Response |H(e^jω)|</h2>
+                <p class="subtitle">Evaluated strictly along the Unit Circle (0 to π)</p>
+                <div class="canvas-wrapper freq-wrapper">
+                    <canvas id="freqCanvas"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
