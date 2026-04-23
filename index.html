@@ -6,118 +6,188 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Engineering Concepts Visualizer</title>
 
-          <!-- CSS -->
           <link rel="stylesheet" href="styles.css">
 
-          <!-- Google Font -->
-          <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+                    rel="stylesheet">
 </head>
 
 <body>
 
-          <!-- Header -->
-          <header>
-                    <h1>Engineering Concepts Visualizer</h1>
-                    <nav>
+          <div class="ambient-glow"></div>
+
+          <header id="navbar">
+                    <h1><i class="fa-solid fa-layer-group"></i> Engineering Concepts Visualizer</h1>
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                              <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <nav id="nav-menu">
                               <a href="#">Home</a>
                               <a href="#topics">Topics</a>
                               <a href="about.html">About</a>
                     </nav>
           </header>
 
-          <!-- Hero Section -->
           <section class="hero">
-                    <h2>Visualize Complex Engineering Concepts</h2>
+                    <div class="hero-badge">Interactive Learning Platform</div>
+                    <h2>Visualize Complex <br><span class="text-gradient">Engineering Concepts</span></h2>
                     <p>
-                              Interactive tools to understand control systems, signal processing, and more.
-                              Learn by seeing, not just reading.
+                              Interactive tools to understand control systems, signal processing, and computer
+                              architecture.
+                              Stop memorizing. Start exploring.
                     </p>
+                    <a href="#topics" class="cta-button">Explore Visualizations <i
+                                        class="fa-solid fa-arrow-down"></i></a>
           </section>
 
-          <!-- Topics Section -->
           <section class="container" id="topics">
-                    <h2 class="section-title">Available Visualizations</h2>
+                    <div class="section-header">
+                              <h2 class="section-title">Available Visualizations</h2>
+                              <p class="section-subtitle">Select a topic to launch the interactive workspace.</p>
+                    </div>
 
-                    <div class="card-grid">
+                    <div class="card-grid" id="cards">
 
                               <a href="pages/compensator/index.html" class="card">
-                                        <h3>Compensator Design</h3>
-                                        <p>Understand lead, lag, and lead-lag compensators visually.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-wave-square card-icon"></i>
+                                                  <h3>Compensator Design</h3>
+                                                  <p>Understand lead, lag, and lead-lag compensators visually.</p>
+                                        </div>
                               </a>
 
                               <a href="pages/convolution/index.html" class="card">
-                                        <h3>Convolution & Correlation</h3>
-                                        <p>Step-by-step visualization of convolution and correlation.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-chart-area card-icon"></i>
+                                                  <h3>Convolution & Correlation</h3>
+                                                  <p>Step-by-step visualization of convolution and correlation.</p>
+                                        </div>
                               </a>
 
                               <a href="pages/nyquist/index.html" class="card">
-                                        <h3>Nyquist Plot</h3>
-                                        <p>Explore stability using Nyquist criteria interactively.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-circle-nodes card-icon"></i>
+                                                  <h3>Nyquist Plot</h3>
+                                                  <p>Explore stability using Nyquist criteria interactively.</p>
+                                        </div>
                               </a>
 
                               <a href="pages/root-locus/index.html" class="card">
-                                        <h3>Root Locus</h3>
-                                        <p>See how poles move with gain changes in real time.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-route card-icon"></i>
+                                                  <h3>Root Locus</h3>
+                                                  <p>See how poles move with gain changes in real time.</p>
+                                        </div>
                               </a>
 
                               <a href="pages/sz-mapping/index.html" class="card">
-                                        <h3>S-Z Mapping</h3>
-                                        <p>Understand transformation from continuous to discrete domain.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-map-location-dot card-icon"></i>
+                                                  <h3>S-Z Mapping</h3>
+                                                  <p>Understand transformation from continuous to discrete domain.</p>
+                                        </div>
                               </a>
+
                               <a href="pages/sampling-aliasing/index.html" class="card">
-                                        <h3>Sampling and Aliasing</h3>
-                                        <p>Understand Sampling Theorem and aliasing phenomenon.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-chart-bar card-icon"></i>
+                                                  <h3>Sampling & Aliasing</h3>
+                                                  <p>Understand Sampling Theorem and the aliasing phenomenon.</p>
+                                        </div>
                               </a>
+
                               <a href="pages/State Space/index.html" class="card">
-                                        <h3>State Space</h3>
-                                        <p>Visualize system dynamics using phase portraits, eigenvalues, and state
-                                                  trajectories.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-cube card-icon"></i>
+                                                  <h3>State Space</h3>
+                                                  <p>Visualize system dynamics using phase portraits and state
+                                                            trajectories.</p>
+                                        </div>
                               </a>
+
                               <a href="pages/Pipelining/index.html" class="card">
-                                        <h3>Pipelining</h3>
-                                        <p>Visualize instruction flow across pipeline stages, understand hazards,
-                                                  stalls, and performance speedup
-                                        </p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-microchip card-icon"></i>
+                                                  <h3>Pipelining</h3>
+                                                  <p>Visualize instruction flow across stages, understand hazards and
+                                                            stalls.</p>
+                                        </div>
                               </a>
+
                               <a href="pages/Fourier Transform/index.html" class="card">
-                                        <h3>Fourier Transform</h3>
-                                        <p>Decompose signals into frequency components and visualize how simple waves
-                                                  combine to form complex signals.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-music card-icon"></i>
+                                                  <h3>Fourier Transform</h3>
+                                                  <p>Decompose signals into frequency components and visualize
+                                                            combinations.</p>
+                                        </div>
                               </a>
+
                               <a href="pages/Laplace Transform/index.html" class="card">
-                                        <h3>Laplace Transform</h3>
-                                        <p>Explore how poles in the s-plane shape system behavior, affecting stability,
-                                                  oscillations, and time-domain responses.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-infinity card-icon"></i>
+                                                  <h3>Laplace Transform</h3>
+                                                  <p>Explore how s-plane poles shape system behavior and stability.</p>
+                                        </div>
                               </a>
+
                               <a href="pages/Z Transform/index.html" class="card">
-                                        <h3>Z Transform</h3>
-                                        <p>Understand discrete-time system behavior by exploring poles, zeros, and
-                                                  stability in the z-plane.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-chart-line card-icon"></i>
+                                                  <h3>Z Transform</h3>
+                                                  <p>Understand discrete-time systems exploring poles and zeros.</p>
+                                        </div>
                               </a>
+
                               <a href="pages/Butterfly Structure/index.html" class="card">
-                                        <h3>Butterfly Structure</h3>
-                                        <p>Explore how the FFT computes efficiently using butterfly operations, data flow stages, and twiddle factor multiplications.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-brands fa-hubspot card-icon"></i>
+                                                  <h3>Butterfly Structure</h3>
+                                                  <p>Explore how FFT computes using data flow and twiddle factors.</p>
+                                        </div>
                               </a>
+
                               <a href="pages/Cache Memory/index.html" class="card">
-                                        <h3>Cache Memory</h3>
-                                        <p>Explore how cache memory works.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-memory card-icon"></i>
+                                                  <h3>Cache Memory</h3>
+                                                  <p>Simulate Direct and Associative mapping with Hit/Miss rates.</p>
+                                        </div>
                               </a>
+
                               <a href="pages/STA/index.html" class="card">
-                                        <h3>Static Timing Analysis (STA)</h3>
-                                        <p>Explore how STA is done.</p>
+                                        <div class="card-border"></div>
+                                        <div class="card-content">
+                                                  <i class="fa-solid fa-stopwatch card-icon"></i>
+                                                  <h3>Static Timing Analysis</h3>
+                                                  <p>Visualize Setup and Hold time windows across logic gates.</p>
+                                        </div>
                               </a>
 
                     </div>
           </section>
 
-          <!-- Footer -->
           <footer>
-                    © 2026 Engineering Concept Visualizer · Learn by visualizing · Built by Anish Rooj
+                    <p>© 2026 Engineering Concept Visualizer</p>
+                    <p class="footer-sub">Learn by visualizing · Built by Anish Rooj</p>
           </footer>
 
-          <!-- JS -->
           <script src="script.js"></script>
-
 </body>
 
 </html>
