@@ -8,7 +8,7 @@ This project transforms abstract mathematical ideas into **intuitive, interactiv
 
 ## 🌐 Live Demo
 
-👉 https://your-username.github.io/your-repo-name/
+👉 https://anish-rooj-cpu.github.io/Concept-Visualizer/
 
 ---
 
