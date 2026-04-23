@@ -1,0 +1,204 @@
+:root {
+  --primary: #0066cc;
+  --primary-hover: #0052a3;
+  --bg: #f4f7f9;
+  --card-bg: #ffffff;
+  --text: #333;
+  --border: #dcdfe3;
+}
+
+body {
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: var(--bg);
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+  color: var(--text);
+  line-height: 1.5;
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+}
+
+#main-menu,
+#cropper-ui {
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+h2 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-top: 0;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Updated Inputs */
+input[type="file"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+input[type="color"] {
+  height: 45px;
+  cursor: pointer;
+  padding: 4px; /* Gives the color swatch some breathing room */
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type="color"]:hover {
+  border-color: var(--primary);
+  background: #f0f7ff;
+}
+
+/* This makes the actual color block inside look better in Chrome/Edge */
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+/* NEW: Layout for side-by-side inputs */
+.dimension-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 12px;
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.checkbox-container:hover {
+  background: #f0f2f5;
+}
+
+/* This makes sure clicking the label or the area around it works */
+.checkbox-container label {
+  cursor: pointer;
+  user-select: none; /* Prevents text highlighting when clicking fast */
+  margin-bottom: 0;
+  display: block;
+  width: 100%;
+}
+
+.checkbox-container input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+/* Button Styling */
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    background 0.2s;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: #6c757d;
+}
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.btn-skip {
+  background: #dc3545;
+}
+.btn-skip:hover {
+  background: #c82333;
+}
+
+#status {
+  margin-top: 15px;
+  font-weight: bold;
+  color: var(--primary);
+  text-align: center;
+}
+
+/* Cropper UI Styles */
+#cropper-ui {
+  display: none;
+}
+
+.crop-container {
+  width: 100%;
+  max-height: 60vh;
+  margin-bottom: 20px;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
