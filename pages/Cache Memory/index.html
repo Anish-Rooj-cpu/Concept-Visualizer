@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Cache Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <h1>Advanced Cache Memory Simulator</h1>
+
+    <div class="stats-panel">
+        <div class="stat-box">Total Accesses: <span id="statTotal">0</span></div>
+        <div class="stat-box hit-text">Hits: <span id="statHits">0</span></div>
+        <div class="stat-box miss-text">Misses: <span id="statMisses">0</span></div>
+        <div class="stat-box">Hit Rate: <span id="statRate">0%</span></div>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="addressInput">Sequence (comma separated):</label>
+            <input type="text" id="addressInput" placeholder="e.g. 0, 4, 8, 4, 1" value="0, 4, 8, 4, 1">
+        </div>
+        
+        <div class="control-group">
+            <label for="mappingType">Mapping:</label>
+            <select id="mappingType">
+                <option value="direct">Direct Mapping</option>
+                <option value="2way">2-Way Set Associative</option>
+                <option value="associative">Fully Associative</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="policyType">Replacement:</label>
+            <select id="policyType">
+                <option value="fifo">FIFO</option>
+                <option value="lru">LRU</option>
+            </select>
+        </div>
+        
+        <button id="btnRun">Run Sequence</button>
+        <button id="btnReset" class="danger">Reset</button>
+    </div>
+
+    <div class="dashboard">
+        <div class="panel memory-panel">
+            <h3>Main Memory (16 Blocks)</h3>
+            <div class="grid" id="mainMemory"></div>
+        </div>
+
+        <div class="panel cache-panel">
+            <h3>Cache Memory (4 Lines)</h3>
+            
+            <div class="address-breakdown" id="addressBreakdown">
+                Waiting for input...
+            </div>
+
+            <table class="cache-table">
+                <thead>
+                    <tr>
+                        <th>Set / Line</th>
+                        <th>Valid</th>
+                        <th>Tag</th>
+                        <th>Data (Block)</th>
+                    </tr>
+                </thead>
+                <tbody id="cacheMemory">
+                </tbody>
+            </table>
+            
+            <div class="log-panel">
+                <h4>Execution Log</h4>
+                <div id="logArea"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
