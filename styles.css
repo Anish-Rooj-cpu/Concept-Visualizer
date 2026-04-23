@@ -296,6 +296,35 @@ footer {
           margin-top: 8px;
 }
 
+/* Visitor Counter */
+footer {
+          padding: 40px 20px;
+          text-align: center;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          margin-top: 60px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+}
+
+.visitor-counter {
+          margin-top: 15px;
+          transition: transform 0.3s ease, opacity 0.3s ease;
+          opacity: 0.8;
+}
+
+.visitor-counter:hover {
+          opacity: 1;
+          transform: translateY(-2px);
+}
+
+.visitor-counter img {
+          display: block;
+          /* This makes it look crisp on high-res displays */
+          height: 20px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
           .mobile-toggle {
