@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://anish-rooj-cpu.github.io/Concept-Visualizer/sitemap.xml
