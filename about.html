@@ -2,114 +2,144 @@
 <html lang="en">
 
 <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>About | Engineering Visualizer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Engineering Concepts Visualizer</title>
 
-          <link rel="stylesheet" href="styles.css">
-
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-                    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
 
-          <div class="ambient-glow"></div>
+  <div class="grid-bg"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
 
-          <header id="navbar">
-                    <h1><i class="fa-solid fa-layer-group"></i> EngVisuals</h1>
-                    <nav id="nav-menu">
-                              <a href="index.html">Home</a>
-                              <a href="index.html#topics">Topics</a>
-                              <a href="about.html" style="color: var(--primary);">About</a>
-                    </nav>
-          </header>
+  <header id="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <i class="fa-solid fa-layer-group"></i>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">ECV</span>
+        <span class="logo-sub">Engineering Visualizer</span>
+      </div>
+    </a>
 
-          <section class="container" style="max-width: 900px; margin-top: 20px;">
-                    <div class="section-header">
-                              <h2 class="section-title">About This Project</h2>
-                              <p class="section-subtitle">Bridging the gap between mathematical theory and intuition.
-                              </p>
-                    </div>
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
 
-                    <div class="card" style="margin-bottom: 50px;">
-                              <div class="card-border"></div>
-                              <div class="card-content">
-                                        <p style="margin-bottom: 15px;">
-                                                  Engineering concepts are often mathematically intensive and difficult
-                                                  to interpret. This project focuses on transforming abstract ideas into
-                                                  interactive visualizations, making learning more intuitive and
-                                                  engaging.
-                                        </p>
-                                        <p>
-                                                  Instead of only solving equations on paper, users can explore how
-                                                  systems behave in real time—from control systems and signal processing
-                                                  to advanced digital architecture.
-                                        </p>
-                              </div>
-                    </div>
+    <nav id="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="index.html#topics">Topics</a>
+      <a href="about.html" class="active">About</a>
+    </nav>
+  </header>
 
-                    <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 20px;">The Architect</h2>
-                    <div class="card" style="margin-bottom: 50px;">
-                              <div class="card-border"></div>
-                              <div class="card-content">
-                                        <h3 style="color: var(--primary); margin-bottom: 15px;">
-                                                  <i class="fa-solid fa-microchip"></i> Anish Rooj
-                                        </h3>
-                                        <p style="margin-bottom: 15px;">
-                                                  I am an Electronics and Telecommunication Engineering student at
-                                                  Jadavpur University with a strong interest in digital design, computer
-                                                  architecture, and system-level engineering.
-                                        </p>
-                                        <p style="margin-bottom: 15px;">
-                                                  My work focuses on building systems from the ground up to understand
-                                                  how theory translates into hardware. I have designed and implemented
-                                                  32-bit RISC-V processors, working from high-level HDL descriptions
-                                                  down to gate-level implementations using fundamental logic components.
-                                        </p>
-                                        <p style="margin-bottom: 20px;">
-                                                  Through these projects, I have developed a deep understanding of
-                                                  datapath design, control logic, instruction execution, and hardware
-                                                  verification. This platform was created to share that practical
-                                                  understanding with other students and engineers.
-                                        </p>
-                                        <p>
-                                                  <a href="https://github.com/Anish-Rooj-cpu/Concept-Visualizer" target="_blank"
-                                                            class="cta-button"
-                                                            style="padding: 8px 16px; font-size: 0.9rem;">
-                                                            <i class="fa-brands fa-github"></i> Github Repo
-                                                  </a>
-                                        </p>
-                              </div>
-                    </div>
+  <!-- Page Hero -->
+  <section class="hero" style="min-height: 300px; padding: 80px 5% 60px;">
+    <div class="hero-eyebrow">About ECV</div>
+    <h2 style="font-size: clamp(2.2rem, 5vw, 3.8rem);">
+      Behind the
+      <span class="line-2 text-gradient">Platform</span>
+    </h2>
+    <p class="hero-desc" style="margin-bottom: 0;">
+      Bridging the gap between mathematical theory and intuitive understanding.
+    </p>
+  </section>
 
-                    <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 20px;">The Assistant</h2>
-                    <div class="card">
-                              <div class="card-border"></div>
-                              <div class="card-content">
-                                        <h3 style="color: #a6e3a1; margin-bottom: 15px;">
-                                                  <i class="fa-solid fa-robot"></i> Google Gemini
-                                        </h3>
-                                        <p>
-                                                  This platform was co-created with Gemini, an AI assistant. While Anish
-                                                  provided the engineering concepts, mathematical logic, and overall
-                                                  system architecture, Gemini acted as the coding assistant to translate
-                                                  those ideas into the modern, interactive web components you see here.
-                                        </p>
-                              </div>
-                    </div>
+  <div class="about-section">
 
-          </section>
+    <!-- About the Project -->
+    <div class="about-title">// Project</div>
+    <div class="about-card reveal">
+      <p>
+        Engineering concepts are often mathematically intensive and difficult to interpret from equations alone.
+        This project transforms abstract theory into interactive visualizations — making learning more intuitive,
+        engaging, and memorable.
+      </p>
+      <p>
+        Instead of solving equations on paper, users can explore how systems behave in real time —
+        from control systems and signal processing to advanced digital architecture. Every tool here
+        is built around the belief that <em>seeing</em> a system is worth a thousand derivations.
+      </p>
 
-          <footer style="margin-top: 60px;">
-                    <p>© 2026 Engineering Concept Visualizer</p>
-                    <p class="footer-sub">Engineered by Anish Rooj · Powered by AI Collaboration</p>
-          </footer>
+      <div class="terminal">
+        <div class="terminal-body">
+          <div><span class="prompt">$ </span>modules --list</div>
+          <div><span class="value">→</span> Control Systems · Signal Processing · Computer Architecture · VLSI</div>
+          <div><span class="prompt">$ </span>visualizations --count</div>
+          <div><span class="value">→</span> 16 interactive modules · 0 prerequisites</div>
+          <div><span class="prompt">$ </span>status</div>
+          <div><span class="value">→</span> Active · Open source · Continuously updated</div>
+        </div>
+      </div>
+    </div>
 
-          <script src="script.js"></script>
+    <!-- The Architect -->
+    <div class="about-title">// Architect</div>
+    <div class="about-card reveal">
+      <div class="about-name">
+        <i class="fa-solid fa-microchip"></i>
+        Anish Rooj
+      </div>
+      <p>
+        Electronics and Telecommunication Engineering student at Jadavpur University, with a strong focus on
+        digital design, computer architecture, and system-level engineering.
+      </p>
+      <p>
+        My work centers on building systems from first principles — understanding how theory translates into
+        hardware. I have designed and implemented 32-bit RISC-V processors, working from high-level HDL
+        descriptions down to gate-level implementations using fundamental logic components.
+      </p>
+      <p>
+        Through these projects, I have developed a deep understanding of datapath design, control logic,
+        instruction execution, and hardware verification. This platform was created to share that practical
+        understanding with other students and engineers.
+      </p>
+      <a href="https://github.com/anish-rooj-cpu" target="_blank" class="btn-primary"
+        style="margin-top: 10px; display: inline-flex; width: fit-content;">
+        <i class="fa-brands fa-github"></i> GitHub Profile
+      </a>
+    </div>
 
+    <!-- The Assistant -->
+    <div class="about-title">// AI Collaborator</div>
+    <div class="about-card reveal">
+      <div class="about-name about-name-ai">
+        <i class="fa-solid fa-robot"></i>
+        Google Gemini
+      </div>
+      <p>
+        This platform was co-created with Gemini, an AI assistant. While Anish provided the engineering
+        concepts, mathematical logic, and overall system architecture, Gemini acted as the coding assistant
+        to translate those ideas into the modern, interactive web components you see here.
+      </p>
+      <p>
+        The collaboration reflects a workflow that's becoming increasingly important: domain expertise
+        paired with AI-assisted implementation to build faster without sacrificing depth.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-left">
+      <span class="footer-brand">ECV // Engineering Concepts Visualizer</span>
+      <span class="footer-copy">© 2026 Anish Rooj · All rights reserved</span>
+    </div>
+    <div class="footer-right">
+      <span class="footer-sub">Engineered by Anish Rooj · Powered by AI Collaboration</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 
 </html>

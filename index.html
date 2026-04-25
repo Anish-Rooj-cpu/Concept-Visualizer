@@ -5,34 +5,45 @@
           <meta charset="UTF-8">
           <meta name="google-site-verification" content="HFdHX7Q4Y6E8mt4UqFaT8tnUZDCw8ZJZ40tHVPgFV7s" />
           <meta name="description"
-          content="Interactive engineering visualizations for control systems, DSP, Fourier, Laplace, Z-transform, cache memory and more. Learn by visualizing.">
-          <meta name="description"
-          content="Welcome to the Engineering Concepts Visualizer (ECV). Learn complex concepts like Laplace transforms, DSP, and control systems through interactive visualizations.">
+                    content="Interactive engineering visualizations for control systems, DSP, Fourier, Laplace, Z-transform, cache memory and more. Learn by visualizing.">
           <meta property="og:title" content="Engineering Concepts Visualizer (ECV)">
           <meta property="og:description"
-                    content="Interactive tools for DSP, control systems, and computer architecture. Laplace Transform Visualizer, Z Transform Visualizer, Convolution Visulizer">
+                    content="Interactive tools for DSP, control systems, and computer architecture.">
           <meta property="og:type" content="website">
           <meta property="og:url" content="https://anish-rooj-cpu.github.io/Concept-Visualizer/">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Engineering Concepts Visualizer (ECV)</title>
 
           <link rel="stylesheet" href="styles.css">
-
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;500;600;700;800&display=swap"
                     rel="stylesheet">
 </head>
 
 <body>
 
-          <div class="ambient-glow"></div>
+          <!-- Background layers -->
+          <div class="grid-bg"></div>
+          <div class="orb orb-1"></div>
+          <div class="orb orb-2"></div>
+          <div class="orb orb-3"></div>
 
+          <!-- Header -->
           <header id="navbar">
-                    <h1><i class="fa-solid fa-layer-group"></i> Engineering Concepts Visualizer (ECV)</h1>
+                    <a href="#" class="logo">
+                              <div class="logo-icon">
+                                        <i class="fa-solid fa-layer-group"></i>
+                              </div>
+                              <div class="logo-text">
+                                        <span class="logo-name">ECV</span>
+                                        <span class="logo-sub">Engineering Visualizer</span>
+                              </div>
+                    </a>
+
                     <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
                               <i class="fa-solid fa-bars"></i>
                     </button>
+
                     <nav id="nav-menu">
                               <a href="#">Home</a>
                               <a href="#topics">Topics</a>
@@ -40,181 +51,366 @@
                     </nav>
           </header>
 
+          <!-- Hero -->
           <section class="hero">
-                    <div class="hero-badge">Interactive Learning Platform</div>
-                    <h2>Visualize Complex <br><span class="text-gradient">Engineering Concepts</span></h2>
-                    <p>
-                              Interactive tools to understand control systems, signal processing, and computer
-                              architecture.
-                              Stop memorizing. Start exploring.
+                    <div class="hero-eyebrow">Interactive Learning Platform</div>
+
+                    <h2>
+                              Visualize Complex
+                              <span class="line-2 text-gradient">Engineering Concepts</span>
+                    </h2>
+
+                    <p class="hero-desc">
+                              Interactive tools to master control systems, signal processing, and
+                              computer architecture. Stop memorizing formulas. Start exploring systems.
                     </p>
-                    <a href="#topics" class="cta-button">Explore Visualizations <i
-                                        class="fa-solid fa-arrow-down"></i></a>
+
+                    <div class="hero-actions">
+                              <a href="#topics" class="btn-primary">
+                                        Explore Visualizations
+                                        <i class="fa-solid fa-arrow-right"></i>
+                              </a>
+                              <a href="about.html" class="btn-secondary">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                        About the Project
+                              </a>
+                    </div>
+
+                    <div class="hero-stats">
+                              <div class="stat">
+                                        <span class="stat-number">16</span>
+                                        <span class="stat-label">Visualizations</span>
+                              </div>
+                              <div class="stat">
+                                        <span class="stat-number">4+</span>
+                                        <span class="stat-label">Domains</span>
+                              </div>
+                              <div class="stat">
+                                        <span class="stat-number">∞</span>
+                                        <span class="stat-label">Exploration</span>
+                              </div>
+                    </div>
           </section>
 
-          <section class="container" id="topics">
-                    <div class="section-header">
+          <!-- Topics Section -->
+          <section class="section" id="topics">
+                    <div class="section-header reveal">
+                              <span class="section-tag">// Modules</span>
                               <h2 class="section-title">Available Visualizations</h2>
-                              <p class="section-subtitle">Select a topic to launch the interactive workspace.</p>
+                              <p class="section-subtitle">Select any module to launch an interactive workspace.</p>
+                    </div>
+
+                    <div class="filter-row reveal">
+                              <button class="filter-pill active" data-filter="all">All</button>
+                              <button class="filter-pill" data-filter="control">Control Systems</button>
+                              <button class="filter-pill" data-filter="dsp">Signal Processing</button>
+                              <button class="filter-pill" data-filter="arch">Computer Architecture</button>
+                              <button class="filter-pill" data-filter="vlsi">VLSI / Digital</button>
                     </div>
 
                     <div class="card-grid" id="cards">
 
-                              <a href="pages/compensator/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/compensator/index.html" class="card reveal" data-category="control">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-wave-square card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-wave-square"></i>
+                                                            </div>
+                                                            <span class="card-tag">Control</span>
+                                                  </div>
                                                   <h3>Compensator Design</h3>
-                                                  <p>Understand lead, lag, and lead-lag compensators visually.</p>
+                                                  <p>Understand lead, lag, and lead-lag compensators visually in real
+                                                            time.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/convolution/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/convolution/index.html" class="card reveal" data-category="dsp">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-chart-area card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-chart-area"></i>
+                                                            </div>
+                                                            <span class="card-tag">DSP</span>
+                                                  </div>
                                                   <h3>Convolution & Correlation</h3>
-                                                  <p>Step-by-step visualization of convolution and correlation.</p>
+                                                  <p>Step-by-step visualization of convolution and correlation
+                                                            operations.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/nyquist/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/nyquist/index.html" class="card reveal" data-category="control">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-circle-nodes card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-circle-nodes"></i>
+                                                            </div>
+                                                            <span class="card-tag">Control</span>
+                                                  </div>
                                                   <h3>Nyquist Plot</h3>
-                                                  <p>Explore stability using Nyquist criteria interactively.</p>
+                                                  <p>Explore stability margins using Nyquist criteria interactively.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/root-locus/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/root-locus/index.html" class="card reveal" data-category="control">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-route card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-route"></i></div>
+                                                            <span class="card-tag">Control</span>
+                                                  </div>
                                                   <h3>Root Locus</h3>
-                                                  <p>See how poles move with gain changes in real time.</p>
+                                                  <p>See how poles migrate with gain changes in real time.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/sz-mapping/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/sz-mapping/index.html" class="card reveal" data-category="dsp">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-map-location-dot card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-map-location-dot"></i>
+                                                            </div>
+                                                            <span class="card-tag">DSP</span>
+                                                  </div>
                                                   <h3>S-Z Mapping</h3>
                                                   <p>Understand transformation from continuous to discrete domain.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/sampling-aliasing/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/sampling-aliasing/index.html" class="card reveal" data-category="dsp">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-chart-bar card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-chart-bar"></i></div>
+                                                            <span class="card-tag">DSP</span>
+                                                  </div>
                                                   <h3>Sampling & Aliasing</h3>
-                                                  <p>Understand Sampling Theorem and the aliasing phenomenon.</p>
+                                                  <p>Explore the Nyquist–Shannon theorem and aliasing phenomena.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/State Space/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/State Space/index.html" class="card reveal" data-category="control">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-cube card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i class="fa-solid fa-cube"></i>
+                                                            </div>
+                                                            <span class="card-tag">Control</span>
+                                                  </div>
                                                   <h3>State Space</h3>
                                                   <p>Visualize system dynamics using phase portraits and state
                                                             trajectories.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/Pipelining/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/Pipelining/index.html" class="card reveal" data-category="arch">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-microchip card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-microchip"></i></div>
+                                                            <span class="card-tag">Arch</span>
+                                                  </div>
                                                   <h3>Pipelining</h3>
-                                                  <p>Visualize instruction flow across stages, understand hazards and
-                                                            stalls.</p>
+                                                  <p>Visualize instruction flow across stages, hazards, and stalls.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/Fourier Transform/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/Fourier Transform/index.html" class="card reveal" data-category="dsp">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-music card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-music"></i></div>
+                                                            <span class="card-tag">DSP</span>
+                                                  </div>
                                                   <h3>Fourier Transform</h3>
                                                   <p>Decompose signals into frequency components and visualize
                                                             combinations.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/Laplace Transform/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/Laplace Transform/index.html" class="card reveal" data-category="control">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-infinity card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-infinity"></i></div>
+                                                            <span class="card-tag">Control</span>
+                                                  </div>
                                                   <h3>Laplace Transform</h3>
                                                   <p>Explore how s-plane poles shape system behavior and stability.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/Z Transform/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/Z Transform/index.html" class="card reveal" data-category="dsp">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-chart-line card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-chart-line"></i>
+                                                            </div>
+                                                            <span class="card-tag">DSP</span>
+                                                  </div>
                                                   <h3>Z Transform</h3>
-                                                  <p>Understand discrete-time systems exploring poles and zeros.</p>
+                                                  <p>Understand discrete-time systems through pole-zero exploration.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/Butterfly Structure/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/Butterfly Structure/index.html" class="card reveal" data-category="dsp">
                                         <div class="card-content">
-                                                  <i class="fa-brands fa-hubspot card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-brands fa-hubspot"></i></div>
+                                                            <span class="card-tag">DSP</span>
+                                                  </div>
                                                   <h3>Butterfly Structure</h3>
-                                                  <p>Explore how FFT computes using data flow and twiddle factors.</p>
+                                                  <p>Explore how FFT computes via data flow and twiddle factors.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/Cache Memory/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/Cache Memory/index.html" class="card reveal" data-category="arch">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-memory card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-memory"></i></div>
+                                                            <span class="card-tag">Arch</span>
+                                                  </div>
                                                   <h3>Cache Memory</h3>
-                                                  <p>Simulate Direct and Associative mapping with Hit/Miss rates.</p>
+                                                  <p>Simulate Direct and Associative mapping with Hit/Miss rate
+                                                            analysis.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
-                              <a href="pages/STA/index.html" class="card">
-                                        <div class="card-border"></div>
+                              <a href="pages/STA/index.html" class="card reveal" data-category="vlsi">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-stopwatch card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-stopwatch"></i></div>
+                                                            <span class="card-tag">VLSI</span>
+                                                  </div>
                                                   <h3>Static Timing Analysis</h3>
-                                                  <p>Visualize Setup and Hold time windows across logic gates.</p>
+                                                  <p>Visualize Setup and Hold time windows across combinational logic.
+                                                  </p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
-                              <a href="pages/CMOS VTC/index.html" class="card">
-                                        <div class="card-border"></div>
+
+                              <a href="pages/CMOS VTC/index.html" class="card reveal" data-category="vlsi">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-stopwatch card-icon"></i>
-                                                  <h3>CMOS Inverter Voltage Transfer Characteristics (VTO)</h3>
-                                                  <p>Visualize VTC of a CMOS Inverter.</p>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i class="fa-solid fa-bolt"></i>
+                                                            </div>
+                                                            <span class="card-tag">VLSI</span>
+                                                  </div>
+                                                  <h3>CMOS Inverter VTC</h3>
+                                                  <p>Visualize the Voltage Transfer Characteristics of a CMOS Inverter.
+                                                  </p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
-                              <a href="pages/Edge Detection/index.html" class="card">
-                                        <div class="card-border"></div>
+
+                              <a href="pages/Edge Detection/index.html" class="card reveal" data-category="dsp">
                                         <div class="card-content">
-                                                  <i class="fa-solid fa-stopwatch card-icon"></i>
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i
+                                                                                class="fa-solid fa-border-all"></i>
+                                                            </div>
+                                                            <span class="card-tag">DSP</span>
+                                                  </div>
                                                   <h3>Edge Detection</h3>
-                                                  <p>Visualize Edge Detection algorithms used in Digital Image Processing.</p>
+                                                  <p>Visualize edge detection algorithms used in Digital Image
+                                                            Processing.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i
+                                                                                class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
                                         </div>
                               </a>
 
                     </div>
           </section>
 
+          <!-- Footer -->
           <footer>
-                    <p>© 2026 Engineering Concept Visualizer</p>
-                    <p class="footer-sub">Learn by visualizing · Built by Anish Rooj</p>
-
-                    <div class="visitor-counter">
-                              <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fanish-rooj-cpu.github.io%2FConcept-Visualizer&label=VISITORS&labelColor=%231e293b&countColor=%2338bdf8&style=flat-square"
-                                        alt="Visitor Count" />
+                    <div class="footer-left">
+                              <span class="footer-brand">ECV // Engineering Concepts Visualizer</span>
+                              <span class="footer-copy">© 2026 Anish Rooj · All rights reserved</span>
+                    </div>
+                    <div class="footer-right">
+                              <span class="footer-sub">Learn by visualizing · Built by Anish Rooj</span>
+                              <div class="visitor-counter">
+                                        <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fanish-rooj-cpu.github.io%2FConcept-Visualizer&label=VISITORS&labelColor=%230a0f1e&countColor=%2300c8ff&style=flat-square"
+                                                  alt="Visitor Count" />
+                              </div>
                     </div>
           </footer>
 
