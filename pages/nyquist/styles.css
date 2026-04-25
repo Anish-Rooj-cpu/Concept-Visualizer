@@ -1,0 +1,203 @@
+:root {
+            --bg-dark: #11111b;
+            --bg-panel: #1e1e2e;
+            --bg-input: #313244;
+            --text-main: #cdd6f4;
+            --text-muted: #a6adc8;
+            --accent-blue: #89b4fa;
+            --accent-pink: #f38ba8;
+            --accent-green: #a6e3a1;
+            --accent-yellow: #f9e2af;
+            --border-color: #45475a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--accent-blue);
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .dashboard {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .panel {
+            background-color: var(--bg-panel);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--bg-input);
+        }
+
+        .controls-panel {
+            flex: 1;
+            min-width: 340px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: var(--accent-blue);
+        }
+
+        button {
+            padding: 12px;
+            background-color: var(--accent-blue);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            background-color: #74c7ec;
+        }
+
+        .metrics-box {
+            background-color: var(--bg-dark);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 15px;
+            line-height: 1.6;
+            border-left: 4px solid var(--accent-blue);
+            margin-top: auto;
+        }
+
+        .highlight {
+            color: var(--accent-pink);
+            font-weight: bold;
+        }
+
+        .highlight-stable {
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .highlight-unstable {
+            color: var(--accent-pink);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .visual-panel {
+            flex: 2;
+            display: flex;
+            gap: 20px;
+            min-width: 650px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .canvas-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-dark);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .canvas-title {
+            font-weight: bold;
+            color: #cba6f7;
+        }
+
+        canvas {
+            background-color: var(--bg-dark);
+            border-radius: 4px;
+        }
+
+        .arrow {
+            font-size: 30px;
+            color: var(--border-color);
+        }
+/* Home Button Styling */
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: var(--panel-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.home-btn:hover {
+    background-color: var(--primary);
+    color: var(--bg-color);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Ensure the body allows absolute positioning */
+body {
+    position: relative;
+    padding-top: 40px; 
+}

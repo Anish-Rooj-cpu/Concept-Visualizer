@@ -1,0 +1,204 @@
+:root {
+            --bg-dark: #11111b;
+            --bg-panel: #1e1e2e;
+            --bg-input: #313244;
+            --text-main: #cdd6f4;
+            --text-muted: #a6adc8;
+            --color-signal: #89b4fa;
+            /* Blue */
+            --color-samples: #f9e2af;
+            /* Yellow */
+            --color-alias: #f38ba8;
+            /* Pink/Red */
+            --color-grid: #45475a;
+            --color-nyquist: rgba(166, 227, 161, 0.15);
+            /* Greenish shading */
+            --color-nyquist-border: #a6e3a1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--color-signal);
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .dashboard {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .panel {
+            background-color: var(--bg-panel);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--bg-input);
+        }
+
+        .controls-panel {
+            flex: 1;
+            min-width: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            color: var(--text-main);
+            font-weight: bold;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+            accent-color: var(--color-signal);
+        }
+
+        .metrics-box {
+            background-color: var(--bg-dark);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 15px;
+            line-height: 1.6;
+            border-left: 4px solid var(--color-signal);
+            margin-top: auto;
+        }
+
+        .highlight-sig {
+            color: var(--color-signal);
+            font-weight: bold;
+        }
+
+        .highlight-samp {
+            color: var(--color-samples);
+            font-weight: bold;
+        }
+
+        .highlight-alias {
+            color: var(--color-alias);
+            font-weight: bold;
+        }
+
+        .visual-panel {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-width: 600px;
+            align-items: center;
+        }
+
+        .canvas-container {
+            background-color: var(--bg-dark);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--color-grid);
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .canvas-title {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-weight: bold;
+            color: var(--text-muted);
+            background: rgba(17, 17, 27, 0.8);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 250px;
+            /* Adjusted to fit two canvases nicely */
+            display: block;
+            background-color: #000;
+            border-radius: 4px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 5px;
+            font-size: 13px;
+            font-weight: bold;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .color-box {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+/* Home Button Styling */
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: var(--panel-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.home-btn:hover {
+    background-color: var(--primary);
+    color: var(--bg-color);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Ensure the body allows absolute positioning */
+body {
+    position: relative;
+    padding-top: 40px; 
+}

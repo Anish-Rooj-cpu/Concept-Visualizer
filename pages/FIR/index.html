@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced FIR DSP Laboratory</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="../../index.html" class="home-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        Home
+    </a>
+
+    <div class="dashboard">
+        <header>
+            <div class="header-titles">
+                <h1>Advanced Digital FIR Laboratory</h1>
+                <p>Interactive FIR Filter Design, Phase Analysis, and Time-Domain Convolution.</p>
+            </div>
+            <div class="header-controls">
+                <select id="sel-preset" class="preset-dropdown">
+                    <option value="" disabled selected>-- Load Preset --</option>
+                    <option value="audio-lp">Audio Lowpass (Clean Noise)</option>
+                    <option value="sharp-bp">Sharp Band-Pass</option>
+                    <option value="smooth-hp">Smooth High-Pass</option>
+                </select>
+                <button id="btn-animate" class="btn play-btn">Animate Convolution ▶</button>
+            </div>
+        </header>
+
+        <main class="grid-container">
+            <aside class="panel controls-panel">
+                <div class="panel-header"><h2>Filter Specifications</h2></div>
+                <div class="controls-content">
+                    
+                    <div class="control-group">
+                        <label>Sampling Rate (fs): <span id="lbl-fs">1000 Hz</span></label>
+                        <input type="range" id="slider-fs" min="100" max="44100" step="100" value="1000">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Filter Type</label>
+                        <select id="sel-type">
+                            <option value="lowpass" selected>Low-Pass</option>
+                            <option value="highpass">High-Pass</option>
+                            <option value="bandpass">Band-Pass</option>
+                            <option value="bandstop">Band-Stop</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group special-control">
+                        <label>Taps / Length (N): <span id="lbl-taps" class="highlight">51</span></label>
+                        <input type="range" id="slider-taps" min="3" max="151" step="2" value="51">
+                        <p class="tiny-hint">Odd N = Type I Linear Phase. Transition width ∝ 1/N.</p>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Cutoff Freq 1 (fc1): <span id="lbl-fc1" class="highlight">200 Hz</span></label>
+                        <input type="range" id="slider-fc1" min="1" max="499" step="1" value="200">
+                    </div>
+                    
+                    <div class="control-group" id="group-fc2" style="display: none;">
+                        <label>Cutoff Freq 2 (fc2): <span id="lbl-fc2" class="highlight">300 Hz</span></label>
+                        <input type="range" id="slider-fc2" min="1" max="499" step="1" value="300">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Primary Window</label>
+                        <select id="sel-window1">
+                            <option value="rectangular">Rectangular (Sharpest, High Ripple)</option>
+                            <option value="hann">Hann</option>
+                            <option value="hamming" selected>Hamming (Good Balance)</option>
+                            <option value="blackman">Blackman (Highest Attenuation)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Compare Window (Optional)</label>
+                        <select id="sel-window2">
+                            <option value="none" selected>-- None --</option>
+                            <option value="rectangular">Rectangular</option>
+                            <option value="hann">Hann</option>
+                            <option value="hamming">Hamming</option>
+                            <option value="blackman">Blackman</option>
+                        </select>
+                    </div>
+
+                    <div class="explanation-panel" id="dynamic-explanation">
+                        </div>
+                </div>
+            </aside>
+
+            <div class="visualizations">
+                
+                <div class="viz-row">
+                    <section class="panel half-panel">
+                        <div class="panel-header">
+                            <h2>Impulse Response h[n]</h2>
+                            <span class="badge">Symmetry = Linear Phase</span>
+                        </div>
+                        <div class="canvas-wrapper"><canvas id="impulseCanvas"></canvas></div>
+                    </section>
+
+                    <section class="panel half-panel">
+                        <div class="panel-header">
+                            <h2>Frequency Response H(e^jω)</h2>
+                            <div class="header-toggles">
+                                <button id="btn-mag" class="toggle-btn active">Magnitude (dB)</button>
+                                <button id="btn-phase" class="toggle-btn">Phase</button>
+                            </div>
+                        </div>
+                        <div class="canvas-wrapper"><canvas id="freqCanvas"></canvas></div>
+                    </section>
+                </div>
+
+                <section class="panel full-panel">
+                    <div class="panel-header">
+                        <h2>Live Signal Filtering (Time Domain)</h2>
+                        <span class="badge time-badge">Input → Convolution → Output</span>
+                    </div>
+                    <div class="canvas-wrapper time-wrapper">
+                        <canvas id="timeCanvas"></canvas>
+                        <div id="delay-label" class="floating-label">Group Delay = (N-1)/2</div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

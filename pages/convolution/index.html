@@ -6,134 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Correlation vs Convolution Visualizer Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-
-        p.subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 25px;
-        }
-
-        .controls {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 20px;
-            align-items: flex-end;
-            justify-content: space-between;
-        }
-
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .slider-group {
-            flex: 2;
-            min-width: 250px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #34495e;
-        }
-
-        select,
-        input[type="range"] {
-            padding: 8px;
-            border: 1px solid #bdc3c7;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .slider-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        input[type="range"] {
-            flex-grow: 1;
-        }
-
-        .slider-value {
-            font-weight: bold;
-            color: #e74c3c;
-            display: inline-block;
-            width: 30px;
-            text-align: right;
-        }
-
-        button {
-            padding: 8px 15px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        .live-math {
-            background: #e8f4f8;
-            padding: 10px 15px;
-            border-radius: 6px;
-            border-left: 4px solid #3498db;
-            margin-bottom: 20px;
-            font-family: monospace;
-            font-size: 16px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .live-math span.result-val {
-            font-weight: bold;
-            color: #c0392b;
-            font-size: 18px;
-        }
-
-        .chart-container {
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            height: 250px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <a href="../../index.html" class="home-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        Home
+    </a>
+
 
     <h1>Correlation vs Convolution</h1>
     <p class="subtitle">Interactive Digital Signal Processing Visualizer</p>
@@ -193,203 +77,110 @@
         <canvas id="chart3"></canvas>
     </div>
 
-    <script>
-        // --- 1. Signal Generators ---
-        const N = 31; // Length of our discrete time window
-        const mid = Math.floor(N / 2);
-        const timeAxis = Array.from({ length: N }, (_, i) => i - mid);
-
-        // Generate static random signal so it doesn't flicker during animation
-        const randomSignal1 = Array.from({ length: N }, () => (Math.random() * 2) - 1);
-        const randomSignal2 = Array.from({ length: N }, () => (Math.random() * 2) - 1);
-
-        const generateSignal = (type, isKernel = false) => {
-            return timeAxis.map((t, index) => {
-                switch (type) {
-                    case 'step': return (t >= -5 && t <= 5) ? 1 : 0;
-                    case 'square': return (t >= -5 && t < 0) ? 1 : ((t >= 0 && t <= 5) ? -1 : 0);
-                    case 'sine': return (t >= -10 && t <= 10) ? Math.sin(t * 0.5) : 0;
-                    case 'gaussian': return Math.exp(-Math.pow(t, 2) / 4);
-                    case 'triangle': return (t >= -5 && t <= 5) ? 1 - Math.abs(t) / 5 : 0;
-                    case 'exponential': return (t >= 0 && t <= 10) ? Math.exp(-t / 3) : 0;
-                    case 'random': return isKernel ? randomSignal2[index] : randomSignal1[index];
-                    default: return 0;
-                }
-            });
-        };
-
-        // --- 2. Math Operations ---
-        function calculateInteraction(sig1, sig2, lag, mode) {
-            let processedSig2 = [...sig2];
-
-            // Convolution requires flipping the kernel
-            if (mode === 'convolution') {
-                processedSig2.reverse();
-            }
-
-            // Shift the signal
-            let shiftedSig2 = new Array(N).fill(0);
-            for (let i = 0; i < N; i++) {
-                let shiftIndex = i - lag;
-                if (shiftIndex >= 0 && shiftIndex < N) {
-                    shiftedSig2[i] = processedSig2[shiftIndex];
-                }
-            }
-
-            // Point-wise multiplication
-            let product = sig1.map((val, i) => val * shiftedSig2[i]);
-            let sum = product.reduce((acc, val) => acc + val, 0);
-
-            return { shiftedSig2, product, sum };
-        }
-
-        function calculateFullOutput(sig1, sig2, mode) {
-            let output = [];
-            for (let lag = -15; lag <= 15; lag++) {
-                output.push(calculateInteraction(sig1, sig2, lag, mode).sum);
-            }
-            return output;
-        }
-
-        // --- 3. Chart Setup ---
-        Chart.defaults.maintainAspectRatio = false;
-        Chart.defaults.elements.point.radius = 2;
-        Chart.defaults.elements.line.borderWidth = 2;
-        Chart.defaults.animation.duration = 100; // Fast animation for smooth sliding
-
-        const commonOptions = {
-            responsive: true,
-            scales: { y: { suggestedMin: -1.5, suggestedMax: 1.5 } }
-        };
-
-        const ctx1 = document.getElementById('chart1').getContext('2d');
-        const chart1 = new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: timeAxis, datasets: [
-                    { label: 'Input Signal', borderColor: '#3498db', backgroundColor: 'rgba(52, 152, 219, 0.1)', data: [], fill: true, stepped: true },
-                    { label: 'Processed Kernel', borderColor: '#e74c3c', borderDash: [5, 5], data: [], stepped: true, backgroundColor: 'transparent' }
-                ]
-            },
-            options: { ...commonOptions, plugins: { title: { display: true, text: 'Panel 1: Input & Processed Kernel' } } }
-        });
-
-        const ctx2 = document.getElementById('chart2').getContext('2d');
-        const chart2 = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: timeAxis, datasets: [
-                    { label: 'Point-wise Product', backgroundColor: '#9b59b6', data: [] }
-                ]
-            },
-            options: { ...commonOptions, plugins: { title: { display: true, text: 'Panel 2: Point-wise Product (Area to Sum)' } } }
-        });
-
-        const lagAxis = Array.from({ length: 31 }, (_, i) => i - 15);
-        const ctx3 = document.getElementById('chart3').getContext('2d');
-        const chart3 = new Chart(ctx3, {
-            type: 'line',
-            data: {
-                labels: lagAxis, datasets: [
-                    { label: 'Full Output Function', borderColor: '#2ecc71', backgroundColor: 'rgba(46, 204, 113, 0.2)', data: [], fill: true },
-                    { label: 'Current Value', backgroundColor: '#c0392b', borderColor: '#c0392b', data: [], type: 'bubble', radius: 6 }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: { title: { display: true, text: 'Panel 3: Final Output (Correlation / Convolution)' } },
-                scales: { y: { suggestedMin: -5, suggestedMax: 5 } }
-            }
-        });
-
-        // --- 4. Event Listeners & Updates ---
-        const ui = {
-            mode: document.getElementById('mode'),
-            sig1: document.getElementById('signal1'),
-            sig2: document.getElementById('signal2'),
-            lag: document.getElementById('lagSlider'),
-            lagLabel: document.getElementById('lagValue'),
-            mathLag: document.getElementById('mathLag'),
-            mathResult: document.getElementById('mathResult'),
-            playBtn: document.getElementById('playBtn')
-        };
-
-        function updateVisuals() {
-            const mode = ui.mode.value;
-            const lag = parseInt(ui.lag.value);
-
-            ui.lagLabel.innerText = lag;
-            ui.mathLag.innerText = lag;
-
-            // Notice we flag the second signal as the kernel for random noise stability
-            const s1 = generateSignal(ui.sig1.value, false);
-            const s2 = generateSignal(ui.sig2.value, true);
-
-            const { shiftedSig2, product, sum } = calculateInteraction(s1, s2, lag, mode);
-            const fullOutput = calculateFullOutput(s1, s2, mode);
-
-            // Update Math Display
-            ui.mathResult.innerText = sum.toFixed(2);
-
-            // Update Panel 1
-            chart1.data.datasets[0].data = s1;
-            chart1.data.datasets[1].data = shiftedSig2;
-            chart1.data.datasets[1].label = mode === 'convolution' ? 'Kernel (Flipped & Shifted)' : 'Reference (Shifted)';
-
-            // Adjust step rendering based on signal type
-            const isS1Discrete = ['step', 'square'].includes(ui.sig1.value);
-            const isS2Discrete = ['step', 'square'].includes(ui.sig2.value);
-            chart1.data.datasets[0].stepped = isS1Discrete;
-            chart1.data.datasets[1].stepped = isS2Discrete;
-            chart1.update();
-
-            // Update Panel 2
-            chart2.data.datasets[0].data = product;
-            chart2.update();
-
-            // Update Panel 3
-            chart3.data.datasets[0].data = fullOutput;
-            // Map the current lag to bubble format for Chart.js
-            let bubbleData = lagAxis.map(l => (l === lag ? { x: l, y: sum, r: 8 } : null)).filter(x => x !== null);
-            chart3.data.datasets[1].data = bubbleData;
-            chart3.update();
-        }
-
-        // --- 5. Animation Logic ---
-        let isPlaying = false;
-        let animationInterval;
-
-        ui.playBtn.addEventListener('click', () => {
-            isPlaying = !isPlaying;
-            if (isPlaying) {
-                ui.playBtn.innerText = 'Pause ⏸';
-                ui.playBtn.style.backgroundColor = '#e74c3c'; // Red for pause
-
-                animationInterval = setInterval(() => {
-                    let currentLag = parseInt(ui.lag.value);
-                    currentLag++;
-                    if (currentLag > parseInt(ui.lag.max)) {
-                        currentLag = parseInt(ui.lag.min);
-                    }
-                    ui.lag.value = currentLag;
-                    updateVisuals();
-                }, 250); // 250ms per step
-            } else {
-                ui.playBtn.innerText = 'Play ▶';
-                ui.playBtn.style.backgroundColor = '#3498db'; // Blue for play
-                clearInterval(animationInterval);
-            }
-        });
-
-        // Attach UI listeners
-        ui.mode.addEventListener('change', updateVisuals);
-        ui.sig1.addEventListener('change', updateVisuals);
-        ui.sig2.addEventListener('change', updateVisuals);
-        ui.lag.addEventListener('input', updateVisuals);
-
-        // Initial render
-        updateVisuals();
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convolution vs Correlation | Convolution & Correlation</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="ambient-glow"></div>
+
+    <header>
+        <div class="header-content">
+            <h1><span class="text-gradient">Convolution vs Correlation</span></h1>
+            <p class="subtitle">Interactive Discrete-Time Signal Analysis</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="controls panel">
+            <div class="control-row">
+                <div class="control-group">
+                    <label>Operation</label>
+                    <select id="mode">
+                        <option value="convolution">Convolution (x[n] * h[n])</option>
+                        <option value="correlation">Cross-Correlation (R_xy)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Input x[n]</label>
+                    <select id="signal1">
+                        <option value="step">Unit Pulse</option>
+                        <option value="sine">Sine Wave</option>
+                        <option value="triangle">Triangle</option>
+                        <option value="exponential">Exp. Decay</option>
+                        <option value="random">White Noise</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Kernel h[n]</label>
+                    <select id="signal2">
+                        <option value="gaussian">Gaussian</option>
+                        <option value="step">Unit Pulse</option>
+                        <option value="sine">Sine Wave</option>
+                        <option value="triangle">Triangle</option>
+                        <option value="random">White Noise</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="slider-panel">
+                <div class="slider-info">
+                    <label>Shift / Lag (n)</label>
+                    <span id="lagValue" class="badge">0</span>
+                </div>
+                <div class="slider-row">
+                    <button id="playBtn" class="btn-primary">Play ▶</button>
+                    <input type="range" id="lagSlider" min="-15" max="15" value="0">
+                    <button id="resetBtn" class="btn-outline">Reset</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="formula-panel panel">
+            <div class="formula-box">
+                <span class="formula-label">Discrete Summation:</span>
+                <code id="formula-display">y[n] = Σ x[k] h[n - k]</code>
+            </div>
+            <div class="result-box">
+                <span class="result-label">Output Value:</span>
+                <span id="mathResult" class="result-val">0.00</span>
+            </div>
+        </section>
+
+        <div class="charts-grid">
+            <div class="chart-card panel">
+                <h3>Domain Visualizer <small>(Shift & Overlap)</small></h3>
+                <div class="chart-wrap"><canvas id="chart1"></canvas></div>
+            </div>
+            <div class="chart-card panel">
+                <h3>Product Stage <small>(x[k] ⋅ h[n-k])</small></h3>
+                <div class="chart-wrap"><canvas id="chart2"></canvas></div>
+            </div>
+            <div class="chart-card panel full-width">
+                <h3>Accumulated Result <small>(Final Output)</small></h3>
+                <div class="chart-wrap"><canvas id="chart3"></canvas></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 DSP Concept Visualizer · Designed for Engineering Intuition</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html> -->

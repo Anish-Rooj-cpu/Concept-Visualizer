@@ -200,3 +200,35 @@ canvas {
     color: var(--text-muted);
     font-weight: bold;
 }
+/* Home Button Styling */
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: var(--panel-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.home-btn:hover {
+    background-color: var(--primary);
+    color: var(--bg-color);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Ensure the body allows absolute positioning */
+body {
+    position: relative;
+    padding-top: 40px; 
+}

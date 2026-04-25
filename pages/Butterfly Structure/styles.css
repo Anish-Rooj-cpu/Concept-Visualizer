@@ -50,3 +50,31 @@ strong { color: var(--text-main); }
 canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
 
 @media (max-width: 900px) { .grid-container { flex-direction: column; } .info-panel { width: 100%; } }
+.home-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: var(--panel-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.home-btn:hover {
+    background-color: var(--primary);
+    color: var(--bg-color);
+    border-color: var(--primary);
+}
+
+/* Ensure the body is relative so the button positions correctly */
+body {
+    position: relative;
+    padding-top: 60px; /* Space for the button */
+}

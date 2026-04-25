@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Interactive Pole Assignment Design</title>
+
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+          <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+          <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <a href="../../index.html" class="home-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        Home
+    </a>
+
+
+          <div class="container">
+                    <header>
+                              <h1>Pole Assignment Visualization</h1>
+                              <p>Interactive discrete-time control design based on the 2nd-order Servomotor model.</p>
+                    </header>
+
+                    <div class="card">
+                              <h2>The Theory</h2>
+                              <p>In this system, we use full-state feedback to control the motor's position and
+                                        velocity. The control law is \( u(k) = -Kx(k) \). By carefully calculating the
+                                        gain matrix \( K = [K_1, K_2] \), we can place the closed-loop poles (the roots
+                                        of the characteristic equation) exactly where we want them in the Z-plane.</p>
+                              <p><strong>Stability Rule:</strong> In discrete-time systems, the system is stable if and
+                                        only if all poles reside strictly <em>inside</em> the unit circle (radius < 1).
+                                                  If they exit the circle, the system becomes unstable and blows up.</p>
+                    </div>
+
+                    <div class="dashboard">
+                              <div class="card controls">
+                                        <h3>Configure Desired Poles</h3>
+                                        <p>Move the sliders to set the Real (\(\alpha\)) and Imaginary (\(\beta\)) parts
+                                                  of the complex conjugate poles: \(n_{1,2} = \alpha \pm j\beta\).</p>
+
+                                        <div class="control-group">
+                                                  <label for="realPart">Real Part (\(\alpha\)): <span id="realVal"
+                                                                      class="value-display">0.80</span></label>
+                                                  <input type="range" id="realPart" min="-1.5" max="1.5" step="0.01"
+                                                            value="0.8">
+                                        </div>
+
+                                        <div class="control-group">
+                                                  <label for="imagPart">Imaginary Part (\(\beta\)): <span id="imagVal"
+                                                                      class="value-display">0.20</span></label>
+                                                  <input type="range" id="imagPart" min="0" max="1.5" step="0.01"
+                                                            value="0.2">
+                                        </div>
+
+                                        <div class="results">
+                                                  <strong>Calculated Gain Matrix:</strong><br><br>
+                                                  K₁ = <span id="k1_val">0.00</span><br>
+                                                  K₂ = <span id="k2_val">0.00</span>
+                                        </div>
+
+                                        <div id="stabilityStatus" class="status stable">
+                                                  System is STABLE (Poles inside unit circle)
+                                        </div>
+                              </div>
+
+                              <div class="card">
+                                        <h3>Z-Plane Map</h3>
+                                        <div class="z-plane-container">
+                                                  <canvas id="zPlaneCanvas" width="300" height="300"></canvas>
+                                        </div>
+                              </div>
+                    </div>
+
+                    <div class="card">
+                              <h3>Initial Condition Response</h3>
+                              <p>This plot simulates how the motor's position \(x_1(k)\) behaves when starting from an
+                                        initial angle offset, returning to zero. Notice how the response speed and
+                                        oscillations change based on your pole placement.</p>
+                              <canvas id="responseChart" height="100"></canvas>
+                    </div>
+
+          </div>
+
+          <script src="script.js"></script>
+
+</body>
+
+</html>
