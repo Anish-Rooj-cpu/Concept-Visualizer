@@ -4,14 +4,45 @@
 <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Interactive Compensator Designer (Bode Plot)</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins.">
+    <meta name="keywords" content="lead compensator, lag compensator, Bode plot, phase margin, gain margin, compensator design, control systems, frequency response">
+    <meta name="author" content="Interactive Engineering Learning Suite">
+    <meta name="robots" content="index, follow">
+    <meta name="subject" content="EE / Control Engineering">
+    <meta name="category" content="Educational Tool, Control Systems">
+    <meta name="language" content="English">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lead-Lag Compensator Design | Bode Plot Interactive Tool">
+    <meta property="og:description" content="Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins.">
+    <meta property="og:locale" content="en_US">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lead-Lag Compensator Design | Bode Plot Interactive Tool">
+    <meta name="twitter:description" content="Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins.">
+    <!-- Canonical & Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Lead-Lag Compensator Design | Bode Plot Interactive Tool",
+      "description": "Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins.",
+      "educationalLevel": "University",
+      "learningResourceType": "Interactive Simulation",
+      "teaches": "Control Systems"
+    }
+    </script>
+    <!-- Shared Design System -->
+    <link rel="stylesheet" href="../shared.css">
+          <title>Lead-Lag Compensator Design | Bode Plot Interactive Tool</title>
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
           <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <a href="../../index.html" class="home-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <a href="../../index.html" class="home-btn" aria-label="Return to Home">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
         </svg>
@@ -77,6 +108,28 @@
           </div>
 
           <script src="script.js"></script>
+
+    <!-- Educational Quick Reference -->
+    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
+        <div class="edu-bar-inner">
+            <span class="edu-bar-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Key Concepts
+            </span>
+            <div class="edu-fact-item">
+                  <span class="edu-fact-label">Lead Compensator</span>
+                  <span class="edu-fact-text">Adds phase lead near crossover. Used to increase phase margin and speed up response.</span>
+                </div>
+<div class="edu-fact-item">
+                  <span class="edu-fact-label">Lag Compensator</span>
+                  <span class="edu-fact-text">Boosts low-frequency gain. Improves steady-state accuracy without destabilizing.</span>
+                </div>
+<div class="edu-fact-item">
+                  <span class="edu-fact-label">Phase Margin Target</span>
+                  <span class="edu-fact-text">Typically aim for 45–60° phase margin for good transient response.</span>
+                </div>
+        </div>
+    </section>
 </body>
 
 </html>

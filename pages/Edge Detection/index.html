@@ -3,15 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edge Detection Visualizer</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively.">
+    <meta name="keywords" content="edge detection, Canny, Sobel, Prewitt, Laplacian, image processing, computer vision, gradient, convolution kernel">
+    <meta name="author" content="Interactive Engineering Learning Suite">
+    <meta name="robots" content="index, follow">
+    <meta name="subject" content="CS / EE">
+    <meta name="category" content="Educational Tool, Image Processing / Computer Vision">
+    <meta name="language" content="English">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Edge Detection Visualizer | Canny Sobel Prewitt Image Processing">
+    <meta property="og:description" content="Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively.">
+    <meta property="og:locale" content="en_US">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Edge Detection Visualizer | Canny Sobel Prewitt Image Processing">
+    <meta name="twitter:description" content="Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively.">
+    <!-- Canonical & Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Edge Detection Visualizer | Canny Sobel Prewitt Image Processing",
+      "description": "Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively.",
+      "educationalLevel": "University",
+      "learningResourceType": "Interactive Simulation",
+      "teaches": "Image Processing / Computer Vision"
+    }
+    </script>
+    <!-- Shared Design System -->
+    <link rel="stylesheet" href="../shared.css">
+  <title>Edge Detection Visualizer | Canny Sobel Prewitt Image Processing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <a href="../../index.html" class="home-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <a href="../../index.html" class="home-btn" aria-label="Return to Home">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
         </svg>
@@ -262,5 +293,27 @@
 
   <canvas id="hidden-canvas" style="display:none;"></canvas>
   <script src="script.js"></script>
+
+    <!-- Educational Quick Reference -->
+    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
+        <div class="edu-bar-inner">
+            <span class="edu-bar-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Key Concepts
+            </span>
+            <div class="edu-fact-item">
+                  <span class="edu-fact-label">Sobel Operator</span>
+                  <span class="edu-fact-text">Approximates gradient with 3×3 kernels in x and y directions. |G| = √(Gx²+Gy²).</span>
+                </div>
+<div class="edu-fact-item">
+                  <span class="edu-fact-label">Canny Algorithm</span>
+                  <span class="edu-fact-text">Sobel gradient → Non-max suppression → Hysteresis thresholding (double-threshold).</span>
+                </div>
+<div class="edu-fact-item">
+                  <span class="edu-fact-label">Laplacian</span>
+                  <span class="edu-fact-text">Second-order operator. Detects edges as zero-crossings. Sensitive to noise.</span>
+                </div>
+        </div>
+    </section>
 </body>
 </html>

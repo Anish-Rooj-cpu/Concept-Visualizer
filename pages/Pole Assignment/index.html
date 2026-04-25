@@ -4,7 +4,38 @@
 <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Interactive Pole Assignment Design</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response.">
+    <meta name="keywords" content="pole placement, state feedback, controller design, gain matrix, controllability, eigenvalue assignment, control systems">
+    <meta name="author" content="Interactive Engineering Learning Suite">
+    <meta name="robots" content="index, follow">
+    <meta name="subject" content="EE / Control Engineering">
+    <meta name="category" content="Educational Tool, Control Systems">
+    <meta name="language" content="English">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Pole Placement Design | State Feedback Controller Interactive">
+    <meta property="og:description" content="Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response.">
+    <meta property="og:locale" content="en_US">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Pole Placement Design | State Feedback Controller Interactive">
+    <meta name="twitter:description" content="Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response.">
+    <!-- Canonical & Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Pole Placement Design | State Feedback Controller Interactive",
+      "description": "Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response.",
+      "educationalLevel": "University",
+      "learningResourceType": "Interactive Simulation",
+      "teaches": "Control Systems"
+    }
+    </script>
+    <!-- Shared Design System -->
+    <link rel="stylesheet" href="../shared.css">
+          <title>Pole Placement Design | State Feedback Controller Interactive</title>
 
           <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -15,8 +46,8 @@
 </head>
 
 <body>
-    <a href="../../index.html" class="home-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <a href="../../index.html" class="home-btn" aria-label="Return to Home">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
         </svg>
@@ -92,6 +123,28 @@
 
           <script src="script.js"></script>
 
+
+    <!-- Educational Quick Reference -->
+    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
+        <div class="edu-bar-inner">
+            <span class="edu-bar-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Key Concepts
+            </span>
+            <div class="edu-fact-item">
+                  <span class="edu-fact-label">Ackermann's Formula</span>
+                  <span class="edu-fact-text">K = eₙᵀ · C⁻¹ · φ(A), where φ is the desired characteristic polynomial.</span>
+                </div>
+<div class="edu-fact-item">
+                  <span class="edu-fact-label">Requirement</span>
+                  <span class="edu-fact-text">Pole placement requires the system to be fully controllable.</span>
+                </div>
+<div class="edu-fact-item">
+                  <span class="edu-fact-label">Trade-off</span>
+                  <span class="edu-fact-text">Placing poles farther left → faster response but larger control effort.</span>
+                </div>
+        </div>
+    </section>
 </body>
 
 </html>

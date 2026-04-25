@@ -1,3 +1,5 @@
+/* Shared design system loaded via shared.css */
+
 :root {
     /* Dark Theme Palette */
     --bg-main: #121212;
@@ -250,35 +252,103 @@ td.inst-col { text-align: left; font-family: monospace; font-weight: bold; white
 @media (max-width: 900px) {
     .container { grid-template-columns: 1fr; }
 }
-/* Home Button Styling */
-.home-btn {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background-color: var(--panel-bg);
-    color: var(--text-color);
-    text-decoration: none;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    font-weight: bold;
-    font-size: 0.9em;
-    transition: all 0.2s ease;
-    z-index: 1000;
-}
 
-.home-btn:hover {
-    background-color: var(--primary);
-    color: var(--bg-color);
-    border-color: var(--primary);
-    transform: translateY(-2px);
-}
+
+
 
 /* Ensure the body allows absolute positioning */
+
+
+
+/* ================================================================
+   DESIGN SYSTEM OVERRIDE — Applied via shared.css variables
+   These overrides unify all pages to the shared dark-lab aesthetic
+   ================================================================ */
+
+/* Reset old colors to use CSS variables from shared.css */
 body {
-    position: relative;
-    padding-top: 40px; 
+  font-family: var(--font-sans) !important;
+  background-color: var(--bg) !important;
+  color: var(--text-primary) !important;
+  padding-top: 72px !important;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-mono) !important;
+}
+
+h1 { color: var(--text-primary) !important; }
+h2 { color: var(--cyan) !important; }
+
+/* Panel backgrounds */
+.controls-panel, .panel, .dashboard > *, .grid-container > *,
+.info-panel, .visualizer-panel, aside, section.panel {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-panel) !important;
+  color: var(--text-primary) !important;
+}
+
+.panel-header, header.panel-header {
+  background: var(--panel-2) !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 12px 16px !important;
+}
+
+/* Inputs */
+input[type="text"], input[type="number"], select, textarea {
+  background: var(--bg-2) !important;
+  border: 1px solid var(--border-2) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-mono) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+label {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+/* Buttons */
+button {
+  font-family: var(--font-mono) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Canvas containers */
+.canvas-container, .canvas-wrapper {
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  overflow: hidden;
+}
+
+/* Metrics / data boxes */
+.metrics-box, .data-box, .explanation-panel,
+.instruction-box, .dynamic-explanation {
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  color: var(--text-secondary) !important;
+  font-size: 0.85rem !important;
+}
+
+/* Highlights */
+.highlight, .highlight-k { color: var(--amber) !important; }
+span[style*="color: #89b4fa"], .text-blue { color: var(--cyan) !important; }
+
+/* Subtitles */
+.subtitle, .page-subtitle, p.subtitle {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.82rem !important;
+}
+
+/* Fix dashboard flex → still works but adds top padding spacing */
+.dashboard {
+  padding-top: 8px;
 }

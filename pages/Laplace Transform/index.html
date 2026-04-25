@@ -3,12 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Laplace Transform & System Dynamics Visualizer</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability.">
+    <meta name="keywords" content="Laplace transform, s-plane, poles zeros, transfer function, control systems, ROC, region of convergence, complex frequency">
+    <meta name="author" content="Interactive Engineering Learning Suite">
+    <meta name="robots" content="index, follow">
+    <meta name="subject" content="EE / Mathematics">
+    <meta name="category" content="Educational Tool, Control Systems / Signals">
+    <meta name="language" content="English">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Laplace Transform S-Plane Explorer | Control Systems Interactive">
+    <meta property="og:description" content="Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability.">
+    <meta property="og:locale" content="en_US">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Laplace Transform S-Plane Explorer | Control Systems Interactive">
+    <meta name="twitter:description" content="Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability.">
+    <!-- Canonical & Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Laplace Transform S-Plane Explorer | Control Systems Interactive",
+      "description": "Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability.",
+      "educationalLevel": "University",
+      "learningResourceType": "Interactive Simulation",
+      "teaches": "Control Systems / Signals"
+    }
+    </script>
+    <!-- Shared Design System -->
+    <link rel="stylesheet" href="../shared.css">
+    <title>Laplace Transform S-Plane Explorer | Control Systems Interactive</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <a href="../../index.html" class="home-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <a href="../../index.html" class="home-btn" aria-label="Return to Home">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             <polyline points="9 22 9 12 15 12 15 22"></polyline>
         </svg>
@@ -83,5 +114,27 @@
         </main>
     </div>
     <script src="script.js"></script>
+
+    <!-- Educational Quick Reference -->
+    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
+        <div class="edu-bar-inner">
+            <span class="edu-bar-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                Key Concepts
+            </span>
+            <div class="edu-fact-item">
+                  <span class="edu-fact-label">Definition</span>
+                  <span class="edu-fact-text">F(s) = ∫₀^∞ f(t)·e^(−st) dt</span>
+                </div>
+<div class="edu-fact-item">
+                  <span class="edu-fact-label">Inverse via Poles</span>
+                  <span class="edu-fact-text">Partial fractions of F(s) → sum of exponentials. Pole at s=−a → e^(−at)u(t).</span>
+                </div>
+<div class="edu-fact-item">
+                  <span class="edu-fact-label">Initial Value Theorem</span>
+                  <span class="edu-fact-text">f(0⁺) = lim_{s→∞} s·F(s)</span>
+                </div>
+        </div>
+    </section>
 </body>
 </html>

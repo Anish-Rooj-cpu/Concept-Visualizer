@@ -3,118 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static Timing Analysis Simulator</title>
-    <link rel="stylesheet" href="style.css">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Simulate direct-mapped, 2-way set-associative, and fully associative caches. Observe hit/miss rates, LRU/FIFO replacement policies, and memory hierarchy performance interactively.">
+    <meta name="keywords" content="cache memory, direct mapped cache, set associative, LRU, FIFO, cache hit miss, computer architecture, memory hierarchy, cache simulator">
+    <meta name="author" content="Interactive Engineering Learning Suite">
+    <meta name="robots" content="index, follow">
+    <meta name="subject" content="CS / Computer Engineering">
+    <meta name="category" content="Educational Tool, Computer Architecture">
+    <meta name="language" content="English">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cache Memory Simulator | Computer Architecture Interactive">
+    <meta property="og:description" content="Simulate direct-mapped, set-associative, and fully associative caches. Observe hit/miss rates, replacement policies, and memory hierarchy performance.">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cache Memory Simulator | Computer Architecture Interactive">
+    <meta name="twitter:description" content="Simulate direct-mapped, set-associative, and fully associative caches with LRU and FIFO replacement policies.">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Cache Memory Simulator | Computer Architecture Interactive",
+      "description": "Simulate direct-mapped, 2-way set-associative, and fully associative caches. Observe hit/miss rates, LRU/FIFO replacement policies, and memory hierarchy performance interactively.",
+      "educationalLevel": "University",
+      "learningResourceType": "Interactive Simulation",
+      "teaches": "Computer Architecture — Cache Memory",
+      "inLanguage": "en"
+    }
+    </script>
+
+    <title>Cache Memory Simulator | Computer Architecture Interactive</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <a href="../../index.html" class="home-btn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+
+    <!-- Home Button -->
+    <a href="../../index.html" class="home-btn" aria-label="Return to Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
         </svg>
         Home
     </a>
 
-
-    <h1>Static Timing Analysis (STA) Simulator</h1>
-
-    <div class="dashboard">
-        <div class="panel controls-panel">
-            <h3>Circuit Parameters (ns)</h3>
-            
-            <div class="control-group">
-                <label>Clock Period (T<sub>clk</sub>): <span id="val-clk">10</span> ns</label>
-                <input type="range" id="t-clk" min="5" max="20" step="0.5" value="10">
-            </div>
-            
-            <div class="control-group">
-                <label>Clock-to-Q (T<sub>cq</sub>): <span id="val-cq">1.0</span> ns</label>
-                <input type="range" id="t-cq" min="0" max="5" step="0.1" value="1.0">
-            </div>
-
-            <div class="control-group">
-                <label>Comb Max Delay (T<sub>c_max</sub>): <span id="val-cmax">6.0</span> ns</label>
-                <input type="range" id="t-cmax" min="1" max="15" step="0.1" value="6.0">
-            </div>
-
-            <div class="control-group">
-                <label>Comb Min Delay (T<sub>c_min</sub>): <span id="val-cmin">2.0</span> ns</label>
-                <input type="range" id="t-cmin" min="0" max="10" step="0.1" value="2.0">
-            </div>
-
-            <div class="control-group">
-                <label>Setup Time (T<sub>su</sub>): <span id="val-su">1.0</span> ns</label>
-                <input type="range" id="t-su" min="0.5" max="4" step="0.1" value="1.0">
-            </div>
-
-            <div class="control-group">
-                <label>Hold Time (T<sub>h</sub>): <span id="val-h">1.0</span> ns</label>
-                <input type="range" id="t-h" min="0.5" max="4" step="0.1" value="1.0">
-            </div>
-
-            <div class="control-group">
-                <label>Clock Skew (T<sub>skew</sub>): <span id="val-skew">0.0</span> ns</label>
-                <input type="range" id="t-skew" min="-2" max="2" step="0.1" value="0.0">
-            </div>
-            
-            <button id="btnReset">Reset Defaults</button>
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="topic-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" aria-hidden="true">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+            </svg>
+            Computer Architecture
         </div>
+        <h1>Cache Memory <span class="accent">Simulator</span></h1>
+        <p class="page-subtitle">Direct-Mapped · Set-Associative · Fully Associative &nbsp;|&nbsp; FIFO &amp; LRU Replacement</p>
+    </header>
 
-        <div class="panel view-panel">
-            <div class="schematic">
-                <div class="ff" id="ff1">
-                    <div class="ff-title">Launch FF (FF1)</div>
-                    <div>T<sub>cq</sub></div>
-                </div>
-                <div class="logic-cloud">
-                    <div>Combinational Logic</div>
-                    <div style="font-size: 0.85em; opacity: 0.8;">Max: <span id="sch-cmax">6</span>ns | Min: <span id="sch-cmin">2</span>ns</div>
-                </div>
-                <div class="ff" id="ff2">
-                    <div class="ff-title">Capture FF (FF2)</div>
-                    <div>T<sub>su</sub> / T<sub>h</sub></div>
-                </div>
-            </div>
-
-            <div class="analysis-grid">
-                <div class="analysis-card">
-                    <h3>Setup Analysis (Max Delay)</h3>
-                    <p class="desc">Data must arrive before the setup window of the next clock edge.</p>
-                    <div class="math-box">
-                        <div><strong>Arrival Time = </strong> T<sub>cq</sub> + T<sub>c_max</sub></div>
-                        <div class="calc">= <span id="calc-su-arr">7.0</span> ns</div>
-                        
-                        <div><strong>Required Time = </strong> T<sub>clk</sub> + T<sub>skew</sub> - T<sub>su</sub></div>
-                        <div class="calc">= <span id="calc-su-req">9.0</span> ns</div>
-                        
-                        <div class="slack-line">
-                            <strong>Setup Slack = </strong> Required - Arrival
-                            <div id="setup-slack-val" class="slack-val pass">+2.0 ns</div>
-                        </div>
-                    </div>
-                    <div id="setup-status" class="status-badge pass-badge">SETUP PASS</div>
-                </div>
-
-                <div class="analysis-card">
-                    <h3>Hold Analysis (Min Delay)</h3>
-                    <p class="desc">Data must stay stable after the clock edge for the hold time duration.</p>
-                    <div class="math-box">
-                        <div><strong>Arrival Time = </strong> T<sub>cq</sub> + T<sub>c_min</sub></div>
-                        <div class="calc">= <span id="calc-h-arr">3.0</span> ns</div>
-                        
-                        <div><strong>Required Time = </strong> T<sub>skew</sub> + T<sub>h</sub></div>
-                        <div class="calc">= <span id="calc-h-req">1.0</span> ns</div>
-                        
-                        <div class="slack-line">
-                            <strong>Hold Slack = </strong> Arrival - Required
-                            <div id="hold-slack-val" class="slack-val pass">+2.0 ns</div>
-                        </div>
-                    </div>
-                    <div id="hold-status" class="status-badge pass-badge">HOLD PASS</div>
-                </div>
-            </div>
+    <!-- Stats Panel -->
+    <div class="stats-panel" role="region" aria-label="Performance Statistics">
+        <div class="stat-card">
+            <span class="stat-label">Total Accesses</span>
+            <span class="stat-value" id="statTotal">0</span>
+        </div>
+        <div class="stat-card green">
+            <span class="stat-label">Cache Hits</span>
+            <span class="stat-value" id="statHits">0</span>
+        </div>
+        <div class="stat-card red">
+            <span class="stat-label">Cache Misses</span>
+            <span class="stat-value" id="statMisses">0</span>
+        </div>
+        <div class="stat-card cyan">
+            <span class="stat-label">Hit Rate</span>
+            <span class="stat-value" id="statRate">0%</span>
         </div>
     </div>
+
+    <!-- Controls -->
+    <div class="controls" role="region" aria-label="Simulator Controls">
+        <div class="control-group">
+            <label for="addressInput">Address Sequence (comma-separated)</label>
+            <input type="text" id="addressInput"
+                   placeholder="e.g. 0, 4, 8, 4, 1, 12, 0"
+                   value="0, 4, 8, 4, 1, 12, 0"
+                   aria-describedby="seqHint">
+            <span id="seqHint" style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);">
+                Valid addresses: 0 – 15
+            </span>
+        </div>
+
+        <div class="control-group">
+            <label for="mappingType">Cache Mapping</label>
+            <select id="mappingType" aria-label="Cache mapping type">
+                <option value="direct">Direct Mapping</option>
+                <option value="2way">2-Way Set Associative</option>
+                <option value="associative">Fully Associative</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="policyType">Replacement Policy</label>
+            <select id="policyType" aria-label="Cache replacement policy">
+                <option value="fifo">FIFO — First In, First Out</option>
+                <option value="lru">LRU — Least Recently Used</option>
+            </select>
+        </div>
+
+        <button id="btnRun" aria-label="Run address sequence">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            Run Sequence
+        </button>
+        <button id="btnReset" class="danger" aria-label="Reset simulator">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2.5" aria-hidden="true">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+            </svg>
+            Reset
+        </button>
+    </div>
+
+    <!-- Dashboard -->
+    <main class="dashboard" role="main">
+
+        <!-- Main Memory Panel -->
+        <section class="panel memory-panel" aria-label="Main Memory">
+            <h3>Main Memory — 16 Blocks</h3>
+            <div class="grid" id="mainMemory" role="grid" aria-label="Main memory blocks"></div>
+        </section>
+
+        <!-- Cache Panel -->
+        <section class="panel cache-panel" aria-label="Cache Memory">
+            <h3>Cache Memory — 4 Lines</h3>
+
+            <div class="address-breakdown" id="addressBreakdown" aria-live="polite" aria-atomic="true">
+                Waiting for input…
+            </div>
+
+            <table class="cache-table" role="table" aria-label="Cache state">
+                <thead>
+                    <tr>
+                        <th scope="col">Set / Line</th>
+                        <th scope="col">Valid</th>
+                        <th scope="col">Tag</th>
+                        <th scope="col">Data (Block)</th>
+                    </tr>
+                </thead>
+                <tbody id="cacheMemory"></tbody>
+            </table>
+
+            <div class="log-panel" aria-label="Execution log">
+                <h4>Execution Log</h4>
+                <div id="logArea" role="log" aria-live="polite" aria-atomic="false"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Educational Quick Reference -->
+    <section class="edu-bar" aria-label="Key Concepts">
+        <div class="edu-bar-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" aria-hidden="true">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            Key Concepts
+        </div>
+        <div class="edu-facts">
+            <div class="edu-fact-item">
+                <span class="edu-fact-label">Hit Rate Formula</span>
+                <span class="edu-fact-text">Hit Rate = Hits ÷ (Hits + Misses) × 100%</span>
+            </div>
+            <div class="edu-fact-item">
+                <span class="edu-fact-label">AMAT</span>
+                <span class="edu-fact-text">AMAT = Hit Time + (Miss Rate × Miss Penalty)</span>
+            </div>
+            <div class="edu-fact-item">
+                <span class="edu-fact-label">Temporal Locality</span>
+                <span class="edu-fact-text">Recently accessed data is likely to be needed again — this is why caching works.</span>
+            </div>
+            <div class="edu-fact-item">
+                <span class="edu-fact-label">Direct Mapping</span>
+                <span class="edu-fact-text">Index = Address mod Cache_Lines. Each memory block maps to exactly one cache line.</span>
+            </div>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
