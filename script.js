@@ -46,7 +46,6 @@ function handleMouseMove(e) {
   target.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
   target.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
 }
-
 document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('mousemove', handleMouseMove);
 });

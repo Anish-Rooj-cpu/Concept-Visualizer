@@ -493,7 +493,7 @@ nav a.active {
 /* ── Card Grid ────────────────────────────────────── */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
   gap: 18px;
 }
 
@@ -692,6 +692,14 @@ nav a.active {
 
 .card:nth-child(6) {
   transition-delay: 0.25s;
+}
+
+.card:nth-child(7) {
+  transition-delay: 0.30s;
+}
+
+.card:nth-child(8) {
+  transition-delay: 0.35s;
 }
 
 /* ── Footer ───────────────────────────────────────── */

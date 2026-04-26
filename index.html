@@ -5,10 +5,11 @@
           <meta charset="UTF-8">
           <meta name="google-site-verification" content="HFdHX7Q4Y6E8mt4UqFaT8tnUZDCw8ZJZ40tHVPgFV7s" />
           <meta name="description"
-                    content="Interactive engineering visualizations for control systems, DSP, Fourier, Laplace, Z-transform, cache memory and more. Learn by visualizing.">
+                    content="Interactive engineering visualizations for control systems, DSP, Fourier, Laplace, Z-transform, FIR filter design, PID controller tuning, cache memory and more. Learn by visualizing.">
           <meta property="og:title" content="Engineering Concepts Visualizer (ECV)">
           <meta property="og:description"
-                    content="Interactive tools for DSP, control systems, and computer architecture.">
+                    content="Interactive tools for DSP, control systems, FIR filter design, PID tuning, and computer architecture.">
+          <meta name="keywords" content="engineering visualizer, control systems, DSP, signal processing, FIR filter, PID controller, Fourier transform, Laplace transform, Z transform, cache memory, VLSI, interactive learning">
           <meta property="og:type" content="website">
           <meta property="og:url" content="https://anish-rooj-cpu.github.io/Concept-Visualizer/">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,7 +79,7 @@
 
                     <div class="hero-stats">
                               <div class="stat">
-                                        <span class="stat-number">16</span>
+                                        <span class="stat-number">18</span>
                                         <span class="stat-label">Visualizations</span>
                               </div>
                               <div class="stat">
@@ -105,8 +106,7 @@
                               <button class="filter-pill" data-filter="control">Control Systems</button>
                               <button class="filter-pill" data-filter="dsp">Signal Processing</button>
                               <button class="filter-pill" data-filter="arch">Computer Architecture</button>
-                              <button class="filter-pill" data-filter="vlsi">VLSI / Digital</button>
-                    </div>
+                              <button class="filter-pill" data-filter="vlsi">VLSI / Digital</button>                    </div>
 
                     <div class="card-grid" id="cards">
 
@@ -391,6 +391,36 @@
                                                   <div class="card-footer">
                                                             <span class="card-cta">Launch <i
                                                                                 class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
+                                        </div>
+                              </a>
+
+                              <a href="pages/PID Controller/index.html" class="card reveal" data-category="control">
+                                        <div class="card-content">
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i class="fa-solid fa-sliders"></i></div>
+                                                            <span class="card-tag">Control</span>
+                                                  </div>
+                                                  <h3>PID Controller Tuner</h3>
+                                                  <p>Tune Kp, Ki, Kd and watch step response, overshoot, and settling time evolve in real time.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i class="fa-solid fa-arrow-right"></i></span>
+                                                            <div class="card-dot"></div>
+                                                  </div>
+                                        </div>
+                              </a>
+
+                              <a href="pages/FIR/index.html" class="card reveal" data-category="dsp">
+                                        <div class="card-content">
+                                                  <div class="card-top">
+                                                            <div class="card-icon-wrap"><i class="fa-solid fa-filter"></i></div>
+                                                            <span class="card-tag">DSP</span>
+                                                  </div>
+                                                  <h3>FIR Filter Designer</h3>
+                                                  <p>Design lowpass, highpass, bandpass filters with the Window Method and visualize frequency response live.</p>
+                                                  <div class="card-footer">
+                                                            <span class="card-cta">Launch <i class="fa-solid fa-arrow-right"></i></span>
                                                             <div class="card-dot"></div>
                                                   </div>
                                         </div>
