@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Dark background matching your site's surface -->
+  <rect width="120" height="120" rx="24" fill="#0a0f1e" />
+  
+  <!-- Glowing subtle border -->
+  <rect x="2" y="2" width="116" height="116" rx="22" fill="none" stroke="#00c8ff" stroke-width="3" opacity="0.4" />
+
+  <!-- Center Microchip / Processor outline -->
+  <rect x="35" y="35" width="50" height="50" rx="8" fill="none" stroke="#00c8ff" stroke-width="6" />
+
+  <!-- Inner nodes / data flow representation -->
+  <circle cx="48" cy="48" r="5" fill="#34d399" />
+  <circle cx="72" cy="72" r="5" fill="#f0abfc" />
+  <path d="M48 48 L72 72" stroke="#7c3aed" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Processor Pins -->
+  <!-- Top Pins -->
+  <line x1="45" y1="20" x2="45" y2="35" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="60" y1="20" x2="60" y2="35" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="75" y1="20" x2="75" y2="35" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <!-- Bottom Pins -->
+  <line x1="45" y1="85" x2="45" y2="100" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="60" y1="85" x2="60" y2="100" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="75" y1="85" x2="75" y2="100" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <!-- Left Pins -->
+  <line x1="20" y1="45" x2="35" y2="45" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="20" y1="60" x2="35" y2="60" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="20" y1="75" x2="35" y2="75" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <!-- Right Pins -->
+  <line x1="85" y1="45" x2="100" y2="45" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="85" y1="60" x2="100" y2="60" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+  <line x1="85" y1="75" x2="100" y2="75" stroke="#00c8ff" stroke-width="4" stroke-linecap="round"/>
+</svg>
