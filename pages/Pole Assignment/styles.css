@@ -222,3 +222,63 @@ span[style*="color: #89b4fa"], .text-blue { color: var(--cyan) !important; }
 .dashboard {
   padding-top: 8px;
 }
+
+/* ── DARK THEME + SCROLL + HOME-BTN FIX ── */
+:root {
+  --primary:    var(--cyan);
+  --bg-color:   var(--bg);
+  --card-bg:    var(--panel);
+  --text-main:  var(--text-primary);
+  --border:     var(--border, #1e2d4a);
+}
+body {
+  padding-top: 72px !important;
+  background-color: var(--bg) !important;
+  color: var(--text-primary) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  font-family: var(--font-sans) !important;
+}
+.container { max-width: 1200px !important; margin: 0 auto !important; padding: 16px 20px !important; }
+h1, h2, h3 { color: var(--cyan) !important; font-family: var(--font-mono) !important; }
+header { color: var(--text-secondary) !important; }
+.card {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-panel) !important;
+  color: var(--text-primary) !important;
+}
+input[type="text"], input[type="number"], select, textarea {
+  background: var(--bg-2) !important;
+  border: 1px solid var(--border-2) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-mono) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 8px 10px !important;
+}
+.value-display {
+  background: var(--bg-2) !important;
+  color: var(--cyan) !important;
+  font-family: var(--font-mono) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 6px 10px !important;
+}
+button {
+  background: var(--panel-2) !important;
+  color: var(--cyan) !important;
+  border: 1px solid var(--border-2) !important;
+  font-family: var(--font-mono) !important;
+  border-radius: var(--radius-sm) !important;
+  cursor: pointer !important;
+}
+button:hover {
+  background: var(--cyan) !important;
+  color: var(--bg) !important;
+}
+canvas { max-width: 100% !important; border-radius: var(--radius-md) !important; }
+label { color: var(--text-secondary) !important; font-family: var(--font-mono) !important; }
+.dashboard { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 20px !important; }
+@media (max-width: 768px) { .dashboard { grid-template-columns: 1fr !important; } }
+

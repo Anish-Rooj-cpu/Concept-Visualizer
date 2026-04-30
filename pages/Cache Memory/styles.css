@@ -703,3 +703,17 @@ button.danger:hover {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--cyan-dim); }
+
+/* ── SCROLL & RESPONSIVE FIX ── */
+body {
+  padding-top: 72px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  height: auto !important;
+}
+@media (max-width: 900px) {
+  .main-grid, .sim-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+

@@ -201,3 +201,34 @@ span[style*="color: #89b4fa"], .text-blue { color: var(--cyan) !important; }
 .dashboard {
   padding-top: 8px;
 }
+
+/* ── SCROLL & HOME-BTN FIX ── */
+body {
+  padding: 72px 20px 20px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  height: auto !important;
+  font-family: var(--font-sans) !important;
+  background: var(--bg) !important;
+  color: var(--text-primary) !important;
+}
+h1 { color: var(--cyan) !important; font-family: var(--font-mono) !important; }
+h3 { color: var(--cyan) !important; font-family: var(--font-mono) !important; }
+.controls-bar {
+  background: var(--panel-2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  max-width: 1300px;
+  width: 100% !important;
+}
+.panel {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-panel) !important;
+}
+.dashboard { flex-wrap: wrap !important; }
+@media (max-width: 900px) {
+  .controls-panel, .view-panel { min-width: 0 !important; flex: 1 1 100% !important; }
+}
+

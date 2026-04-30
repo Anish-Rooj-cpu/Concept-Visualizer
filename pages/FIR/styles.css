@@ -255,3 +255,28 @@
   .preset-grid      { grid-template-columns: 1fr 1fr; }
   .metrics-grid     { grid-template-columns: 1fr 1fr; }
 }
+
+/* ── RESPONSIVE FIX ── */
+@media (max-width: 900px) {
+  .fir-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .controls-panel {
+    position: static !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+}
+
+
+/* ── RESPONSIVE FIX ── */
+@media (max-width: 900px) {
+  .fir-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .controls-panel {
+    position: static !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+}

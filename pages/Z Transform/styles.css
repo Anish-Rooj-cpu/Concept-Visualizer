@@ -275,3 +275,36 @@ span[style*="color: #89b4fa"], .text-blue { color: var(--cyan) !important; }
 .dashboard {
   padding-top: 8px;
 }
+
+/* ── SCROLL & HOME-BTN FIX ── */
+body {
+  padding-top: 72px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  height: auto !important;
+  font-family: var(--font-sans) !important;
+  background: var(--bg) !important;
+  color: var(--text-primary) !important;
+}
+.dashboard {
+  height: auto !important;
+  min-height: calc(100vh - 72px) !important;
+  box-sizing: border-box !important;
+}
+.grid-container {
+  min-height: 0 !important;
+  flex: 1 !important;
+}
+.panel {
+  overflow: visible !important;
+  min-height: 200px;
+}
+canvas { max-width: 100% !important; }
+@media (max-width: 900px) {
+  .grid-container {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+  .panel { min-height: 280px !important; }
+}
+

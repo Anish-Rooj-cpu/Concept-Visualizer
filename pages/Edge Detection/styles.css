@@ -849,3 +849,43 @@ span[style*="color: #89b4fa"], .text-blue { color: var(--cyan) !important; }
 .dashboard {
   padding-top: 8px;
 }
+
+/* ── SCROLL & HOME-BTN FIX ── */
+body {
+  height: auto !important;
+  min-height: 100vh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding-top: 72px !important;
+}
+.app-shell {
+  height: auto !important;
+  min-height: calc(100vh - 72px) !important;
+  overflow: visible !important;
+}
+.main-content {
+  overflow: visible !important;
+  min-height: 0;
+}
+.viz-area {
+  overflow: auto !important;
+  min-height: 300px;
+}
+.sidebar {
+  overflow-y: auto !important;
+  max-height: calc(100vh - 72px);
+  position: sticky;
+  top: 0;
+}
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto 1fr !important;
+  }
+  .sidebar {
+    max-height: 50vh;
+    position: relative;
+  }
+  body { padding-top: 64px !important; }
+}
+

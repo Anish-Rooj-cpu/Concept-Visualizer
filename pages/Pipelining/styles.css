@@ -352,3 +352,32 @@ span[style*="color: #89b4fa"], .text-blue { color: var(--cyan) !important; }
 .dashboard {
   padding-top: 8px;
 }
+
+/* ── SCROLL & HOME-BTN FIX ── */
+body {
+  padding-top: 72px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  font-family: var(--font-sans) !important;
+  background: var(--bg) !important;
+  color: var(--text-primary) !important;
+}
+.container {
+  grid-template-columns: 320px 1fr !important;
+  padding: 16px 20px !important;
+}
+h1 { color: var(--cyan) !important; font-family: var(--font-mono) !important; }
+h2 { color: var(--cyan) !important; font-family: var(--font-mono) !important; }
+.panel {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+}
+header {
+  background: var(--panel-2) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+@media (max-width: 900px) {
+  .container { grid-template-columns: 1fr !important; }
+}
+

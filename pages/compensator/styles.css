@@ -224,3 +224,43 @@ span[style*="color: #89b4fa"], .text-blue { color: var(--cyan) !important; }
 .dashboard {
   padding-top: 8px;
 }
+
+/* ── DARK THEME + SCROLL + HOME-BTN FIX ── */
+body {
+  padding: 72px 20px 20px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  font-family: var(--font-sans) !important;
+  background: var(--bg) !important;
+  color: var(--text-primary) !important;
+}
+h1, h2 { color: var(--cyan) !important; font-family: var(--font-mono) !important; }
+.controls-panel {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+}
+.canvas-panel {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+}
+input[type="text"], input[type="range"] {
+  background: var(--bg-2) !important;
+  border: 1px solid var(--border-2) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-mono) !important;
+}
+label { color: var(--text-secondary) !important; font-family: var(--font-mono) !important; }
+button {
+  background: var(--panel-2) !important;
+  color: var(--cyan) !important;
+  border: 1px solid var(--border-2) !important;
+  font-family: var(--font-mono) !important;
+}
+button:hover { background: var(--cyan) !important; color: var(--bg) !important; }
+canvas { max-width: 100% !important; }
+@media (max-width: 900px) {
+  .dashboard { flex-direction: column !important; }
+}
+

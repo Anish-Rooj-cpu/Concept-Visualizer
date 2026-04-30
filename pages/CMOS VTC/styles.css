@@ -378,3 +378,22 @@ span[style*="color: #89b4fa"], .text-blue { color: var(--cyan) !important; }
 .dashboard {
   padding-top: 8px;
 }
+
+/* ── SCROLL & HOME-BTN FIX ── */
+body {
+  padding-top: 80px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+.container {
+  padding-top: 8px !important;
+}
+.control-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 16px !important;
+}
+@media (max-width: 600px) {
+  .control-grid { grid-template-columns: 1fr !important; }
+}
+
