@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Interactive PID Controller Tuner — visualize proportional, integral, and derivative responses in real time. Tune Kp, Ki, Kd and observe step response, error, and control signal on live plots.">
-  <meta name="keywords" content="PID controller, proportional integral derivative, control systems, step response, tuning, Kp Ki Kd, engineering visualizer">
+  <meta name="description"
+    content="Interactive PID Controller Tuner — visualize proportional, integral, and derivative responses in real time. Tune Kp, Ki, Kd and observe step response, error, and control signal on live plots.">
+  <meta name="keywords"
+    content="PID controller, proportional integral derivative, control systems, step response, tuning, Kp Ki Kd, engineering visualizer">
   <meta property="og:title" content="PID Controller Tuner — ECV">
-  <meta property="og:description" content="Tune Kp, Ki, Kd interactively and observe step response, overshoot, rise time, and settling time in real time.">
+  <meta property="og:description"
+    content="Tune Kp, Ki, Kd interactively and observe step response, overshoot, rise time, and settling time in real time.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://anish-rooj-cpu.github.io/Concept-Visualizer/pages/pid-controller/">
   <title>PID Controller Tuner — ECV</title>
@@ -14,23 +18,37 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="canonical" href="https://anish-rooj-cpu.github.io/Concept-Visualizer/pages/pid-controller/">
 </head>
+
 <body>
 
   <!-- Home Button -->
-  <a href="../../index.html" class="home-btn" aria-label="Back to home">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M19 12H5M5 12l7-7M5 12l7 7"/>
-    </svg>
-    ECV Home
-  </a>
+  <nav class="global-nav">
+    <div class="nav-left">
+      <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
+        <div class="logo-icon">
+          <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">ECV</span>
+          <span class="brand-subtitle">Engineering Concepts Visualizer</span>
+        </div>
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="../../index.html" class="nav-link">HOME</a>
+      <a href="../../topics.html" class="nav-link">TOPICS</a>
+      <a href="../../about.html" class="nav-link">ABOUT</a>
+    </div>
+  </nav>
 
   <div class="page-wrapper">
 
     <!-- Page Header -->
     <header class="page-header">
-      <span class="topic-tag">&#x25C6; Control Systems</span>
+      <!-- <span class="topic-tag">&#x25C6; Control Systems</span> -->
       <h1><span class="accent">PID</span> Controller Tuner</h1>
-      <p class="page-subtitle">Tune Kp, Ki, Kd and watch the closed-loop step response, error, and control effort evolve in real time.</p>
+      <p class="page-subtitle">Tune Kp, Ki, Kd and watch the closed-loop step response, error, and control effort evolve
+        in real time.</p>
     </header>
 
     <!-- Main Dashboard -->
@@ -190,7 +208,9 @@
 
       <!-- RIGHT: Theory -->
       <aside class="panel info-panel" aria-label="PID theory reference">
-        <div class="panel-header"><h2>Theory</h2></div>
+        <div class="panel-header">
+          <h2>Theory</h2>
+        </div>
         <div class="panel-content">
 
           <p>A PID controller computes a correction signal <em>u(t)</em> from the error between setpoint and output:</p>
@@ -198,14 +218,18 @@
           <div class="formula">u(t) = Kp·e + Ki·∫e dt + Kd·ė</div>
 
           <ul class="concept-list" style="margin-top:14px">
-            <li><strong>Kp — Proportional</strong>Reacts to present error. Higher Kp → faster response but more overshoot and potential instability.</li>
-            <li><strong>Ki — Integral</strong>Eliminates steady-state error by accumulating past error. Too high → integral windup &amp; oscillation.</li>
-            <li><strong>Kd — Derivative</strong>Anticipates future error via rate of change. Adds damping; sensitive to noise.</li>
+            <li><strong>Kp — Proportional</strong>Reacts to present error. Higher Kp → faster response but more
+              overshoot and potential instability.</li>
+            <li><strong>Ki — Integral</strong>Eliminates steady-state error by accumulating past error. Too high →
+              integral windup &amp; oscillation.</li>
+            <li><strong>Kd — Derivative</strong>Anticipates future error via rate of change. Adds damping; sensitive to
+              noise.</li>
           </ul>
 
           <div class="edu-callout" style="margin-top:16px">
             <p class="callout-title">Ziegler–Nichols Rule</p>
-            <p>Increase Kp until sustained oscillations appear (K<sub>u</sub>, period T<sub>u</sub>). Then set Kp = 0.6K<sub>u</sub>, Ti = T<sub>u</sub>/2, Td = T<sub>u</sub>/8.</p>
+            <p>Increase Kp until sustained oscillations appear (K<sub>u</sub>, period T<sub>u</sub>). Then set Kp =
+              0.6K<sub>u</sub>, Ti = T<sub>u</sub>/2, Td = T<sub>u</sub>/8.</p>
           </div>
 
           <div class="edu-callout" style="margin-top:10px">
@@ -216,10 +240,14 @@
           <hr>
           <h3 style="margin-bottom:8px;font-size:0.82rem;color:var(--text-secondary)">Key Metrics</h3>
           <ul class="steps-list">
-            <li data-step="1"><span><strong style="color:var(--cyan)">Rise Time</strong> — time to first reach 90% of setpoint.</span></li>
-            <li data-step="2"><span><strong style="color:var(--cyan)">Overshoot</strong> — peak output above setpoint (%).</span></li>
-            <li data-step="3"><span><strong style="color:var(--cyan)">Settling Time</strong> — time to stay within ±2% band.</span></li>
-            <li data-step="4"><span><strong style="color:var(--cyan)">SSE</strong> — steady-state error as t→∞.</span></li>
+            <li data-step="1"><span><strong style="color:var(--cyan)">Rise Time</strong> — time to first reach 90% of
+                setpoint.</span></li>
+            <li data-step="2"><span><strong style="color:var(--cyan)">Overshoot</strong> — peak output above setpoint
+                (%).</span></li>
+            <li data-step="3"><span><strong style="color:var(--cyan)">Settling Time</strong> — time to stay within ±2%
+                band.</span></li>
+            <li data-step="4"><span><strong style="color:var(--cyan)">SSE</strong> — steady-state error as t→∞.</span>
+            </li>
           </ul>
 
         </div>
@@ -231,24 +259,32 @@
     <div class="edu-bar" role="complementary" aria-label="Quick facts">
       <div class="edu-bar-inner">
         <div class="edu-bar-title">
-          <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="9"/><line x1="10" y1="6" x2="10" y2="10"/><circle cx="10" cy="14" r="1" fill="currentColor"/></svg>
+          <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke-width="2" stroke-linecap="round">
+            <circle cx="10" cy="10" r="9" />
+            <line x1="10" y1="6" x2="10" y2="10" />
+            <circle cx="10" cy="14" r="1" fill="currentColor" />
+          </svg>
           Quick Facts
         </div>
         <div class="edu-fact-item">
           <span class="edu-fact-label">Type I System</span>
-          <span class="edu-fact-text">A plant with one integrator (Type I) has zero SSE for step inputs without integral action needed.</span>
+          <span class="edu-fact-text">A plant with one integrator (Type I) has zero SSE for step inputs without integral
+            action needed.</span>
         </div>
         <div class="edu-fact-item">
           <span class="edu-fact-label">Derivative Kick</span>
-          <span class="edu-fact-text">When setpoint jumps, Kd causes a large spike in u(t). Derivative-on-measurement mitigates this.</span>
+          <span class="edu-fact-text">When setpoint jumps, Kd causes a large spike in u(t). Derivative-on-measurement
+            mitigates this.</span>
         </div>
         <div class="edu-fact-item">
           <span class="edu-fact-label">Windup Guard</span>
-          <span class="edu-fact-text">If the actuator saturates, the integral term keeps growing — anti-windup clamps it to safe bounds.</span>
+          <span class="edu-fact-text">If the actuator saturates, the integral term keeps growing — anti-windup clamps it
+            to safe bounds.</span>
         </div>
         <div class="edu-fact-item">
           <span class="edu-fact-label">Stability Margin</span>
-          <span class="edu-fact-text">Gain margin &gt; 6 dB and phase margin &gt; 45° are common design targets for robust PID loops.</span>
+          <span class="edu-fact-text">Gain margin &gt; 6 dB and phase margin &gt; 45° are common design targets for
+            robust PID loops.</span>
         </div>
       </div>
     </div>
@@ -257,4 +293,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
