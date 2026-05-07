@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Simulate direct-mapped, 2-way set-associative, and fully associative caches. Observe hit/miss rates, LRU/FIFO replacement policies, and memory hierarchy performance interactively.">
-    <meta name="keywords" content="cache memory, direct mapped cache, set associative, LRU, FIFO, cache hit miss, computer architecture, memory hierarchy, cache simulator">
+    <meta name="description"
+        content="Simulate direct-mapped, 2-way set-associative, and fully associative caches. Observe hit/miss rates, LRU/FIFO replacement policies, and memory hierarchy performance interactively.">
+    <meta name="keywords"
+        content="cache memory, direct mapped cache, set associative, LRU, FIFO, cache hit miss, computer architecture, memory hierarchy, cache simulator">
     <meta name="author" content="Interactive Engineering Learning Suite">
     <meta name="robots" content="index, follow">
     <meta name="subject" content="CS / Computer Engineering">
@@ -16,13 +19,15 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Cache Memory Simulator | Computer Architecture Interactive">
-    <meta property="og:description" content="Simulate direct-mapped, set-associative, and fully associative caches. Observe hit/miss rates, replacement policies, and memory hierarchy performance.">
+    <meta property="og:description"
+        content="Simulate direct-mapped, set-associative, and fully associative caches. Observe hit/miss rates, replacement policies, and memory hierarchy performance.">
     <meta property="og:locale" content="en_US">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Cache Memory Simulator | Computer Architecture Interactive">
-    <meta name="twitter:description" content="Simulate direct-mapped, set-associative, and fully associative caches with LRU and FIFO replacement policies.">
+    <meta name="twitter:description"
+        content="Simulate direct-mapped, set-associative, and fully associative caches with LRU and FIFO replacement policies.">
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -40,31 +45,35 @@
 
     <title>Cache Memory Simulator | Computer Architecture Interactive</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../shared.css">
 </head>
+
 <body>
 
     <!-- Home Button -->
-    <a href="../../index.html" class="home-btn" aria-label="Return to Home">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
-        Home
-    </a>
-
+    <nav class="global-nav">
+        <div class="nav-left">
+            <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
+                <div class="logo-icon">
+                    <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">ECV</span>
+                    <span class="brand-subtitle">Engineering Concepts Visualizer</span>
+                </div>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="../../index.html" class="nav-link">HOME</a>
+            <a href="../../topics.html" class="nav-link">TOPICS</a>
+            <a href="../../about.html" class="nav-link">ABOUT</a>
+        </div>
+    </nav>
     <!-- Page Header -->
     <header class="page-header">
-        <div class="topic-tag">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2" aria-hidden="true">
-                <rect x="2" y="3" width="20" height="14" rx="2"/>
-                <path d="M8 21h8M12 17v4"/>
-            </svg>
-            Computer Architecture
-        </div>
         <h1>Cache Memory <span class="accent">Simulator</span></h1>
-        <p class="page-subtitle">Direct-Mapped · Set-Associative · Fully Associative &nbsp;|&nbsp; FIFO &amp; LRU Replacement</p>
+        <p class="page-subtitle">Direct-Mapped · Set-Associative · Fully Associative &nbsp;|&nbsp; FIFO &amp; LRU
+            Replacement</p>
     </header>
 
     <!-- Stats Panel -->
@@ -91,10 +100,8 @@
     <div class="controls" role="region" aria-label="Simulator Controls">
         <div class="control-group">
             <label for="addressInput">Address Sequence (comma-separated)</label>
-            <input type="text" id="addressInput"
-                   placeholder="e.g. 0, 4, 8, 4, 1, 12, 0"
-                   value="0, 4, 8, 4, 1, 12, 0"
-                   aria-describedby="seqHint">
+            <input type="text" id="addressInput" placeholder="e.g. 0, 4, 8, 4, 1, 12, 0" value="0, 4, 8, 4, 1, 12, 0"
+                aria-describedby="seqHint">
             <span id="seqHint" style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);">
                 Valid addresses: 0 – 15
             </span>
@@ -119,15 +126,15 @@
 
         <button id="btnRun" aria-label="Run address sequence">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <polygon points="5 3 19 12 5 21 5 3"/>
+                <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
             Run Sequence
         </button>
         <button id="btnReset" class="danger" aria-label="Reset simulator">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2.5" aria-hidden="true">
-                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                <path d="M3 3v5h5"/>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                aria-hidden="true">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                <path d="M3 3v5h5" />
             </svg>
             Reset
         </button>
@@ -173,10 +180,10 @@
     <!-- Educational Quick Reference -->
     <section class="edu-bar" aria-label="Key Concepts">
         <div class="edu-bar-header">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2" aria-hidden="true">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                aria-hidden="true">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
             </svg>
             Key Concepts
         </div>
@@ -191,15 +198,18 @@
             </div>
             <div class="edu-fact-item">
                 <span class="edu-fact-label">Temporal Locality</span>
-                <span class="edu-fact-text">Recently accessed data is likely to be needed again — this is why caching works.</span>
+                <span class="edu-fact-text">Recently accessed data is likely to be needed again — this is why caching
+                    works.</span>
             </div>
             <div class="edu-fact-item">
                 <span class="edu-fact-label">Direct Mapping</span>
-                <span class="edu-fact-text">Index = Address mod Cache_Lines. Each memory block maps to exactly one cache line.</span>
+                <span class="edu-fact-text">Index = Address mod Cache_Lines. Each memory block maps to exactly one cache
+                    line.</span>
             </div>
         </div>
     </section>
 
     <script src="script.js"></script>
 </body>
+
 </html>

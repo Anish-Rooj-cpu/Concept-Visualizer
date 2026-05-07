@@ -60,6 +60,7 @@ body {
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
+  padding-top: 0 !important; /* Ensure no residual padding pushes the page down */
 }
 
 /* Grid background texture */
@@ -89,54 +90,117 @@ body::after {
   z-index: 0;
 }
 
-/* ── HOME BUTTON ── */
-.home-btn {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 9999;
-  display: inline-flex;
+/* ── GLOBAL NAVIGATION BAR (Premium ECV Design) ── */
+.global-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 64px;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 18px 9px 12px;
-  background: var(--panel);
-  color: var(--cyan);
+  justify-content: space-between;
+  padding: 0 32px;
+  background: rgba(10, 14, 26, 0.85); /* var(--bg) with opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+
+/* ── BRANDING (LEFT SIDE) ── */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   text-decoration: none;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-2);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
+  transition: opacity var(--transition);
+}
+
+.brand-logo:hover {
+  opacity: 0.85;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--cyan);
+  border-radius: 8px;
+  background: rgba(0, 212, 255, 0.05);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.25); /* Glowing effect */
+  color: var(--cyan);
+}
+
+.logo-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-title {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+}
+
+.brand-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* ── NAV LINKS (RIGHT SIDE) ── */
+.nav-right {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  transition: all var(--transition);
-  box-shadow: var(--shadow-panel), 0 0 0 0 rgba(0,212,255,0);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color var(--transition);
 }
 
-.home-btn svg {
-  width: 16px;
-  height: 16px;
-  stroke: var(--cyan);
-  transition: transform var(--transition);
-  flex-shrink: 0;
+.nav-link:hover {
+  color: var(--text-primary);
 }
 
-.home-btn:hover {
-  background: var(--cyan);
-  color: var(--bg);
-  border-color: var(--cyan);
-  box-shadow: var(--shadow-panel), 0 0 20px rgba(0,212,255,0.4);
-  transform: translateY(-1px);
-}
-
-.home-btn:hover svg {
-  stroke: var(--bg);
-  transform: scale(1.1);
-}
-
-.home-btn:active {
-  transform: translateY(0);
+/* Responsive adjustments for Nav */
+@media (max-width: 768px) {
+  .global-nav {
+    padding: 0 16px;
+    height: 58px;
+  }
+  .brand-subtitle {
+    display: none; /* Hide subtitle on smaller screens to save space */
+  }
+  .nav-right {
+    gap: 16px;
+  }
+  .nav-link {
+    font-size: 0.75rem;
+  }
 }
 
 /* ── TYPOGRAPHY ── */
@@ -566,7 +630,7 @@ button:active,
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  overflow: visible;
+  overflow: hidden !important; /* Ensure canvas bounds are strictly respected */
 }
 
 canvas {
@@ -596,7 +660,7 @@ canvas {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 72px 20px 40px; /* top: clear home btn */
+  padding: 24px 20px 40px; /* Reduced top padding to respect the new sticky nav */
 }
 
 .page-header {
@@ -640,6 +704,7 @@ canvas {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
+  padding-top: 24px; /* Natural space under the global nav */
 }
 
 /* Default: two-column  */
@@ -671,14 +736,7 @@ a:hover { color: #fff; }
   }
 
   .page-wrapper {
-    padding: 68px 14px 32px;
-  }
-
-  .home-btn {
-    top: 10px;
-    left: 10px;
-    padding: 7px 14px 7px 10px;
-    font-size: 0.74rem;
+    padding: 24px 14px 32px;
   }
 
   .canvas-container,
@@ -695,18 +753,33 @@ a:hover { color: #fff; }
 
 @media (max-width: 600px) {
   html { font-size: 14px; }
-
+  
   .panel-header {
     flex-direction: column;
     align-items: flex-start;
   }
 
   button, .btn {
-    width: 100%;
+    width: auto;
+  }
+
+  .btn-row, .action-row, .controls-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .btn-row button, .action-row button {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .formula {
     font-size: 0.78rem;
+  }
+  
+  button, .btn, select, input[type="range"] {
+    min-height: 40px;
   }
 }
 
@@ -810,7 +883,7 @@ a:hover { color: #fff; }
 /* ── PRINT ── */
 @media print {
   body::before, body::after { display: none; }
-  .home-btn { display: none; }
+  .global-nav { display: none; }
 }
 
 /* ── ACCESSIBILITY ── */
@@ -843,45 +916,14 @@ a:hover { color: #fff; }
 
 /* ── SHARED.CSS PATCH v2 — Scroll, Responsiveness, Clarity ── */
 
-/* 1. Viewport-locked app shell support:
-   Pages that intentionally use height:100vh layouts need this
-   so the home button never overlaps content. */
+/* Viewport-locked app shell support */
 .app-shell,
 .viewport-app {
   margin-top: 0;
 }
 
-/* 2. Canvas overflow must stay hidden to avoid white strips */
-.canvas-container,
-.canvas-wrapper {
-  overflow: hidden !important;
-}
-
-/* 3. Mobile: don't force all buttons to 100% width – only action rows */
-@media (max-width: 600px) {
-  button, .btn {
-    width: auto;
-  }
-  .btn-row, .action-row, .controls-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .btn-row button, .action-row button {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-}
-
-/* 4. Prevent horizontal scroll on any page */
+/* Prevent horizontal scroll on any page */
 html, body { max-width: 100%; }
 
-/* 5. Better touch targets on mobile */
-@media (max-width: 600px) {
-  button, .btn, select, input[type="range"] {
-    min-height: 40px;
-  }
-}
-
-/* 6. Smooth scroll for in-page anchors */
+/* Smooth scroll for in-page anchors */
 html { scroll-padding-top: 80px; }

@@ -226,7 +226,7 @@ span[style*="color: #89b4fa"], .text-blue { color: var(--cyan) !important; }
 
 /* ── DARK THEME + SCROLL + HOME-BTN FIX ── */
 body {
-  padding: 72px 20px 20px !important;
+  padding: 5px 20px 20px !important;
   background-color: var(--bg) !important;
   color: var(--text-primary) !important;
   max-width: 1100px !important;

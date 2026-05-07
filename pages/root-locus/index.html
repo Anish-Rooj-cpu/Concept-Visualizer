@@ -39,17 +39,25 @@
           <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-    <a href="../../index.html" class="home-btn" aria-label="Return to Home">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-        </svg>
-        Home
-    </a>
-
-
-          <h1>Interactive Root Locus</h1>
+<body><nav class="global-nav">
+    <div class="nav-left">
+        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
+            <div class="logo-icon">
+                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div class="brand-text">
+                <span class="brand-title">ECV</span>
+                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
+            </div>
+        </a>
+    </div>
+    <div class="nav-right">
+        <a href="../../index.html" class="nav-link">HOME</a>
+        <a href="../../topics.html" class="nav-link">TOPICS</a>
+        <a href="../../about.html" class="nav-link">ABOUT</a>
+    </div>
+</nav>
+<h1>Interactive Root Locus</h1>
           <div class="subtitle">1 + K[N(s)/D(s)] = 0</div>
 
           <div class="dashboard">
