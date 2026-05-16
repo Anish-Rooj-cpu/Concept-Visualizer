@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Plot the Nyquist diagram for any transfer function. Identify encirclements of -1+0j, determine gain margin, phase margin, and closed-loop stability.">
-    <meta name="keywords" content="Nyquist plot, Nyquist criterion, gain margin, phase margin, stability, frequency response, control systems, polar plot">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="EE / Control Engineering">
-    <meta name="category" content="Educational Tool, Control Systems">
-    <meta name="language" content="English">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Nyquist Plot Interactive | Gain & Phase Margin Visualizer">
-    <meta property="og:description" content="Plot the Nyquist diagram for any transfer function. Identify encirclements of -1+0j, determine gain margin, phase margin, and closed-loop stability.">
-    <meta property="og:locale" content="en_US">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Nyquist Plot Interactive | Gain & Phase Margin Visualizer">
-    <meta name="twitter:description" content="Plot the Nyquist diagram for any transfer function. Identify encirclements of -1+0j, determine gain margin, phase margin, and closed-loop stability.">
-    <!-- Canonical & Schema -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Plot the Nyquist diagram for any transfer function. Identify encirclements of -1+0j, determine gain margin, phase margin, and closed-loop stability." name="description"/>
+<meta content="Nyquist plot, Nyquist criterion, gain margin, phase margin, stability, frequency response, control systems, polar plot" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="EE / Control Engineering" name="subject"/>
+<meta content="Educational Tool, Control Systems" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="Nyquist Plot Interactive | Gain &amp; Phase Margin Visualizer" property="og:title"/>
+<meta content="Plot the Nyquist diagram for any transfer function. Identify encirclements of -1+0j, determine gain margin, phase margin, and closed-loop stability." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Nyquist Plot Interactive | Gain &amp; Phase Margin Visualizer" name="twitter:title"/>
+<meta content="Plot the Nyquist diagram for any transfer function. Identify encirclements of -1+0j, determine gain margin, phase margin, and closed-loop stability." name="twitter:description"/>
+<!-- Canonical & Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -33,105 +33,89 @@
       "teaches": "Control Systems"
     }
     </script>
-    <!-- Shared Design System -->
-    <link rel="stylesheet" href="../shared.css">
-    <title>Nyquist Plot Interactive | Gain & Phase Margin Visualizer</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-
+<!-- Shared Design System -->
+<link href="../shared.css" rel="stylesheet"/>
+<title>Nyquist Plot Interactive | Gain &amp; Phase Margin Visualizer</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://enggviz.online/pages/nyquist/index.html" rel="canonical"/></head>
 <body><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <h1>Universal Nyquist Stability Mapper</h1>
-    <div class="subtitle">Enter coefficients for G(s)H(s) to analyze system stability.</div>
-
-    <div class="dashboard">
-
-        <div class="panel controls-panel">
-            <div class="input-group">
-                <label>Numerator N(s) [e.g. 10]</label>
-                <input type="text" id="numInput" value="10">
-            </div>
-
-            <div class="input-group">
-                <label>Denominator D(s) [e.g. 1, 6, 11, 6]</label>
-                <input type="text" id="denInput" value="1, 6, 11, 6">
-                <div style="font-size: 11px; color: var(--text-muted);">Coefficients of
+<div class="subtitle">Enter coefficients for G(s)H(s) to analyze system stability.</div>
+<div class="dashboard">
+<div class="panel controls-panel">
+<div class="input-group">
+<label>Numerator N(s) [e.g. 10]</label>
+<input id="numInput" type="text" value="10"/>
+</div>
+<div class="input-group">
+<label>Denominator D(s) [e.g. 1, 6, 11, 6]</label>
+<input id="denInput" type="text" value="1, 6, 11, 6"/>
+<div style="font-size: 11px; color: var(--text-muted);">Coefficients of
                     descending powers of s. Example: s³ + 6s² + 11s + 6</div>
-            </div>
-
-            <button onclick="updateSystem()">Update Transfer Function</button>
-
-            <hr style="border-color: var(--border-color); width: 100%; margin: 10px 0;">
-
-            <div class="input-group">
-                <label>System Gain (K): <span id="kValDisplay">1.0</span></label>
-                <input type="range" id="kSlider" min="0.1" max="150" step="0.1" value="10">
-            </div>
-
-            <div class="input-group">
-                <label>Trace ω (D-Contour): <span id="wValDisplay">ω = 0.00 rad/s</span></label>
-                <input type="range" id="traceSlider" min="-50" max="50" step="0.1" value="0">
-            </div>
-
-            <div class="metrics-box" id="metricsReadout">
-            </div>
-        </div>
-
-        <div class="panel visual-panel">
-            <div class="canvas-container">
-                <div class="canvas-title">S-Plane (D-Contour)</div>
-                <canvas id="sCanvas" width="300" height="400"></canvas>
-            </div>
-
-            <div class="arrow">➔</div>
-
-            <div class="canvas-container">
-                <div class="canvas-title">G(s)H(s) Plane (Nyquist Plot)</div>
-                <canvas id="gCanvas" width="400" height="400"></canvas>
-            </div>
-        </div>
-
-    </div>
-
-    <script src="script.js"></script>
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
-        <div class="edu-bar-inner">
-            <span class="edu-bar-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+</div>
+<button onclick="updateSystem()">Update Transfer Function</button>
+<hr style="border-color: var(--border-color); width: 100%; margin: 10px 0;"/>
+<div class="input-group">
+<label>System Gain (K): <span id="kValDisplay">1.0</span></label>
+<input id="kSlider" max="150" min="0.1" step="0.1" type="range" value="10"/>
+</div>
+<div class="input-group">
+<label>Trace ω (D-Contour): <span id="wValDisplay">ω = 0.00 rad/s</span></label>
+<input id="traceSlider" max="50" min="-50" step="0.1" type="range" value="0"/>
+</div>
+<div class="metrics-box" id="metricsReadout">
+</div>
+</div>
+<div class="panel visual-panel">
+<div class="canvas-container">
+<div class="canvas-title">S-Plane (D-Contour)</div>
+<canvas height="400" id="sCanvas" width="300"></canvas>
+</div>
+<div class="arrow">➔</div>
+<div class="canvas-container">
+<div class="canvas-title">G(s)H(s) Plane (Nyquist Plot)</div>
+<canvas height="400" id="gCanvas" width="400"></canvas>
+</div>
+</div>
+</div>
+<script src="script.js"></script>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<span class="edu-bar-title">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 Key Concepts
             </span>
-            <div class="edu-fact-item">
-                  <span class="edu-fact-label">Nyquist Criterion</span>
-                  <span class="edu-fact-text">Z = N + P. Z: RHP closed-loop poles. N: CW encirclements of −1. P: RHP open-loop poles.</span>
-                </div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Gain Margin</span>
-                  <span class="edu-fact-text">How much gain can increase before instability. Measured at phase = −180°.</span>
-                </div>
+<span class="edu-fact-label">Nyquist Criterion</span>
+<span class="edu-fact-text">Z = N + P. Z: RHP closed-loop poles. N: CW encirclements of −1. P: RHP open-loop poles.</span>
+</div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Phase Margin</span>
-                  <span class="edu-fact-text">How much phase can decrease before instability. Measured at |G(jω)| = 1 (0 dB).</span>
-                </div>
-        </div>
-    </section>
+<span class="edu-fact-label">Gain Margin</span>
+<span class="edu-fact-text">How much gain can increase before instability. Measured at phase = −180°.</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Phase Margin</span>
+<span class="edu-fact-text">How much phase can decrease before instability. Measured at |G(jω)| = 1 (0 dB).</span>
+</div>
+</div>
+</section>
 </body>
-
 </html>

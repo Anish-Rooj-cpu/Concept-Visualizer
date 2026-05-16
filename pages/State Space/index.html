@@ -1,27 +1,28 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Explore state-space models of linear systems. Visualize trajectories, phase portraits, eigenvalues, and system response from any initial condition.">
-    <meta name="keywords" content="state space, linear systems, eigenvalues, phase portrait, A matrix, controllability, observability, control theory">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="EE / Control Engineering">
-    <meta name="category" content="Educational Tool, Control Systems">
-    <meta name="language" content="English">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="State Space Analysis | Linear Systems Interactive Simulator">
-    <meta property="og:description" content="Explore state-space models of linear systems. Visualize trajectories, phase portraits, eigenvalues, and system response from any initial condition.">
-    <meta property="og:locale" content="en_US">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="State Space Analysis | Linear Systems Interactive Simulator">
-    <meta name="twitter:description" content="Explore state-space models of linear systems. Visualize trajectories, phase portraits, eigenvalues, and system response from any initial condition.">
-    <!-- Canonical & Schema -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Explore state-space models of linear systems. Visualize trajectories, phase portraits, eigenvalues, and system response from any initial condition." name="description"/>
+<meta content="state space, linear systems, eigenvalues, phase portrait, A matrix, controllability, observability, control theory" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="EE / Control Engineering" name="subject"/>
+<meta content="Educational Tool, Control Systems" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="State Space Analysis | Linear Systems Interactive Simulator" property="og:title"/>
+<meta content="Explore state-space models of linear systems. Visualize trajectories, phase portraits, eigenvalues, and system response from any initial condition." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="State Space Analysis | Linear Systems Interactive Simulator" name="twitter:title"/>
+<meta content="Explore state-space models of linear systems. Visualize trajectories, phase portraits, eigenvalues, and system response from any initial condition." name="twitter:description"/>
+<!-- Canonical & Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -32,115 +33,104 @@
       "teaches": "Control Systems"
     }
     </script>
-    <!-- Shared Design System -->
-    <link rel="stylesheet" href="../shared.css">
-    <title>State Space Analysis | Linear Systems Interactive Simulator</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+<!-- Shared Design System -->
+<link href="../shared.css" rel="stylesheet"/>
+<title>State Space Analysis | Linear Systems Interactive Simulator</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://enggviz.online/pages/State%20Space/index.html" rel="canonical"/></head>
 <body><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <h1>Advanced State Space Phase Portrait</h1>
-    <div class="subtitle">dx/dt = Ax | Interactive Dynamics, Animation, & Time Response</div>
-
-    <div class="dashboard">
-        <div class="panel controls-panel">
-            
-            <div class="control-section">
-                <label class="section-label">System Matrix (A)</label>
-                <div class="matrix-wrapper">
-                    <div class="matrix-label">A =</div>
-                    <div class="matrix-grid">
-                        <input type="number" id="a11" value="-0.5" step="0.1">
-                        <input type="number" id="a12" value="1" step="0.1">
-                        <input type="number" id="a21" value="-1" step="0.1">
-                        <input type="number" id="a22" value="-0.5" step="0.1">
-                    </div>
-                </div>
+<div class="subtitle">dx/dt = Ax | Interactive Dynamics, Animation, &amp; Time Response</div>
+<div class="dashboard">
+<div class="panel controls-panel">
+<div class="control-section">
+<label class="section-label">System Matrix (A)</label>
+<div class="matrix-wrapper">
+<div class="matrix-label">A =</div>
+<div class="matrix-grid">
+<input id="a11" step="0.1" type="number" value="-0.5"/>
+<input id="a12" step="0.1" type="number" value="1"/>
+<input id="a21" step="0.1" type="number" value="-1"/>
+<input id="a22" step="0.1" type="number" value="-0.5"/>
+</div>
+</div>
+</div>
+<div class="control-section">
+<label class="section-label">Presets</label>
+<select id="presetSelect">
+<option value="stable_focus">Damped Oscillator (Stable Focus)</option>
+<option value="center">Harmonic Oscillator (Center)</option>
+<option value="saddle">Saddle Point</option>
+<option value="stable_node">Overdamped (Stable Node)</option>
+<option value="unstable_node">Unstable Node</option>
+<option value="unstable_focus">Unstable Focus</option>
+</select>
+</div>
+<div class="control-section">
+<div class="slider-header">
+<label class="section-label">Vector Field Density</label>
+<span id="densityLabel">Medium (40px)</span>
+</div>
+<input id="densitySlider" max="80" min="20" step="5" type="range" value="40"/>
+</div>
+<div class="button-group">
+<button class="primary" id="updateBtn">Update Vector Field</button>
+<button class="secondary" onclick="clearAllTrajectories()">Clear Trajectories</button>
+</div>
+<div class="metrics-box" id="metricsReadout">
+</div>
+</div>
+<div class="visual-panel">
+<div class="instruction">
+<strong>Left Click:</strong> Drop Particle  |  <strong>Right-Click Drag:</strong> Pan  |  <strong>Scroll:</strong> Zoom
             </div>
-
-            <div class="control-section">
-                <label class="section-label">Presets</label>
-                <select id="presetSelect">
-                    <option value="stable_focus">Damped Oscillator (Stable Focus)</option>
-                    <option value="center">Harmonic Oscillator (Center)</option>
-                    <option value="saddle">Saddle Point</option>
-                    <option value="stable_node">Overdamped (Stable Node)</option>
-                    <option value="unstable_node">Unstable Node</option>
-                    <option value="unstable_focus">Unstable Focus</option>
-                </select>
-            </div>
-
-            <div class="control-section">
-                <div class="slider-header">
-                    <label class="section-label">Vector Field Density</label>
-                    <span id="densityLabel">Medium (40px)</span>
-                </div>
-                <input type="range" id="densitySlider" min="20" max="80" step="5" value="40">
-            </div>
-
-            <div class="button-group">
-                <button class="primary" id="updateBtn">Update Vector Field</button>
-                <button class="secondary" onclick="clearAllTrajectories()">Clear Trajectories</button>
-            </div>
-
-            <div class="metrics-box" id="metricsReadout">
-                </div>
-        </div>
-
-        <div class="visual-panel">
-            <div class="instruction">
-                <strong>Left Click:</strong> Drop Particle &nbsp;|&nbsp; <strong>Right-Click Drag:</strong> Pan &nbsp;|&nbsp; <strong>Scroll:</strong> Zoom
-            </div>
-            
-            <div class="canvas-container">
-                <canvas id="phaseCanvas" width="650" height="450"></canvas>
-            </div>
-            
-            <div class="canvas-container" style="margin-top: 15px;">
-                <div class="chart-title">System Response x(t) (Last Clicked Trajectory)</div>
-                <canvas id="timeCanvas" width="650" height="200"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
-        <div class="edu-bar-inner">
-            <span class="edu-bar-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+<div class="canvas-container">
+<canvas height="450" id="phaseCanvas" width="650"></canvas>
+</div>
+<div class="canvas-container" style="margin-top: 15px;">
+<div class="chart-title">System Response x(t) (Last Clicked Trajectory)</div>
+<canvas height="200" id="timeCanvas" width="650"></canvas>
+</div>
+</div>
+</div>
+<script src="script.js"></script>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<span class="edu-bar-title">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 Key Concepts
             </span>
-            <div class="edu-fact-item">
-                  <span class="edu-fact-label">State Equations</span>
-                  <span class="edu-fact-text">ẋ = Ax + Bu, y = Cx + Du</span>
-                </div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Stability via Eigenvalues</span>
-                  <span class="edu-fact-text">System is stable if and only if all eigenvalues of A have negative real parts.</span>
-                </div>
+<span class="edu-fact-label">State Equations</span>
+<span class="edu-fact-text">ẋ = Ax + Bu, y = Cx + Du</span>
+</div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Controllability</span>
-                  <span class="edu-fact-text">Check rank(C) = n, where C = [B AB A²B…]. Full rank → fully controllable.</span>
-                </div>
-        </div>
-    </section>
+<span class="edu-fact-label">Stability via Eigenvalues</span>
+<span class="edu-fact-text">System is stable if and only if all eigenvalues of A have negative real parts.</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Controllability</span>
+<span class="edu-fact-text">Check rank(C) = n, where C = [B AB A²B…]. Full rank → fully controllable.</span>
+</div>
+</div>
+</section>
 </body>
 </html>

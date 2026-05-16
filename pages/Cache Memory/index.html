@@ -1,36 +1,28 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Simulate direct-mapped, 2-way set-associative, and fully associative caches. Observe hit/miss rates, LRU/FIFO replacement policies, and memory hierarchy performance interactively.">
-    <meta name="keywords"
-        content="cache memory, direct mapped cache, set associative, LRU, FIFO, cache hit miss, computer architecture, memory hierarchy, cache simulator">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="CS / Computer Engineering">
-    <meta name="category" content="Educational Tool, Computer Architecture">
-    <meta name="language" content="English">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Cache Memory Simulator | Computer Architecture Interactive">
-    <meta property="og:description"
-        content="Simulate direct-mapped, set-associative, and fully associative caches. Observe hit/miss rates, replacement policies, and memory hierarchy performance.">
-    <meta property="og:locale" content="en_US">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Cache Memory Simulator | Computer Architecture Interactive">
-    <meta name="twitter:description"
-        content="Simulate direct-mapped, set-associative, and fully associative caches with LRU and FIFO replacement policies.">
-
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Simulate direct-mapped, 2-way set-associative, and fully associative caches. Observe hit/miss rates, LRU/FIFO replacement policies, and memory hierarchy performance interactively." name="description"/>
+<meta content="cache memory, direct mapped cache, set associative, LRU, FIFO, cache hit miss, computer architecture, memory hierarchy, cache simulator" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="CS / Computer Engineering" name="subject"/>
+<meta content="Educational Tool, Computer Architecture" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="Cache Memory Simulator | Computer Architecture Interactive" property="og:title"/>
+<meta content="Simulate direct-mapped, set-associative, and fully associative caches. Observe hit/miss rates, replacement policies, and memory hierarchy performance." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Cache Memory Simulator | Computer Architecture Interactive" name="twitter:title"/>
+<meta content="Simulate direct-mapped, set-associative, and fully associative caches with LRU and FIFO replacement policies." name="twitter:description"/>
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -42,174 +34,153 @@
       "inLanguage": "en"
     }
     </script>
-
-    <title>Cache Memory Simulator | Computer Architecture Interactive</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="../shared.css">
-</head>
-
+<title>Cache Memory Simulator | Computer Architecture Interactive</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="../shared.css" rel="stylesheet"/>
+<link href="https://enggviz.online/pages/Cache%20Memory/index.html" rel="canonical"/></head>
 <body>
-
-    <!-- Home Button -->
-    <nav class="global-nav">
-        <div class="nav-left">
-            <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-                <div class="logo-icon">
-                    <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-                </div>
-                <div class="brand-text">
-                    <span class="brand-title">ECV</span>
-                    <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-                </div>
-            </a>
-        </div>
-        <div class="nav-right">
-            <a href="../../index.html" class="nav-link">HOME</a>
-            <a href="../../topics.html" class="nav-link">TOPICS</a>
-            <a href="../../about.html" class="nav-link">ABOUT</a>
-        </div>
-    </nav>
-    <!-- Page Header -->
-    <header class="page-header">
-        <h1>Cache Memory <span class="accent">Simulator</span></h1>
-        <p class="page-subtitle">Direct-Mapped · Set-Associative · Fully Associative &nbsp;|&nbsp; FIFO &amp; LRU
+<!-- Home Button -->
+<nav class="global-nav">
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
+</nav>
+<!-- Page Header -->
+<header class="page-header">
+<h1>Cache Memory <span class="accent">Simulator</span></h1>
+<p class="page-subtitle">Direct-Mapped · Set-Associative · Fully Associative  |  FIFO &amp; LRU
             Replacement</p>
-    </header>
-
-    <!-- Stats Panel -->
-    <div class="stats-panel" role="region" aria-label="Performance Statistics">
-        <div class="stat-card">
-            <span class="stat-label">Total Accesses</span>
-            <span class="stat-value" id="statTotal">0</span>
-        </div>
-        <div class="stat-card green">
-            <span class="stat-label">Cache Hits</span>
-            <span class="stat-value" id="statHits">0</span>
-        </div>
-        <div class="stat-card red">
-            <span class="stat-label">Cache Misses</span>
-            <span class="stat-value" id="statMisses">0</span>
-        </div>
-        <div class="stat-card cyan">
-            <span class="stat-label">Hit Rate</span>
-            <span class="stat-value" id="statRate">0%</span>
-        </div>
-    </div>
-
-    <!-- Controls -->
-    <div class="controls" role="region" aria-label="Simulator Controls">
-        <div class="control-group">
-            <label for="addressInput">Address Sequence (comma-separated)</label>
-            <input type="text" id="addressInput" placeholder="e.g. 0, 4, 8, 4, 1, 12, 0" value="0, 4, 8, 4, 1, 12, 0"
-                aria-describedby="seqHint">
-            <span id="seqHint" style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);">
+</header>
+<!-- Stats Panel -->
+<div aria-label="Performance Statistics" class="stats-panel" role="region">
+<div class="stat-card">
+<span class="stat-label">Total Accesses</span>
+<span class="stat-value" id="statTotal">0</span>
+</div>
+<div class="stat-card green">
+<span class="stat-label">Cache Hits</span>
+<span class="stat-value" id="statHits">0</span>
+</div>
+<div class="stat-card red">
+<span class="stat-label">Cache Misses</span>
+<span class="stat-value" id="statMisses">0</span>
+</div>
+<div class="stat-card cyan">
+<span class="stat-label">Hit Rate</span>
+<span class="stat-value" id="statRate">0%</span>
+</div>
+</div>
+<!-- Controls -->
+<div aria-label="Simulator Controls" class="controls" role="region">
+<div class="control-group">
+<label for="addressInput">Address Sequence (comma-separated)</label>
+<input aria-describedby="seqHint" id="addressInput" placeholder="e.g. 0, 4, 8, 4, 1, 12, 0" type="text" value="0, 4, 8, 4, 1, 12, 0"/>
+<span id="seqHint" style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);">
                 Valid addresses: 0 – 15
             </span>
-        </div>
-
-        <div class="control-group">
-            <label for="mappingType">Cache Mapping</label>
-            <select id="mappingType" aria-label="Cache mapping type">
-                <option value="direct">Direct Mapping</option>
-                <option value="2way">2-Way Set Associative</option>
-                <option value="associative">Fully Associative</option>
-            </select>
-        </div>
-
-        <div class="control-group">
-            <label for="policyType">Replacement Policy</label>
-            <select id="policyType" aria-label="Cache replacement policy">
-                <option value="fifo">FIFO — First In, First Out</option>
-                <option value="lru">LRU — Least Recently Used</option>
-            </select>
-        </div>
-
-        <button id="btnRun" aria-label="Run address sequence">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
+</div>
+<div class="control-group">
+<label for="mappingType">Cache Mapping</label>
+<select aria-label="Cache mapping type" id="mappingType">
+<option value="direct">Direct Mapping</option>
+<option value="2way">2-Way Set Associative</option>
+<option value="associative">Fully Associative</option>
+</select>
+</div>
+<div class="control-group">
+<label for="policyType">Replacement Policy</label>
+<select aria-label="Cache replacement policy" id="policyType">
+<option value="fifo">FIFO — First In, First Out</option>
+<option value="lru">LRU — Least Recently Used</option>
+</select>
+</div>
+<button aria-label="Run address sequence" id="btnRun">
+<svg aria-hidden="true" fill="currentColor" height="13" viewbox="0 0 24 24" width="13">
+<polygon points="5 3 19 12 5 21 5 3"></polygon>
+</svg>
             Run Sequence
         </button>
-        <button id="btnReset" class="danger" aria-label="Reset simulator">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                aria-hidden="true">
-                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                <path d="M3 3v5h5" />
-            </svg>
+<button aria-label="Reset simulator" class="danger" id="btnReset">
+<svg aria-hidden="true" fill="none" height="13" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="13">
+<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+<path d="M3 3v5h5"></path>
+</svg>
             Reset
         </button>
-    </div>
-
-    <!-- Dashboard -->
-    <main class="dashboard" role="main">
-
-        <!-- Main Memory Panel -->
-        <section class="panel memory-panel" aria-label="Main Memory">
-            <h3>Main Memory — 16 Blocks</h3>
-            <div class="grid" id="mainMemory" role="grid" aria-label="Main memory blocks"></div>
-        </section>
-
-        <!-- Cache Panel -->
-        <section class="panel cache-panel" aria-label="Cache Memory">
-            <h3>Cache Memory — 4 Lines</h3>
-
-            <div class="address-breakdown" id="addressBreakdown" aria-live="polite" aria-atomic="true">
+</div>
+<!-- Dashboard -->
+<main class="dashboard" role="main">
+<!-- Main Memory Panel -->
+<section aria-label="Main Memory" class="panel memory-panel">
+<h3>Main Memory — 16 Blocks</h3>
+<div aria-label="Main memory blocks" class="grid" id="mainMemory" role="grid"></div>
+</section>
+<!-- Cache Panel -->
+<section aria-label="Cache Memory" class="panel cache-panel">
+<h3>Cache Memory — 4 Lines</h3>
+<div aria-atomic="true" aria-live="polite" class="address-breakdown" id="addressBreakdown">
                 Waiting for input…
             </div>
-
-            <table class="cache-table" role="table" aria-label="Cache state">
-                <thead>
-                    <tr>
-                        <th scope="col">Set / Line</th>
-                        <th scope="col">Valid</th>
-                        <th scope="col">Tag</th>
-                        <th scope="col">Data (Block)</th>
-                    </tr>
-                </thead>
-                <tbody id="cacheMemory"></tbody>
-            </table>
-
-            <div class="log-panel" aria-label="Execution log">
-                <h4>Execution Log</h4>
-                <div id="logArea" role="log" aria-live="polite" aria-atomic="false"></div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts">
-        <div class="edu-bar-header">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                aria-hidden="true">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-            </svg>
+<table aria-label="Cache state" class="cache-table" role="table">
+<thead>
+<tr>
+<th scope="col">Set / Line</th>
+<th scope="col">Valid</th>
+<th scope="col">Tag</th>
+<th scope="col">Data (Block)</th>
+</tr>
+</thead>
+<tbody id="cacheMemory"></tbody>
+</table>
+<div aria-label="Execution log" class="log-panel">
+<h4>Execution Log</h4>
+<div aria-atomic="false" aria-live="polite" id="logArea" role="log"></div>
+</div>
+</section>
+</main>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar">
+<div class="edu-bar-header">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14">
+<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+<path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+</svg>
             Key Concepts
         </div>
-        <div class="edu-facts">
-            <div class="edu-fact-item">
-                <span class="edu-fact-label">Hit Rate Formula</span>
-                <span class="edu-fact-text">Hit Rate = Hits ÷ (Hits + Misses) × 100%</span>
-            </div>
-            <div class="edu-fact-item">
-                <span class="edu-fact-label">AMAT</span>
-                <span class="edu-fact-text">AMAT = Hit Time + (Miss Rate × Miss Penalty)</span>
-            </div>
-            <div class="edu-fact-item">
-                <span class="edu-fact-label">Temporal Locality</span>
-                <span class="edu-fact-text">Recently accessed data is likely to be needed again — this is why caching
+<div class="edu-facts">
+<div class="edu-fact-item">
+<span class="edu-fact-label">Hit Rate Formula</span>
+<span class="edu-fact-text">Hit Rate = Hits ÷ (Hits + Misses) × 100%</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">AMAT</span>
+<span class="edu-fact-text">AMAT = Hit Time + (Miss Rate × Miss Penalty)</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Temporal Locality</span>
+<span class="edu-fact-text">Recently accessed data is likely to be needed again — this is why caching
                     works.</span>
-            </div>
-            <div class="edu-fact-item">
-                <span class="edu-fact-label">Direct Mapping</span>
-                <span class="edu-fact-text">Index = Address mod Cache_Lines. Each memory block maps to exactly one cache
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Direct Mapping</span>
+<span class="edu-fact-text">Index = Address mod Cache_Lines. Each memory block maps to exactly one cache
                     line.</span>
-            </div>
-        </div>
-    </section>
-
-    <script src="script.js"></script>
+</div>
+</div>
+</section>
+<script src="script.js"></script>
 </body>
-
 </html>

@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins.">
-    <meta name="keywords" content="lead compensator, lag compensator, Bode plot, phase margin, gain margin, compensator design, control systems, frequency response">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="EE / Control Engineering">
-    <meta name="category" content="Educational Tool, Control Systems">
-    <meta name="language" content="English">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Lead-Lag Compensator Design | Bode Plot Interactive Tool">
-    <meta property="og:description" content="Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins.">
-    <meta property="og:locale" content="en_US">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Lead-Lag Compensator Design | Bode Plot Interactive Tool">
-    <meta name="twitter:description" content="Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins.">
-    <!-- Canonical & Schema -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins." name="description"/>
+<meta content="lead compensator, lag compensator, Bode plot, phase margin, gain margin, compensator design, control systems, frequency response" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="EE / Control Engineering" name="subject"/>
+<meta content="Educational Tool, Control Systems" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="Lead-Lag Compensator Design | Bode Plot Interactive Tool" property="og:title"/>
+<meta content="Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Lead-Lag Compensator Design | Bode Plot Interactive Tool" name="twitter:title"/>
+<meta content="Design lead and lag compensators interactively. Tune pole/zero positions and observe Bode plot changes in gain and phase margins." name="twitter:description"/>
+<!-- Canonical & Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -33,111 +33,95 @@
       "teaches": "Control Systems"
     }
     </script>
-    <!-- Shared Design System -->
-    <link rel="stylesheet" href="../shared.css">
-          <title>Lead-Lag Compensator Design | Bode Plot Interactive Tool</title>
-          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-          <link rel="stylesheet" href="styles.css">
-</head>
-
+<!-- Shared Design System -->
+<link href="../shared.css" rel="stylesheet"/>
+<title>Lead-Lag Compensator Design | Bode Plot Interactive Tool</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://enggviz.online/pages/compensator/index.html" rel="canonical"/></head>
 <body><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <h1>Interactive Compensator Designer</h1>
-          <div class="subtitle">Design Phase Lead / Lag Compensators</div>
-
-          <div class="dashboard">
-                    <div class="controls-panel">
-                              <h3 style="color: #f9e2af; margin-top: 0;">1. Plant Transfer Function</h3>
-                              <div class="input-group">
-                                        <label>Numerator N(s) [e.g., 100]</label>
-                                        <input type="text" id="numInput" value="100">
-                              </div>
-                              <div class="input-group">
-                                        <label>Denominator D(s) [e.g., 1, 6, 0 for s(s+6)]</label>
-                                        <input type="text" id="denInput" value="1, 6, 0">
-                              </div>
-
-                              <hr style="border-color: #45475a; width: 100%; margin: 10px 0;">
-
-                              <h3 style="color: #f9e2af; margin-top: 0;">2. Compensator Gc(s)</h3>
-                              <div class="formula">Gc(s) = (1 + aTs) / (1 + Ts)</div>
-
-                              <div class="input-group">
-                                        <label>Type</label>
-                                        <div class="radio-group">
-                                                  <label><input type="radio" name="compType" value="lead" checked
-                                                                      onchange="updateSliderRanges()"> Phase Lead (a >
+<div class="subtitle">Design Phase Lead / Lag Compensators</div>
+<div class="dashboard">
+<div class="controls-panel">
+<h3 style="color: #f9e2af; margin-top: 0;">1. Plant Transfer Function</h3>
+<div class="input-group">
+<label>Numerator N(s) [e.g., 100]</label>
+<input id="numInput" type="text" value="100"/>
+</div>
+<div class="input-group">
+<label>Denominator D(s) [e.g., 1, 6, 0 for s(s+6)]</label>
+<input id="denInput" type="text" value="1, 6, 0"/>
+</div>
+<hr style="border-color: #45475a; width: 100%; margin: 10px 0;"/>
+<h3 style="color: #f9e2af; margin-top: 0;">2. Compensator Gc(s)</h3>
+<div class="formula">Gc(s) = (1 + aTs) / (1 + Ts)</div>
+<div class="input-group">
+<label>Type</label>
+<div class="radio-group">
+<label><input checked="" name="compType" onchange="updateSliderRanges()" type="radio" value="lead"/> Phase Lead (a &gt;
                                                             1)</label>
-                                                  <label><input type="radio" name="compType" value="lag"
-                                                                      onchange="updateSliderRanges()"> Phase Lag (a <
+<label><input name="compType" onchange="updateSliderRanges()" type="radio" value="lag"/> Phase Lag (a &lt;
                                                                       1)</label>
-                                        </div>
-                              </div>
-
-                              <div class="input-group">
-                                        <label>Parameter 'a': <span id="aValDisplay"
-                                                            class="highlight-val">10.00</span></label>
-                                        <input type="range" id="aSlider" min="1.1" max="20" step="0.1" value="10">
-                              </div>
-
-                              <div class="input-group">
-                                        <label>Time Constant 'T': <span id="tValDisplay"
-                                                            class="highlight-val">0.100</span></label>
-                                        <input type="range" id="tSlider" min="0.001" max="1" step="0.001" value="0.1">
-                              </div>
-
-                              <button onclick="updatePlots()">Update Plant & Render</button>
-                    </div>
-
-                    <div class="charts-panel">
-                              <div class="chart-container">
-                                        <canvas id="magChart"></canvas>
-                              </div>
-                              <div class="chart-container">
-                                        <canvas id="phaseChart"></canvas>
-                              </div>
-                    </div>
-          </div>
-
-          <script src="script.js"></script>
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
-        <div class="edu-bar-inner">
-            <span class="edu-bar-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+</div>
+</div>
+<div class="input-group">
+<label>Parameter 'a': <span class="highlight-val" id="aValDisplay">10.00</span></label>
+<input id="aSlider" max="20" min="1.1" step="0.1" type="range" value="10"/>
+</div>
+<div class="input-group">
+<label>Time Constant 'T': <span class="highlight-val" id="tValDisplay">0.100</span></label>
+<input id="tSlider" max="1" min="0.001" step="0.001" type="range" value="0.1"/>
+</div>
+<button onclick="updatePlots()">Update Plant &amp; Render</button>
+</div>
+<div class="charts-panel">
+<div class="chart-container">
+<canvas id="magChart"></canvas>
+</div>
+<div class="chart-container">
+<canvas id="phaseChart"></canvas>
+</div>
+</div>
+</div>
+<script src="script.js"></script>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<span class="edu-bar-title">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 Key Concepts
             </span>
-            <div class="edu-fact-item">
-                  <span class="edu-fact-label">Lead Compensator</span>
-                  <span class="edu-fact-text">Adds phase lead near crossover. Used to increase phase margin and speed up response.</span>
-                </div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Lag Compensator</span>
-                  <span class="edu-fact-text">Boosts low-frequency gain. Improves steady-state accuracy without destabilizing.</span>
-                </div>
+<span class="edu-fact-label">Lead Compensator</span>
+<span class="edu-fact-text">Adds phase lead near crossover. Used to increase phase margin and speed up response.</span>
+</div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Phase Margin Target</span>
-                  <span class="edu-fact-text">Typically aim for 45–60° phase margin for good transient response.</span>
-                </div>
-        </div>
-    </section>
+<span class="edu-fact-label">Lag Compensator</span>
+<span class="edu-fact-text">Boosts low-frequency gain. Improves steady-state accuracy without destabilizing.</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Phase Margin Target</span>
+<span class="edu-fact-text">Typically aim for 45–60° phase margin for good transient response.</span>
+</div>
+</div>
+</section>
 </body>
-
 </html>

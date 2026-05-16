@@ -1,27 +1,28 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively.">
-    <meta name="keywords" content="edge detection, Canny, Sobel, Prewitt, Laplacian, image processing, computer vision, gradient, convolution kernel">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="CS / EE">
-    <meta name="category" content="Educational Tool, Image Processing / Computer Vision">
-    <meta name="language" content="English">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Edge Detection Visualizer | Canny Sobel Prewitt Image Processing">
-    <meta property="og:description" content="Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively.">
-    <meta property="og:locale" content="en_US">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Edge Detection Visualizer | Canny Sobel Prewitt Image Processing">
-    <meta name="twitter:description" content="Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively.">
-    <!-- Canonical & Schema -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively." name="description"/>
+<meta content="edge detection, Canny, Sobel, Prewitt, Laplacian, image processing, computer vision, gradient, convolution kernel" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="CS / EE" name="subject"/>
+<meta content="Educational Tool, Image Processing / Computer Vision" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="Edge Detection Visualizer | Canny Sobel Prewitt Image Processing" property="og:title"/>
+<meta content="Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Edge Detection Visualizer | Canny Sobel Prewitt Image Processing" name="twitter:title"/>
+<meta content="Apply and compare edge detection algorithms — Canny, Sobel, Prewitt, Laplacian — on real images. Tune thresholds and kernels interactively." name="twitter:description"/>
+<!-- Canonical & Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -32,296 +33,289 @@
       "teaches": "Image Processing / Computer Vision"
     }
     </script>
-    <!-- Shared Design System -->
-    <link rel="stylesheet" href="../shared.css">
-  <title>Edge Detection Visualizer | Canny Sobel Prewitt Image Processing</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<!-- Shared Design System -->
+<link href="../shared.css" rel="stylesheet"/>
+<title>Edge Detection Visualizer | Canny Sobel Prewitt Image Processing</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+</link><link href="https://enggviz.online/pages/Edge%20Detection/index.html" rel="canonical"/></head>
+<body>
+<nav class="global-nav">
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <div class="app-shell">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sidebar-logo">
-        <div class="logo-icon">∑</div>
-        <span class="logo-text">ConvLab</span>
-      </div>
-
-      <nav class="sidebar-nav">
-        <button class="nav-tab active" data-tab="explore">Explore</button>
-        <button class="nav-tab" data-tab="learn">Learn</button>
-        <button class="nav-tab" data-tab="theory">Theory</button>
-      </nav>
-
-      <!-- EXPLORE TAB -->
-      <div class="tab-content active" id="tab-explore">
-        <section class="sidebar-section">
-          <h2 class="section-label">Kernel</h2>
-          <select id="kernel-select" class="styled-select">
-            <option value="sobelX">Sobel X — Vertical Edges</option>
-            <option value="sobelY">Sobel Y — Horizontal Edges</option>
-            <option value="sobelMag">Sobel Magnitude — Combined</option>
-            <option value="laplacian">Laplacian — All Edges</option>
-            <option value="sharpen">Sharpen</option>
-            <option value="gaussianBlur">Gaussian Blur</option>
-          </select>
-          <p id="kernel-desc" class="meta-text"></p>
-        </section>
-
-        <section class="sidebar-section">
-          <h2 class="section-label">Convolution Settings</h2>
-          <div class="setting-row">
-            <label>Padding</label>
-            <select id="padding-select" class="styled-select-sm">
-              <option value="valid">Valid</option>
-              <option value="same">Same (Zero-pad)</option>
-            </select>
-          </div>
-          <div class="setting-row">
-            <label>Stride</label>
-            <input type="number" id="stride-input" value="1" min="1" max="3" class="styled-number" />
-          </div>
-        </section>
-
-        <section class="sidebar-section">
-          <h2 class="section-label">Display</h2>
-          <div class="toggle-row">
-            <span>Color Map</span>
-            <button class="toggle-btn" id="toggle-colormap" aria-pressed="false"><span class="toggle-knob"></span></button>
-          </div>
-          <div class="toggle-row">
-            <span>Signed Output</span>
-            <button class="toggle-btn" id="toggle-signed" aria-pressed="false"><span class="toggle-knob"></span></button>
-          </div>
-        </section>
-
-        <section class="sidebar-section">
-          <h2 class="section-label">Image Source</h2>
-          <label class="file-label" for="image-upload">
-            <span class="file-icon">⬆</span> Upload Image
-            <input type="file" id="image-upload" accept="image/*" />
-          </label>
-          <div class="btn-group-v">
-            <button class="btn-secondary" id="btn-shape-box">Draw Square</button>
-            <button class="btn-secondary" id="btn-shape-cross">Draw Cross</button>
-            <button class="btn-secondary" id="btn-shape-circle">Draw Circle</button>
-            <button class="btn-secondary" id="btn-noise">Add Noise</button>
-          </div>
-        </section>
-
-        <section class="sidebar-section">
-          <h2 class="section-label">Playback Speed</h2>
-          <div class="slider-row">
-            <span class="mono">Fast</span>
-            <input type="range" id="speed-slider" min="30" max="800" value="200" class="styled-range" />
-            <span class="mono">Slow</span>
-          </div>
-          <p class="speed-val mono" id="speed-val">200 ms/step</p>
-        </section>
-      </div>
-
-      <!-- LEARN TAB -->
-      <div class="tab-content" id="tab-learn">
-        <section class="sidebar-section learn-cards">
-          <div class="learn-card">
-            <h3>What is Convolution?</h3>
-            <p>A kernel (filter) slides across an image. At each position, we multiply overlapping pixel values with kernel weights and sum the results — producing one output value per position.</p>
-          </div>
-          <div class="learn-card">
-            <h3>What is a Kernel?</h3>
-            <p>A small matrix (usually 3×3) of weights. Different kernels detect different features: edges, blurs, sharpness. The weights determine what the filter "looks for".</p>
-          </div>
-          <div class="learn-card">
-            <h3>Padding</h3>
-            <p><strong>Valid:</strong> no padding — output shrinks. The kernel stays fully inside the image.<br/><strong>Same:</strong> zero-pad borders so output matches input size. Useful in deep networks.</p>
-          </div>
-          <div class="learn-card">
-            <h3>Stride</h3>
-            <p>How many pixels the kernel moves each step. Stride 1 = overlapping windows (dense output). Stride 2 = skip every other pixel (half-size output, faster).</p>
-          </div>
-          <div class="learn-card">
-            <h3>Feature Map</h3>
-            <p>The output grid after convolution. Each pixel represents how strongly the kernel's feature (e.g. a vertical edge) appeared at that location in the input.</p>
-          </div>
-        </section>
-      </div>
-
-      <!-- THEORY TAB -->
-      <div class="tab-content" id="tab-theory">
-        <section class="sidebar-section learn-cards">
-          <div class="learn-card formula-card">
-            <h3>Convolution Formula</h3>
-            <div class="formula">
-              <code>(I ★ K)[i,j] = Σ<sub>m</sub>Σ<sub>n</sub> I[i+m, j+n] · K[m,n]</code>
-            </div>
-            <p>Where I is the input image and K is the kernel. Each output pixel is a dot product of the kernel with the local input patch.</p>
-          </div>
-          <div class="learn-card formula-card">
-            <h3>Sobel Operators</h3>
-            <div class="formula"><code>G = √(Gx² + Gy²)</code></div>
-            <p>Sobel X detects horizontal intensity gradients (vertical edges). Sobel Y detects vertical gradients. Magnitude combines both for full edge strength.</p>
-          </div>
-          <div class="learn-card formula-card">
-            <h3>Output Dimensions</h3>
-            <div class="formula"><code>out = ⌊(n + 2p − k) / s⌋ + 1</code></div>
-            <p><strong>n</strong> = input size, <strong>p</strong> = padding, <strong>k</strong> = kernel size, <strong>s</strong> = stride. Try changing padding and stride to see the output grid resize.</p>
-          </div>
-          <div class="learn-card formula-card">
-            <h3>In Deep Learning</h3>
-            <p>CNNs (Convolutional Neural Networks) stack many such convolution layers. Each layer learns its own kernel weights automatically — discovering edges, textures, and objects.</p>
-          </div>
-        </section>
-      </div>
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-
-      <!-- HEADER BAR -->
-      <header class="topbar">
-        <div class="topbar-title">
-          <h1>Convolution <span class="accent">&</span> Edge Detection</h1>
-          <p class="topbar-sub" id="dynamic-explanation">Slide a kernel over an image to extract features. Choose a kernel, then press Play or Step.</p>
-        </div>
-        <div class="playback-controls">
-          <button class="ctrl-btn" id="btn-reset" title="Reset">↺</button>
-          <button class="ctrl-btn" id="btn-step-back" title="Step Back">⏮</button>
-          <button class="ctrl-btn primary" id="btn-play" title="Play">▶</button>
-          <button class="ctrl-btn" id="btn-pause" title="Pause" disabled>⏸</button>
-          <button class="ctrl-btn" id="btn-step" title="Step Forward">⏭</button>
-        </div>
-      </header>
-
-      <!-- PROGRESS -->
-      <div class="progress-bar-wrap">
-        <div class="progress-bar-track">
-          <div id="progress-bar" class="progress-bar-fill"></div>
-        </div>
-        <span id="status-text" class="status-text">Ready — hover over input image to preview</span>
-      </div>
-
-      <!-- VISUALIZATION AREA -->
-      <div class="viz-area">
-
-        <!-- INPUT GRID -->
-        <div class="grid-card">
-          <div class="grid-card-header">
-            <span class="grid-label">Input Image</span>
-            <span class="grid-dim" id="input-dim">20 × 20</span>
-          </div>
-          <div class="grid-wrapper">
-            <div id="input-grid" class="pixel-grid"></div>
-            <div id="kernel-overlay" class="kernel-overlay hidden"></div>
-          </div>
-        </div>
-
-        <!-- KERNEL PANEL -->
-        <div class="kernel-card">
-          <div class="grid-card-header">
-            <span class="grid-label">Active Kernel</span>
-            <span class="grid-dim" id="kernel-name-tag">Sobel X</span>
-          </div>
-
-          <div id="kernel-grid" class="kernel-matrix"></div>
-
-          <div class="math-panel">
-            <div class="math-panel-header">Calculation</div>
-            <div id="math-equation" class="math-eq">Hover or step to view…</div>
-            <div id="math-result" class="math-res"></div>
-          </div>
-
-          <!-- Output dim info -->
-          <div class="dim-info">
-            <div class="dim-row">
-              <span>Output size</span>
-              <span class="mono" id="out-dim">—</span>
-            </div>
-            <div class="dim-row">
-              <span>Progress</span>
-              <span class="mono" id="step-count">0 / 0</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- OUTPUT GRID -->
-        <div class="grid-card">
-          <div class="grid-card-header">
-            <span class="grid-label">Feature Map</span>
-            <span class="grid-dim" id="output-dim">—</span>
-          </div>
-          <div class="grid-wrapper">
-            <div id="output-grid" class="pixel-grid"></div>
-          </div>
-        </div>
-
-      </div><!-- end viz-area -->
-
-      <!-- ANNOTATION STRIP -->
-      <div class="annotation-strip">
-        <div class="annotation-item">
-          <div class="annotation-dot dot-input"></div>
-          <span>Input pixel × kernel weight</span>
-        </div>
-        <div class="annotation-item">
-          <div class="annotation-dot dot-kernel"></div>
-          <span>Active kernel region</span>
-        </div>
-        <div class="annotation-item">
-          <div class="annotation-dot dot-output"></div>
-          <span>Active output pixel</span>
-        </div>
-        <div class="annotation-item">
-          <div class="annotation-dot dot-done"></div>
-          <span>Computed output</span>
-        </div>
-      </div>
-
-    </main>
-  </div>
-
-  <canvas id="hidden-canvas" style="display:none;"></canvas>
-  <script src="script.js"></script>
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
-        <div class="edu-bar-inner">
-            <span class="edu-bar-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                Key Concepts
-            </span>
-            <div class="edu-fact-item">
-                  <span class="edu-fact-label">Sobel Operator</span>
-                  <span class="edu-fact-text">Approximates gradient with 3×3 kernels in x and y directions. |G| = √(Gx²+Gy²).</span>
-                </div>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+<div class="sidebar-logo">
+<div class="logo-icon">∑</div>
+<span class="logo-text">ConvLab</span>
+</div>
+<nav class="sidebar-nav">
+<button class="nav-tab active" data-tab="explore">Explore</button>
+<button class="nav-tab" data-tab="learn">Learn</button>
+<button class="nav-tab" data-tab="theory">Theory</button>
+</nav>
+<!-- EXPLORE TAB -->
+<div class="tab-content active" id="tab-explore">
+<section class="sidebar-section">
+<h2 class="section-label">Kernel</h2>
+<select class="styled-select" id="kernel-select">
+<option value="sobelX">Sobel X — Vertical Edges</option>
+<option value="sobelY">Sobel Y — Horizontal Edges</option>
+<option value="sobelMag">Sobel Magnitude — Combined</option>
+<option value="laplacian">Laplacian — All Edges</option>
+<option value="sharpen">Sharpen</option>
+<option value="gaussianBlur">Gaussian Blur</option>
+</select>
+<p class="meta-text" id="kernel-desc"></p>
+</section>
+<section class="sidebar-section">
+<h2 class="section-label">Convolution Settings</h2>
+<div class="setting-row">
+<label>Padding</label>
+<select class="styled-select-sm" id="padding-select">
+<option value="valid">Valid</option>
+<option value="same">Same (Zero-pad)</option>
+</select>
+</div>
+<div class="setting-row">
+<label>Stride</label>
+<input class="styled-number" id="stride-input" max="3" min="1" type="number" value="1"/>
+</div>
+</section>
+<section class="sidebar-section">
+<h2 class="section-label">Display</h2>
+<div class="toggle-row">
+<span>Color Map</span>
+<button aria-pressed="false" class="toggle-btn" id="toggle-colormap"><span class="toggle-knob"></span></button>
+</div>
+<div class="toggle-row">
+<span>Signed Output</span>
+<button aria-pressed="false" class="toggle-btn" id="toggle-signed"><span class="toggle-knob"></span></button>
+</div>
+</section>
+<section class="sidebar-section">
+<h2 class="section-label">Image Source</h2>
+<label class="file-label" for="image-upload">
+<span class="file-icon">⬆</span> Upload Image
+            <input accept="image/*" id="image-upload" type="file"/>
+</label>
+<div class="btn-group-v">
+<button class="btn-secondary" id="btn-shape-box">Draw Square</button>
+<button class="btn-secondary" id="btn-shape-cross">Draw Cross</button>
+<button class="btn-secondary" id="btn-shape-circle">Draw Circle</button>
+<button class="btn-secondary" id="btn-noise">Add Noise</button>
+</div>
+</section>
+<section class="sidebar-section">
+<h2 class="section-label">Playback Speed</h2>
+<div class="slider-row">
+<span class="mono">Fast</span>
+<input class="styled-range" id="speed-slider" max="800" min="30" type="range" value="200"/>
+<span class="mono">Slow</span>
+</div>
+<p class="speed-val mono" id="speed-val">200 ms/step</p>
+</section>
+</div>
+<!-- LEARN TAB -->
+<div class="tab-content" id="tab-learn">
+<section class="sidebar-section learn-cards">
+<div class="learn-card">
+<h3>What is Convolution?</h3>
+<p>A kernel (filter) slides across an image. At each position, we multiply overlapping pixel values with
+              kernel weights and sum the results — producing one output value per position.</p>
+</div>
+<div class="learn-card">
+<h3>What is a Kernel?</h3>
+<p>A small matrix (usually 3×3) of weights. Different kernels detect different features: edges, blurs,
+              sharpness. The weights determine what the filter "looks for".</p>
+</div>
+<div class="learn-card">
+<h3>Padding</h3>
+<p><strong>Valid:</strong> no padding — output shrinks. The kernel stays fully inside the
+              image.<br/><strong>Same:</strong> zero-pad borders so output matches input size. Useful in deep networks.
+            </p>
+</div>
+<div class="learn-card">
+<h3>Stride</h3>
+<p>How many pixels the kernel moves each step. Stride 1 = overlapping windows (dense output). Stride 2 =
+              skip every other pixel (half-size output, faster).</p>
+</div>
+<div class="learn-card">
+<h3>Feature Map</h3>
+<p>The output grid after convolution. Each pixel represents how strongly the kernel's feature (e.g. a
+              vertical edge) appeared at that location in the input.</p>
+</div>
+</section>
+</div>
+<!-- THEORY TAB -->
+<div class="tab-content" id="tab-theory">
+<section class="sidebar-section learn-cards">
+<div class="learn-card formula-card">
+<h3>Convolution Formula</h3>
+<div class="formula">
+<code>(I ★ K)[i,j] = Σ<sub>m</sub>Σ<sub>n</sub> I[i+m, j+n] · K[m,n]</code>
+</div>
+<p>Where I is the input image and K is the kernel. Each output pixel is a dot product of the kernel with the
+              local input patch.</p>
+</div>
+<div class="learn-card formula-card">
+<h3>Sobel Operators</h3>
+<div class="formula"><code>G = √(Gx² + Gy²)</code></div>
+<p>Sobel X detects horizontal intensity gradients (vertical edges). Sobel Y detects vertical gradients.
+              Magnitude combines both for full edge strength.</p>
+</div>
+<div class="learn-card formula-card">
+<h3>Output Dimensions</h3>
+<div class="formula"><code>out = ⌊(n + 2p − k) / s⌋ + 1</code></div>
+<p><strong>n</strong> = input size, <strong>p</strong> = padding, <strong>k</strong> = kernel size,
+              <strong>s</strong> = stride. Try changing padding and stride to see the output grid resize.</p>
+</div>
+<div class="learn-card formula-card">
+<h3>In Deep Learning</h3>
+<p>CNNs (Convolutional Neural Networks) stack many such convolution layers. Each layer learns its own kernel
+              weights automatically — discovering edges, textures, and objects.</p>
+</div>
+</section>
+</div>
+</aside>
+<!-- MAIN CONTENT -->
+<main class="main-content">
+<!-- HEADER BAR -->
+<header class="topbar">
+<div class="topbar-title">
+<h1>Convolution <span class="accent">&amp;</span> Edge Detection</h1>
+<p class="topbar-sub" id="dynamic-explanation">Slide a kernel over an image to extract features. Choose a
+            kernel, then press Play or Step.</p>
+</div>
+<div class="playback-controls">
+<button class="ctrl-btn" id="btn-reset" title="Reset">↺</button>
+<button class="ctrl-btn" id="btn-step-back" title="Step Back">⏮</button>
+<button class="ctrl-btn primary" id="btn-play" title="Play">▶</button>
+<button class="ctrl-btn" disabled="" id="btn-pause" title="Pause">⏸</button>
+<button class="ctrl-btn" id="btn-step" title="Step Forward">⏭</button>
+</div>
+</header>
+<!-- PROGRESS -->
+<div class="progress-bar-wrap">
+<div class="progress-bar-track">
+<div class="progress-bar-fill" id="progress-bar"></div>
+</div>
+<span class="status-text" id="status-text">Ready — hover over input image to preview</span>
+</div>
+<!-- VISUALIZATION AREA -->
+<div class="viz-area">
+<!-- INPUT GRID -->
+<div class="grid-card">
+<div class="grid-card-header">
+<span class="grid-label">Input Image</span>
+<span class="grid-dim" id="input-dim">20 × 20</span>
+</div>
+<div class="grid-wrapper">
+<div class="pixel-grid" id="input-grid"></div>
+<div class="kernel-overlay hidden" id="kernel-overlay"></div>
+</div>
+</div>
+<!-- KERNEL PANEL -->
+<div class="kernel-card">
+<div class="grid-card-header">
+<span class="grid-label">Active Kernel</span>
+<span class="grid-dim" id="kernel-name-tag">Sobel X</span>
+</div>
+<div class="kernel-matrix" id="kernel-grid"></div>
+<div class="math-panel">
+<div class="math-panel-header">Calculation</div>
+<div class="math-eq" id="math-equation">Hover or step to view…</div>
+<div class="math-res" id="math-result"></div>
+</div>
+<!-- Output dim info -->
+<div class="dim-info">
+<div class="dim-row">
+<span>Output size</span>
+<span class="mono" id="out-dim">—</span>
+</div>
+<div class="dim-row">
+<span>Progress</span>
+<span class="mono" id="step-count">0 / 0</span>
+</div>
+</div>
+</div>
+<!-- OUTPUT GRID -->
+<div class="grid-card">
+<div class="grid-card-header">
+<span class="grid-label">Feature Map</span>
+<span class="grid-dim" id="output-dim">—</span>
+</div>
+<div class="grid-wrapper">
+<div class="pixel-grid" id="output-grid"></div>
+</div>
+</div>
+</div><!-- end viz-area -->
+<!-- ANNOTATION STRIP -->
+<div class="annotation-strip">
+<div class="annotation-item">
+<div class="annotation-dot dot-input"></div>
+<span>Input pixel × kernel weight</span>
+</div>
+<div class="annotation-item">
+<div class="annotation-dot dot-kernel"></div>
+<span>Active kernel region</span>
+</div>
+<div class="annotation-item">
+<div class="annotation-dot dot-output"></div>
+<span>Active output pixel</span>
+</div>
+<div class="annotation-item">
+<div class="annotation-dot dot-done"></div>
+<span>Computed output</span>
+</div>
+</div>
+</main>
+</div>
+<canvas id="hidden-canvas" style="display:none;"></canvas>
+<script src="script.js"></script>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<span class="edu-bar-title">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14">
+<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+<path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+</svg>
+        Key Concepts
+      </span>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Canny Algorithm</span>
-                  <span class="edu-fact-text">Sobel gradient → Non-max suppression → Hysteresis thresholding (double-threshold).</span>
-                </div>
+<span class="edu-fact-label">Sobel Operator</span>
+<span class="edu-fact-text">Approximates gradient with 3×3 kernels in x and y directions. |G| =
+          √(Gx²+Gy²).</span>
+</div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Laplacian</span>
-                  <span class="edu-fact-text">Second-order operator. Detects edges as zero-crossings. Sensitive to noise.</span>
-                </div>
-        </div>
-    </section>
+<span class="edu-fact-label">Canny Algorithm</span>
+<span class="edu-fact-text">Sobel gradient → Non-max suppression → Hysteresis thresholding
+          (double-threshold).</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Laplacian</span>
+<span class="edu-fact-text">Second-order operator. Detects edges as zero-crossings. Sensitive to noise.</span>
+</div>
+</div>
+</section>
 </body>
 </html>

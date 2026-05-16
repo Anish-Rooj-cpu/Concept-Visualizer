@@ -1,27 +1,28 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Build signals from harmonics using epicycles. See how sine waves combine in time and frequency domains. Edit the spectrum and watch the waveform update live.">
-    <meta name="keywords" content="Fourier series, Fourier transform, harmonics, frequency domain, time domain, epicycles, spectrum, square wave, signal decomposition">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="EE / Mathematics / DSP">
-    <meta name="category" content="Educational Tool, Digital Signal Processing">
-    <meta name="language" content="English">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Fourier Transform Interactive Explorer | Frequency Domain Visualizer">
-    <meta property="og:description" content="Build signals from harmonics using epicycles. See how sine waves combine in time and frequency domains. Edit the spectrum and watch the waveform update live.">
-    <meta property="og:locale" content="en_US">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Fourier Transform Interactive Explorer | Frequency Domain Visualizer">
-    <meta name="twitter:description" content="Build signals from harmonics using epicycles. See how sine waves combine in time and frequency domains. Edit the spectrum and watch the waveform update live.">
-    <!-- Canonical & Schema -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Build signals from harmonics using epicycles. See how sine waves combine in time and frequency domains. Edit the spectrum and watch the waveform update live." name="description"/>
+<meta content="Fourier series, Fourier transform, harmonics, frequency domain, time domain, epicycles, spectrum, square wave, signal decomposition" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="EE / Mathematics / DSP" name="subject"/>
+<meta content="Educational Tool, Digital Signal Processing" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="Fourier Transform Interactive Explorer | Frequency Domain Visualizer" property="og:title"/>
+<meta content="Build signals from harmonics using epicycles. See how sine waves combine in time and frequency domains. Edit the spectrum and watch the waveform update live." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Fourier Transform Interactive Explorer | Frequency Domain Visualizer" name="twitter:title"/>
+<meta content="Build signals from harmonics using epicycles. See how sine waves combine in time and frequency domains. Edit the spectrum and watch the waveform update live." name="twitter:description"/>
+<!-- Canonical & Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -32,118 +33,109 @@
       "teaches": "Digital Signal Processing"
     }
     </script>
-    <!-- Shared Design System -->
-    <link rel="stylesheet" href="../shared.css">
-    <title>Fourier Transform Interactive Explorer | Frequency Domain Visualizer</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+<!-- Shared Design System -->
+<link href="../shared.css" rel="stylesheet"/>
+<title>Fourier Transform Interactive Explorer | Frequency Domain Visualizer</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://enggviz.online/pages/Fourier%20Transform/index.html" rel="canonical"/></head>
 <body><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <div class="container">
-        <header>
-            <div class="header-titles">
-                <h1>Fourier Series & Transform Explorer</h1>
-                <p>Understand how complex signals are built from simple sine waves in both the Time and Frequency domains.</p>
-            </div>
-            <div class="header-controls">
-                <button id="btn-play-pause" class="btn-primary">Pause ⏸</button>
-                <div class="speed-control">
-                    <label>Speed:</label>
-                    <input type="range" id="speed-slider" min="0" max="2" step="0.1" value="1">
-                </div>
-                <div class="toggle-control">
-                    <label><input type="checkbox" id="toggle-error"> Show Ideal Wave</label>
-                </div>
-            </div>
-        </header>
-
-        <main>
-            <aside class="controls-panel">
-                <div class="panel-section">
-                    <h2>Waveform Generator</h2>
-                    <select id="wave-selector">
-                        <option value="square">Square Wave</option>
-                        <option value="sawtooth">Sawtooth Wave</option>
-                        <option value="triangle">Triangle Wave</option>
-                        <option value="custom">Custom (Drag Spectrum)</option>
-                        <option value="reset">Zero Signal (Flat)</option>
-                    </select>
-                </div>
-
-                <div class="panel-section">
-                    <h2>Harmonics Editor</h2>
-                    <p class="hint">Adjust amplitude and phase. Hover to highlight.</p>
-                    <div id="harmonics-container">
-                        </div>
-                </div>
-            </aside>
-
-            <section class="visualization-panel">
-                
-                <div class="equation-box" id="math-equation">
+<header>
+<div class="header-titles">
+<h1>Fourier Series &amp; Transform Explorer</h1>
+<p>Understand how complex signals are built from simple sine waves in both the Time and Frequency domains.</p>
+</div>
+<div class="header-controls">
+<button class="btn-primary" id="btn-play-pause">Pause ⏸</button>
+<div class="speed-control">
+<label>Speed:</label>
+<input id="speed-slider" max="2" min="0" step="0.1" type="range" value="1"/>
+</div>
+<div class="toggle-control">
+<label><input id="toggle-error" type="checkbox"/> Show Ideal Wave</label>
+</div>
+</div>
+</header>
+<main>
+<aside class="controls-panel">
+<div class="panel-section">
+<h2>Waveform Generator</h2>
+<select id="wave-selector">
+<option value="square">Square Wave</option>
+<option value="sawtooth">Sawtooth Wave</option>
+<option value="triangle">Triangle Wave</option>
+<option value="custom">Custom (Drag Spectrum)</option>
+<option value="reset">Zero Signal (Flat)</option>
+</select>
+</div>
+<div class="panel-section">
+<h2>Harmonics Editor</h2>
+<p class="hint">Adjust amplitude and phase. Hover to highlight.</p>
+<div id="harmonics-container">
+</div>
+</div>
+</aside>
+<section class="visualization-panel">
+<div class="equation-box" id="math-equation">
                     f(t) = 0
                 </div>
-
-                <div class="canvas-wrapper main-canvas-wrapper">
-                    <h3 class="overlay-title">Time Domain (Epicycles & Waveform)</h3>
-                    <canvas id="timeCanvas"></canvas>
-                </div>
-
-                <div class="canvas-wrapper spectrum-wrapper">
-                    <h3 class="overlay-title">Frequency Domain (Amplitude Spectrum) - <span class="hint">Drag bars to edit!</span></h3>
-                    <canvas id="freqCanvas"></canvas>
-                </div>
-            </section>
-            
-            <aside class="guide-panel">
-                <h2>What am I seeing?</h2>
-                <div id="guide-content">
-                    <p><strong>The Big Idea:</strong> Any repeating wave can be broken down into a sum of basic sine waves.</p>
-                    <hr>
-                    <p id="dynamic-guide">Watch the circles (epicycles). The first circle is the fundamental frequency. Each attached circle spins faster, representing higher harmonics. Their vertical positions add up to draw the wave!</p>
-                </div>
-            </aside>
-        </main>
-    </div>
-
-    <script src="script.js"></script>
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
-        <div class="edu-bar-inner">
-            <span class="edu-bar-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+<div class="canvas-wrapper main-canvas-wrapper">
+<h3 class="overlay-title">Time Domain (Epicycles &amp; Waveform)</h3>
+<canvas id="timeCanvas"></canvas>
+</div>
+<div class="canvas-wrapper spectrum-wrapper">
+<h3 class="overlay-title">Frequency Domain (Amplitude Spectrum) - <span class="hint">Drag bars to edit!</span></h3>
+<canvas id="freqCanvas"></canvas>
+</div>
+</section>
+<aside class="guide-panel">
+<h2>What am I seeing?</h2>
+<div id="guide-content">
+<p><strong>The Big Idea:</strong> Any repeating wave can be broken down into a sum of basic sine waves.</p>
+<hr/>
+<p id="dynamic-guide">Watch the circles (epicycles). The first circle is the fundamental frequency. Each attached circle spins faster, representing higher harmonics. Their vertical positions add up to draw the wave!</p>
+</div>
+</aside>
+</main>
+</div>
+<script src="script.js"></script>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<span class="edu-bar-title">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 Key Concepts
             </span>
-            <div class="edu-fact-item">
-                  <span class="edu-fact-label">Synthesis Equation</span>
-                  <span class="edu-fact-text">f(t) = Σ cₙ · e^(j2πnf₀t)</span>
-                </div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Gibbs Phenomenon</span>
-                  <span class="edu-fact-text">Adding more harmonics to a square wave reduces ripple but never eliminates it at discontinuities.</span>
-                </div>
+<span class="edu-fact-label">Synthesis Equation</span>
+<span class="edu-fact-text">f(t) = Σ cₙ · e^(j2πnf₀t)</span>
+</div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Parseval's Theorem</span>
-                  <span class="edu-fact-text">Total energy in time domain = total energy in frequency domain.</span>
-                </div>
-        </div>
-    </section>
+<span class="edu-fact-label">Gibbs Phenomenon</span>
+<span class="edu-fact-text">Adding more harmonics to a square wave reduces ripple but never eliminates it at discontinuities.</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Parseval's Theorem</span>
+<span class="edu-fact-text">Total energy in time domain = total energy in frequency domain.</span>
+</div>
+</div>
+</section>
 </body>
 </html>

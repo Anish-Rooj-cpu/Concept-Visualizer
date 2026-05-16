@@ -1,27 +1,28 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Explore Z-transform poles and zeros on the complex plane. Understand stability via the unit circle and observe how pole placement affects the impulse response.">
-    <meta name="keywords" content="z-transform, z-plane, poles zeros, unit circle, stability, discrete time, digital signal processing, impulse response">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="EE / DSP">
-    <meta name="category" content="Educational Tool, Digital Signal Processing">
-    <meta name="language" content="English">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Z-Transform Interactive Explorer | Discrete-Time Systems">
-    <meta property="og:description" content="Explore Z-transform poles and zeros on the complex plane. Understand stability via the unit circle and observe how pole placement affects the impulse response.">
-    <meta property="og:locale" content="en_US">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Z-Transform Interactive Explorer | Discrete-Time Systems">
-    <meta name="twitter:description" content="Explore Z-transform poles and zeros on the complex plane. Understand stability via the unit circle and observe how pole placement affects the impulse response.">
-    <!-- Canonical & Schema -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Explore Z-transform poles and zeros on the complex plane. Understand stability via the unit circle and observe how pole placement affects the impulse response." name="description"/>
+<meta content="z-transform, z-plane, poles zeros, unit circle, stability, discrete time, digital signal processing, impulse response" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="EE / DSP" name="subject"/>
+<meta content="Educational Tool, Digital Signal Processing" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="Z-Transform Interactive Explorer | Discrete-Time Systems" property="og:title"/>
+<meta content="Explore Z-transform poles and zeros on the complex plane. Understand stability via the unit circle and observe how pole placement affects the impulse response." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Z-Transform Interactive Explorer | Discrete-Time Systems" name="twitter:title"/>
+<meta content="Explore Z-transform poles and zeros on the complex plane. Understand stability via the unit circle and observe how pole placement affects the impulse response." name="twitter:description"/>
+<!-- Canonical & Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -32,118 +33,113 @@
       "teaches": "Digital Signal Processing"
     }
     </script>
-    <!-- Shared Design System -->
-    <link rel="stylesheet" href="../shared.css">
-    <title>Z-Transform Interactive Explorer | Discrete-Time Systems</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+<!-- Shared Design System -->
+<link href="../shared.css" rel="stylesheet"/>
+<title>Z-Transform Interactive Explorer | Discrete-Time Systems</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://enggviz.online/pages/Z%20Transform/index.html" rel="canonical"/></head>
 <body><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <div class="dashboard">
-        <header>
-            <div class="header-titles">
-                <h1>Z-Transform & DSP System Explorer</h1>
-                <p>Interactive z-plane, discrete time-domain simulation, and digital frequency response.</p>
-            </div>
-            <div class="header-controls">
-                <button id="btn-add-pole" class="btn pole-btn">+ Add Pole (✖)</button>
-                <button id="btn-add-pole-complex" class="btn pole-btn">+ Add Conjugate Poles</button>
-                <button id="btn-add-zero" class="btn zero-btn">+ Add Zero (〇)</button>
-                <button id="btn-clear" class="btn clear-btn">Clear All</button>
-            </div>
-        </header>
-
-        <main class="grid-container">
-            <section class="panel">
-                <div class="panel-header">
-                    <h2>z-Plane (Complex Plane)</h2>
-                    <div class="toggles">
-                        <label><input type="checkbox" id="toggle-snap" checked> Snap to Grid</label>
-                    </div>
-                </div>
-                <div class="canvas-wrapper splane-wrapper">
-                    <canvas id="zPlaneCanvas"></canvas>
-                    <div id="tooltip" class="tooltip"></div>
-                    <div class="hint">Stability boundary is the Unit Circle (|z| = 1)</div>
-                </div>
-            </section>
-
-            <section class="panel">
-                <div class="panel-header">
-                    <h2>Time Domain Response (Discrete y[n])</h2>
-                    <div class="toggles">
-                        <select id="response-type">
-                            <option value="impulse">Impulse Response δ[n]</option>
-                            <option value="step" selected>Step Response u[n]</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="canvas-wrapper time-wrapper">
-                    <canvas id="timeCanvas"></canvas>
-                </div>
-            </section>
-
-            <section class="panel math-panel">
-                <h2>System Function H(z)</h2>
-                <div id="math-decomposition" class="math-content">
-                    <p class="placeholder-text">Add poles/zeros to see the transfer function...</p>
-                </div>
-                <div class="intuition-guide">
-                    <strong>DSP Intuition Guide:</strong><br>
-                    • <strong>Inside Unit Circle:</strong> Signal decays (Stable).<br>
-                    • <strong>Outside Unit Circle:</strong> Signal grows infinitely (Unstable).<br>
-                    • <strong>Angle (θ):</strong> Determines the digital frequency of oscillation.<br>
+<header>
+<div class="header-titles">
+<h1>Z-Transform &amp; DSP System Explorer</h1>
+<p>Interactive z-plane, discrete time-domain simulation, and digital frequency response.</p>
+</div>
+<div class="header-controls">
+<button class="btn pole-btn" id="btn-add-pole">+ Add Pole (✖)</button>
+<button class="btn pole-btn" id="btn-add-pole-complex">+ Add Conjugate Poles</button>
+<button class="btn zero-btn" id="btn-add-zero">+ Add Zero (〇)</button>
+<button class="btn clear-btn" id="btn-clear">Clear All</button>
+</div>
+</header>
+<main class="grid-container">
+<section class="panel">
+<div class="panel-header">
+<h2>z-Plane (Complex Plane)</h2>
+<div class="toggles">
+<label><input checked="" id="toggle-snap" type="checkbox"/> Snap to Grid</label>
+</div>
+</div>
+<div class="canvas-wrapper splane-wrapper">
+<canvas id="zPlaneCanvas"></canvas>
+<div class="tooltip" id="tooltip"></div>
+<div class="hint">Stability boundary is the Unit Circle (|z| = 1)</div>
+</div>
+</section>
+<section class="panel">
+<div class="panel-header">
+<h2>Time Domain Response (Discrete y[n])</h2>
+<div class="toggles">
+<select id="response-type">
+<option value="impulse">Impulse Response δ[n]</option>
+<option selected="" value="step">Step Response u[n]</option>
+</select>
+</div>
+</div>
+<div class="canvas-wrapper time-wrapper">
+<canvas id="timeCanvas"></canvas>
+</div>
+</section>
+<section class="panel math-panel">
+<h2>System Function H(z)</h2>
+<div class="math-content" id="math-decomposition">
+<p class="placeholder-text">Add poles/zeros to see the transfer function...</p>
+</div>
+<div class="intuition-guide">
+<strong>DSP Intuition Guide:</strong><br/>
+                    • <strong>Inside Unit Circle:</strong> Signal decays (Stable).<br/>
+                    • <strong>Outside Unit Circle:</strong> Signal grows infinitely (Unstable).<br/>
+                    • <strong>Angle (θ):</strong> Determines the digital frequency of oscillation.<br/>
                     • <strong>Zeros on Unit Circle:</strong> Completely blocks that specific frequency.
                 </div>
-            </section>
-
-            <section class="panel freq-panel">
-                <h2>Frequency Response |H(e^jω)|</h2>
-                <p class="subtitle">Evaluated strictly along the Unit Circle (0 to π)</p>
-                <div class="canvas-wrapper freq-wrapper">
-                    <canvas id="freqCanvas"></canvas>
-                </div>
-            </section>
-        </main>
-    </div>
-    <script src="script.js"></script>
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
-        <div class="edu-bar-inner">
-            <span class="edu-bar-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+</section>
+<section class="panel freq-panel">
+<h2>Frequency Response |H(e^jω)|</h2>
+<p class="subtitle">Evaluated strictly along the Unit Circle (0 to π)</p>
+<div class="canvas-wrapper freq-wrapper">
+<canvas id="freqCanvas"></canvas>
+</div>
+</section>
+</main>
+</div>
+<script src="script.js"></script>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<span class="edu-bar-title">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 Key Concepts
             </span>
-            <div class="edu-fact-item">
-                  <span class="edu-fact-label">Definition</span>
-                  <span class="edu-fact-text">X(z) = Σ x[n]·z⁻ⁿ</span>
-                </div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Stability</span>
-                  <span class="edu-fact-text">For causal systems: all poles must lie strictly inside the unit circle |z| < 1.</span>
-                </div>
+<span class="edu-fact-label">Definition</span>
+<span class="edu-fact-text">X(z) = Σ x[n]·z⁻ⁿ</span>
+</div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Unit Circle = DTFT</span>
-                  <span class="edu-fact-text">Evaluating X(z) on |z|=1 gives the Discrete-Time Fourier Transform.</span>
-                </div>
-        </div>
-    </section>
+<span class="edu-fact-label">Stability</span>
+<span class="edu-fact-text">For causal systems: all poles must lie strictly inside the unit circle |z| &lt; 1.</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Unit Circle = DTFT</span>
+<span class="edu-fact-text">Evaluating X(z) on |z|=1 gives the Discrete-Time Fourier Transform.</span>
+</div>
+</div>
+</section>
 </body>
 </html>

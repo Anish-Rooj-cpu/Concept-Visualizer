@@ -1,258 +1,235 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Interactive FIR Filter Designer — design lowpass, highpass, bandpass and bandstop filters using Window Method. Visualize frequency response, impulse response, and filter coefficients in real time.">
-  <meta name="keywords" content="FIR filter, finite impulse response, window method, frequency response, digital signal processing, DSP, lowpass filter, highpass filter, bandpass, hamming, blackman">
-  <meta property="og:title" content="FIR Filter Designer — ECV">
-  <meta property="og:description" content="Design FIR filters with the Window Method. Instantly see frequency response, impulse response, and coefficients.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://anish-rooj-cpu.github.io/Concept-Visualizer/pages/fir-filter/">
-  <title>FIR Filter Designer — ECV</title>
-  <link rel="stylesheet" href="../shared.css">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="canonical" href="https://anish-rooj-cpu.github.io/Concept-Visualizer/pages/fir-filter/">
-</head>
-<body>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Interactive FIR Filter Designer — design lowpass, highpass, bandpass and bandstop filters using Window Method. Visualize frequency response, impulse response, and filter coefficients in real time." name="description"/>
+<meta content="FIR filter, finite impulse response, window method, frequency response, digital signal processing, DSP, lowpass filter, highpass filter, bandpass, hamming, blackman" name="keywords"/>
+<meta content="FIR Filter Designer — ECV" property="og:title"/>
+<meta content="Design FIR filters with the Window Method. Instantly see frequency response, impulse response, and coefficients." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://anish-rooj-cpu.github.io/Concept-Visualizer/pages/fir-filter/" property="og:url"/>
+<title>FIR Filter Designer — ECV</title>
+<link href="../shared.css" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
 
-  <!-- Home Button --><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<link href="https://enggviz.online/pages/FIR/index.html" rel="canonical"/></head>
+<body>
+<!-- Home Button --><nav class="global-nav">
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <div class="page-wrapper">
-
-    <!-- Page Header -->
-    <header class="page-header">
-      <span class="topic-tag">&#x25C6; Signal Processing</span>
-      <h1><span class="accent">FIR</span> Filter Designer</h1>
-      <p class="page-subtitle">Design finite impulse response filters with the Window Method and visualize frequency response, impulse response, and tap coefficients in real time.</p>
-    </header>
-
-    <!-- Dashboard -->
-    <main class="fir-layout" id="main-dashboard">
-
-      <!-- LEFT: Controls -->
-      <aside class="panel controls-panel" aria-label="FIR filter design controls">
-        <div class="panel-header">
-          <h2>Design Parameters</h2>
-          <span class="status-dot" id="status-dot"></span>
-        </div>
-        <div class="panel-content controls-body">
-
-          <!-- Filter Type -->
-          <section class="ctrl-section">
-            <h3 class="ctrl-section-title">Filter Type</h3>
-            <div class="filter-type-grid">
-              <button class="type-btn active" data-type="lowpass">Lowpass</button>
-              <button class="type-btn" data-type="highpass">Highpass</button>
-              <button class="type-btn" data-type="bandpass">Bandpass</button>
-              <button class="type-btn" data-type="bandstop">Bandstop</button>
-            </div>
-          </section>
-
-          <hr>
-
-          <!-- Window -->
-          <section class="ctrl-section">
-            <h3 class="ctrl-section-title">Window Function</h3>
-            <div class="control-group">
-              <label for="window-select">Window Type</label>
-              <select id="window-select">
-                <option value="rectangular">Rectangular (None)</option>
-                <option value="hanning">Hann (Hanning)</option>
-                <option value="hamming" selected>Hamming</option>
-                <option value="blackman">Blackman</option>
-                <option value="kaiser">Kaiser (β = 6)</option>
-              </select>
-            </div>
-          </section>
-
-          <hr>
-
-          <!-- Frequency Parameters -->
-          <section class="ctrl-section">
-            <h3 class="ctrl-section-title">Frequency Parameters</h3>
-            <div class="control-group">
-              <label for="fs">Sample Rate fs (Hz)</label>
-              <input type="range" id="fs" min="100" max="48000" step="100" value="8000">
-              <span class="val-badge" id="v-fs">8000</span>
-            </div>
-            <div class="control-group" id="fc1-group">
-              <label for="fc1" id="fc1-label">Cutoff fc (Hz)</label>
-              <input type="range" id="fc1" min="10" max="4000" step="10" value="1000">
-              <span class="val-badge" id="v-fc1">1000</span>
-            </div>
-            <div class="control-group hidden" id="fc2-group">
-              <label for="fc2">Upper Cutoff fc2 (Hz)</label>
-              <input type="range" id="fc2" min="10" max="4000" step="10" value="2000">
-              <span class="val-badge" id="v-fc2">2000</span>
-            </div>
-            <div class="control-group">
-              <label for="order">Filter Order N (taps = N+1)</label>
-              <input type="range" id="order" min="4" max="128" step="2" value="32">
-              <span class="val-badge" id="v-order">32</span>
-            </div>
-          </section>
-
-          <hr>
-
-          <!-- Presets -->
-          <section class="ctrl-section">
-            <h3 class="ctrl-section-title">Presets</h3>
-            <div class="preset-grid">
-              <button class="btn preset-btn" data-preset="speech">Speech LP</button>
-              <button class="btn preset-btn" data-preset="audio">Audio HP</button>
-              <button class="btn preset-btn" data-preset="band">Narrow BP</button>
-              <button class="btn btn-amber preset-btn" data-preset="reset">Reset</button>
-            </div>
-          </section>
-
-          <hr>
-
-          <!-- Metrics -->
-          <section class="ctrl-section">
-            <h3 class="ctrl-section-title">Filter Specs</h3>
-            <div class="metrics-grid">
-              <div class="metric-card">
-                <span class="metric-label">Taps</span>
-                <span class="metric-val" id="m-taps">33</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-label">Stopband Atten.</span>
-                <span class="metric-val" id="m-atten">—</span>
-                <span class="metric-unit">dB</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-label">Passband Ripple</span>
-                <span class="metric-val" id="m-ripple">—</span>
-                <span class="metric-unit">dB</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-label">Transition BW</span>
-                <span class="metric-val" id="m-tbw">—</span>
-                <span class="metric-unit">Hz</span>
-              </div>
-            </div>
-          </section>
-
-        </div>
-      </aside>
-
-      <!-- RIGHT: Charts -->
-      <div class="charts-col">
-
-        <!-- Frequency Response (Magnitude) -->
-        <div class="panel chart-panel">
-          <div class="panel-header">
-            <h2>Frequency Response |H(f)| dB</h2>
-            <div class="legend-row">
-              <span class="legend-dot" style="background:var(--cyan)"></span><span>Magnitude (dB)</span>
-              <span class="legend-dot" style="background:var(--amber)"></span><span>Cutoff(s)</span>
-            </div>
-          </div>
-          <div class="panel-content chart-wrap">
-            <canvas id="canvas-freq" aria-label="Frequency response magnitude chart"></canvas>
-          </div>
-        </div>
-
-        <!-- Phase Response -->
-        <div class="panel chart-panel">
-          <div class="panel-header">
-            <h2>Phase Response ∠H(f)</h2>
-            <div class="legend-row">
-              <span class="legend-dot" style="background:var(--purple)"></span><span>Phase (rad)</span>
-            </div>
-          </div>
-          <div class="panel-content chart-wrap">
-            <canvas id="canvas-phase" aria-label="Phase response chart"></canvas>
-          </div>
-        </div>
-
-        <!-- Impulse + Coefficients -->
-        <div class="two-charts">
-          <div class="panel chart-panel">
-            <div class="panel-header">
-              <h2>Impulse Response h[n]</h2>
-            </div>
-            <div class="panel-content chart-wrap">
-              <canvas id="canvas-impulse" aria-label="Impulse response chart"></canvas>
-            </div>
-          </div>
-          <div class="panel chart-panel">
-            <div class="panel-header">
-              <h2>Window w[n]</h2>
-            </div>
-            <div class="panel-content chart-wrap">
-              <canvas id="canvas-window" aria-label="Window function chart"></canvas>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </main>
-
-    <!-- Theory sidebar shown below on mobile, inline on desktop handled via CSS -->
-    <div class="theory-bar panel">
-      <div class="panel-header"><h2>Window Method Design</h2></div>
-      <div class="panel-content theory-grid">
-        <div>
-          <p>The Window Method multiplies an ideal (infinite) impulse response h<sub>ideal</sub>[n] with a finite-length window w[n] to produce a practical FIR filter:</p>
-          <div class="formula">h[n] = h_ideal[n] · w[n], &nbsp; 0 ≤ n ≤ N</div>
-          <p style="margin-top:10px">The window shape controls the trade-off between stopband attenuation and transition bandwidth.</p>
-        </div>
-        <ul class="concept-list">
-          <li><strong>Rectangular</strong>Sharpest transition (~21 dB attenuation). High Gibbs ripple (~9%).</li>
-          <li><strong>Hamming</strong>~42 dB attenuation. Good balance of ripple and transition width.</li>
-          <li><strong>Blackman</strong>~74 dB attenuation. Wider transition band.</li>
-          <li><strong>Kaiser</strong>Adjustable via β parameter. Best flexibility.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Edu Bar -->
-    <div class="edu-bar" role="complementary" aria-label="Quick facts">
-      <div class="edu-bar-inner">
-        <div class="edu-bar-title">
-          <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="9"/><line x1="10" y1="6" x2="10" y2="10"/><circle cx="10" cy="14" r="1" fill="currentColor"/></svg>
+<!-- Page Header -->
+<header class="page-header">
+<span class="topic-tag">◆ Signal Processing</span>
+<h1><span class="accent">FIR</span> Filter Designer</h1>
+<p class="page-subtitle">Design finite impulse response filters with the Window Method and visualize frequency response, impulse response, and tap coefficients in real time.</p>
+</header>
+<!-- Dashboard -->
+<main class="fir-layout" id="main-dashboard">
+<!-- LEFT: Controls -->
+<aside aria-label="FIR filter design controls" class="panel controls-panel">
+<div class="panel-header">
+<h2>Design Parameters</h2>
+<span class="status-dot" id="status-dot"></span>
+</div>
+<div class="panel-content controls-body">
+<!-- Filter Type -->
+<section class="ctrl-section">
+<h3 class="ctrl-section-title">Filter Type</h3>
+<div class="filter-type-grid">
+<button class="type-btn active" data-type="lowpass">Lowpass</button>
+<button class="type-btn" data-type="highpass">Highpass</button>
+<button class="type-btn" data-type="bandpass">Bandpass</button>
+<button class="type-btn" data-type="bandstop">Bandstop</button>
+</div>
+</section>
+<hr/>
+<!-- Window -->
+<section class="ctrl-section">
+<h3 class="ctrl-section-title">Window Function</h3>
+<div class="control-group">
+<label for="window-select">Window Type</label>
+<select id="window-select">
+<option value="rectangular">Rectangular (None)</option>
+<option value="hanning">Hann (Hanning)</option>
+<option selected="" value="hamming">Hamming</option>
+<option value="blackman">Blackman</option>
+<option value="kaiser">Kaiser (β = 6)</option>
+</select>
+</div>
+</section>
+<hr/>
+<!-- Frequency Parameters -->
+<section class="ctrl-section">
+<h3 class="ctrl-section-title">Frequency Parameters</h3>
+<div class="control-group">
+<label for="fs">Sample Rate fs (Hz)</label>
+<input id="fs" max="48000" min="100" step="100" type="range" value="8000"/>
+<span class="val-badge" id="v-fs">8000</span>
+</div>
+<div class="control-group" id="fc1-group">
+<label for="fc1" id="fc1-label">Cutoff fc (Hz)</label>
+<input id="fc1" max="4000" min="10" step="10" type="range" value="1000"/>
+<span class="val-badge" id="v-fc1">1000</span>
+</div>
+<div class="control-group hidden" id="fc2-group">
+<label for="fc2">Upper Cutoff fc2 (Hz)</label>
+<input id="fc2" max="4000" min="10" step="10" type="range" value="2000"/>
+<span class="val-badge" id="v-fc2">2000</span>
+</div>
+<div class="control-group">
+<label for="order">Filter Order N (taps = N+1)</label>
+<input id="order" max="128" min="4" step="2" type="range" value="32"/>
+<span class="val-badge" id="v-order">32</span>
+</div>
+</section>
+<hr/>
+<!-- Presets -->
+<section class="ctrl-section">
+<h3 class="ctrl-section-title">Presets</h3>
+<div class="preset-grid">
+<button class="btn preset-btn" data-preset="speech">Speech LP</button>
+<button class="btn preset-btn" data-preset="audio">Audio HP</button>
+<button class="btn preset-btn" data-preset="band">Narrow BP</button>
+<button class="btn btn-amber preset-btn" data-preset="reset">Reset</button>
+</div>
+</section>
+<hr/>
+<!-- Metrics -->
+<section class="ctrl-section">
+<h3 class="ctrl-section-title">Filter Specs</h3>
+<div class="metrics-grid">
+<div class="metric-card">
+<span class="metric-label">Taps</span>
+<span class="metric-val" id="m-taps">33</span>
+</div>
+<div class="metric-card">
+<span class="metric-label">Stopband Atten.</span>
+<span class="metric-val" id="m-atten">—</span>
+<span class="metric-unit">dB</span>
+</div>
+<div class="metric-card">
+<span class="metric-label">Passband Ripple</span>
+<span class="metric-val" id="m-ripple">—</span>
+<span class="metric-unit">dB</span>
+</div>
+<div class="metric-card">
+<span class="metric-label">Transition BW</span>
+<span class="metric-val" id="m-tbw">—</span>
+<span class="metric-unit">Hz</span>
+</div>
+</div>
+</section>
+</div>
+</aside>
+<!-- RIGHT: Charts -->
+<div class="charts-col">
+<!-- Frequency Response (Magnitude) -->
+<div class="panel chart-panel">
+<div class="panel-header">
+<h2>Frequency Response |H(f)| dB</h2>
+<div class="legend-row">
+<span class="legend-dot" style="background:var(--cyan)"></span><span>Magnitude (dB)</span>
+<span class="legend-dot" style="background:var(--amber)"></span><span>Cutoff(s)</span>
+</div>
+</div>
+<div class="panel-content chart-wrap">
+<canvas aria-label="Frequency response magnitude chart" id="canvas-freq"></canvas>
+</div>
+</div>
+<!-- Phase Response -->
+<div class="panel chart-panel">
+<div class="panel-header">
+<h2>Phase Response ∠H(f)</h2>
+<div class="legend-row">
+<span class="legend-dot" style="background:var(--purple)"></span><span>Phase (rad)</span>
+</div>
+</div>
+<div class="panel-content chart-wrap">
+<canvas aria-label="Phase response chart" id="canvas-phase"></canvas>
+</div>
+</div>
+<!-- Impulse + Coefficients -->
+<div class="two-charts">
+<div class="panel chart-panel">
+<div class="panel-header">
+<h2>Impulse Response h[n]</h2>
+</div>
+<div class="panel-content chart-wrap">
+<canvas aria-label="Impulse response chart" id="canvas-impulse"></canvas>
+</div>
+</div>
+<div class="panel chart-panel">
+<div class="panel-header">
+<h2>Window w[n]</h2>
+</div>
+<div class="panel-content chart-wrap">
+<canvas aria-label="Window function chart" id="canvas-window"></canvas>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Theory sidebar shown below on mobile, inline on desktop handled via CSS -->
+<div class="theory-bar panel">
+<div class="panel-header"><h2>Window Method Design</h2></div>
+<div class="panel-content theory-grid">
+<div>
+<p>The Window Method multiplies an ideal (infinite) impulse response h<sub>ideal</sub>[n] with a finite-length window w[n] to produce a practical FIR filter:</p>
+<div class="formula">h[n] = h_ideal[n] · w[n],   0 ≤ n ≤ N</div>
+<p style="margin-top:10px">The window shape controls the trade-off between stopband attenuation and transition bandwidth.</p>
+</div>
+<ul class="concept-list">
+<li><strong>Rectangular</strong>Sharpest transition (~21 dB attenuation). High Gibbs ripple (~9%).</li>
+<li><strong>Hamming</strong>~42 dB attenuation. Good balance of ripple and transition width.</li>
+<li><strong>Blackman</strong>~74 dB attenuation. Wider transition band.</li>
+<li><strong>Kaiser</strong>Adjustable via β parameter. Best flexibility.</li>
+</ul>
+</div>
+</div>
+<!-- Edu Bar -->
+<div aria-label="Quick facts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<div class="edu-bar-title">
+<svg fill="none" height="14" stroke-linecap="round" stroke-width="2" viewbox="0 0 20 20" width="14"><circle cx="10" cy="10" r="9"></circle><line x1="10" x2="10" y1="6" y2="10"></line><circle cx="10" cy="14" fill="currentColor" r="1"></circle></svg>
           Quick Facts
         </div>
-        <div class="edu-fact-item">
-          <span class="edu-fact-label">Linear Phase</span>
-          <span class="edu-fact-text">Symmetric FIR filters have exactly linear phase — all frequencies are delayed by the same amount (N/2 samples).</span>
-        </div>
-        <div class="edu-fact-item">
-          <span class="edu-fact-label">Gibbs Phenomenon</span>
-          <span class="edu-fact-text">Truncating the ideal sinc produces ringing near the cutoff. Smoother windows suppress this at the cost of a wider transition band.</span>
-        </div>
-        <div class="edu-fact-item">
-          <span class="edu-fact-label">Causal Shift</span>
-          <span class="edu-fact-text">The ideal filter is non-causal (centered at n=0). Shifting by N/2 makes it causal, adding a group delay of N/2 samples.</span>
-        </div>
-        <div class="edu-fact-item">
-          <span class="edu-fact-label">IIR vs FIR</span>
-          <span class="edu-fact-text">FIR filters are always stable and can achieve linear phase. IIR filters need fewer taps but have nonlinear phase and can be unstable.</span>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /page-wrapper -->
-
-  <script src="script.js"></script>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Linear Phase</span>
+<span class="edu-fact-text">Symmetric FIR filters have exactly linear phase — all frequencies are delayed by the same amount (N/2 samples).</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Gibbs Phenomenon</span>
+<span class="edu-fact-text">Truncating the ideal sinc produces ringing near the cutoff. Smoother windows suppress this at the cost of a wider transition band.</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Causal Shift</span>
+<span class="edu-fact-text">The ideal filter is non-causal (centered at n=0). Shifting by N/2 makes it causal, adding a group delay of N/2 samples.</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">IIR vs FIR</span>
+<span class="edu-fact-text">FIR filters are always stable and can achieve linear phase. IIR filters need fewer taps but have nonlinear phase and can be unstable.</span>
+</div>
+</div>
+</div>
+</div><!-- /page-wrapper -->
+<script src="script.js"></script>
 </body>
 </html>

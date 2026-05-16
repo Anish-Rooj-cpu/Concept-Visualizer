@@ -1,27 +1,28 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Simulate setup and hold time violations in digital circuits. Adjust clock period, propagation delays, and skew to explore critical path timing.">
-    <meta name="keywords" content="static timing analysis, STA, setup time, hold time, clock skew, VLSI, digital design, critical path, flip-flop">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="EE / Computer Engineering">
-    <meta name="category" content="Educational Tool, VLSI / Digital Design">
-    <meta name="language" content="English">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Static Timing Analysis (STA) Simulator | VLSI Interactive">
-    <meta property="og:description" content="Simulate setup and hold time violations in digital circuits. Adjust clock period, propagation delays, and skew to explore critical path timing.">
-    <meta property="og:locale" content="en_US">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Static Timing Analysis (STA) Simulator | VLSI Interactive">
-    <meta name="twitter:description" content="Simulate setup and hold time violations in digital circuits. Adjust clock period, propagation delays, and skew to explore critical path timing.">
-    <!-- Canonical & Schema -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Simulate setup and hold time violations in digital circuits. Adjust clock period, propagation delays, and skew to explore critical path timing." name="description"/>
+<meta content="static timing analysis, STA, setup time, hold time, clock skew, VLSI, digital design, critical path, flip-flop" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="EE / Computer Engineering" name="subject"/>
+<meta content="Educational Tool, VLSI / Digital Design" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="Static Timing Analysis (STA) Simulator | VLSI Interactive" property="og:title"/>
+<meta content="Simulate setup and hold time violations in digital circuits. Adjust clock period, propagation delays, and skew to explore critical path timing." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Static Timing Analysis (STA) Simulator | VLSI Interactive" name="twitter:title"/>
+<meta content="Simulate setup and hold time violations in digital circuits. Adjust clock period, propagation delays, and skew to explore critical path timing." name="twitter:description"/>
+<!-- Canonical & Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -32,207 +33,188 @@
       "teaches": "VLSI / Digital Design"
     }
     </script>
-    <!-- Shared Design System -->
-    <link rel="stylesheet" href="../shared.css">
-    <title>Static Timing Analysis (STA) Simulator | VLSI Interactive</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+<!-- Shared Design System -->
+<link href="../shared.css" rel="stylesheet"/>
+<title>Static Timing Analysis (STA) Simulator | VLSI Interactive</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://enggviz.online/pages/STA/index.html" rel="canonical"/></head>
 <body><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <h1>STA Simulator</h1>
-
-    <div class="controls-bar">
-        <div class="preset-group">
-            <button onclick="loadPreset('safe')">Safe Design</button>
-            <button onclick="loadPreset('setup_fail')" class="danger-btn">Setup Violation</button>
-            <button onclick="loadPreset('hold_fail')" class="danger-btn">Hold Violation</button>
-        </div>
-        <div class="action-group">
-            <button id="btnSweep" class="warn-btn">Sweep T<sub>clk</sub> (Test Fmax)</button>
-            <select id="pathToggle" onchange="calculateSTA()">
-                <option value="both">View: Both Paths</option>
-                <option value="setup">View: Setup Only</option>
-                <option value="hold">View: Hold Only</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="dashboard">
-        <div class="panel controls-panel">
-            <h3>Parameters (ns)</h3>
-            
-            <div class="control-group" title="Clock Period: The total duration of one clock cycle.">
-                <div class="label-row">
-                    <label>Period (T<sub>clk</sub>)</label>
-                    <span id="val-clk">10.0</span>
-                </div>
-                <input type="range" id="t-clk" min="4" max="20" step="0.5" value="10">
+<div class="controls-bar">
+<div class="preset-group">
+<button onclick="loadPreset('safe')">Safe Design</button>
+<button class="danger-btn" onclick="loadPreset('setup_fail')">Setup Violation</button>
+<button class="danger-btn" onclick="loadPreset('hold_fail')">Hold Violation</button>
+</div>
+<div class="action-group">
+<button class="warn-btn" id="btnSweep">Sweep T<sub>clk</sub> (Test Fmax)</button>
+<select id="pathToggle" onchange="calculateSTA()">
+<option value="both">View: Both Paths</option>
+<option value="setup">View: Setup Only</option>
+<option value="hold">View: Hold Only</option>
+</select>
+</div>
+</div>
+<div class="dashboard">
+<div class="panel controls-panel">
+<h3>Parameters (ns)</h3>
+<div class="control-group" title="Clock Period: The total duration of one clock cycle.">
+<div class="label-row">
+<label>Period (T<sub>clk</sub>)</label>
+<span id="val-clk">10.0</span>
+</div>
+<input id="t-clk" max="20" min="4" step="0.5" type="range" value="10"/>
+</div>
+<div class="control-group" title="Clock-to-Q Delay: Time it takes for data to leave the launch flip-flop after the clock edge.">
+<div class="label-row">
+<label>Clk-to-Q (T<sub>cq</sub>)</label>
+<span id="val-cq">1.0</span>
+</div>
+<input id="t-cq" max="5" min="0" step="0.1" type="range" value="1.0"/>
+</div>
+<div class="control-group" title="Combinational Max Delay: The longest path delay through the logic cloud (Setup check).">
+<div class="label-row">
+<label>Comb Max (T<sub>c_max</sub>)</label>
+<span id="val-cmax">6.0</span>
+</div>
+<input id="t-cmax" max="15" min="1" step="0.1" type="range" value="6.0"/>
+</div>
+<div class="control-group" title="Combinational Min Delay: The shortest path delay through the logic cloud (Hold check).">
+<div class="label-row">
+<label>Comb Min (T<sub>c_min</sub>)</label>
+<span id="val-cmin">2.0</span>
+</div>
+<input id="t-cmin" max="10" min="0" step="0.1" type="range" value="2.0"/>
+</div>
+<div class="control-group" title="Setup Time: Time data must be stable BEFORE the capture clock edge.">
+<div class="label-row">
+<label>Setup (T<sub>su</sub>)</label>
+<span id="val-su">1.0</span>
+</div>
+<input id="t-su" max="4" min="0.5" step="0.1" type="range" value="1.0"/>
+</div>
+<div class="control-group" title="Hold Time: Time data must remain stable AFTER the capture clock edge.">
+<div class="label-row">
+<label>Hold (T<sub>h</sub>)</label>
+<span id="val-h">1.0</span>
+</div>
+<input id="t-h" max="4" min="0.5" step="0.1" type="range" value="1.0"/>
+</div>
+<div class="control-group" title="Clock Skew: Difference in clock arrival time between launch and capture flip-flops.">
+<div class="label-row">
+<label>Skew (T<sub>skew</sub>)</label>
+<span id="val-skew">0.0</span>
+</div>
+<input id="t-skew" max="3" min="-2" step="0.1" type="range" value="0.0"/>
+</div>
+<div class="control-group highlight-control" title="Clock Uncertainty: Margin reserved for jitter and non-ideal clock behavior.">
+<div class="label-row">
+<label>Uncertainty (T<sub>unc</sub>)</label>
+<span id="val-unc">0.5</span>
+</div>
+<input id="t-unc" max="2" min="0" step="0.1" type="range" value="0.5"/>
+</div>
+<div class="fmax-box">
+                Max Frequency:<br/>
+<span id="fmax-val">125</span> MHz
             </div>
-
-            <div class="control-group" title="Clock-to-Q Delay: Time it takes for data to leave the launch flip-flop after the clock edge.">
-                <div class="label-row">
-                    <label>Clk-to-Q (T<sub>cq</sub>)</label>
-                    <span id="val-cq">1.0</span>
-                </div>
-                <input type="range" id="t-cq" min="0" max="5" step="0.1" value="1.0">
-            </div>
-
-            <div class="control-group" title="Combinational Max Delay: The longest path delay through the logic cloud (Setup check).">
-                <div class="label-row">
-                    <label>Comb Max (T<sub>c_max</sub>)</label>
-                    <span id="val-cmax">6.0</span>
-                </div>
-                <input type="range" id="t-cmax" min="1" max="15" step="0.1" value="6.0">
-            </div>
-
-            <div class="control-group" title="Combinational Min Delay: The shortest path delay through the logic cloud (Hold check).">
-                <div class="label-row">
-                    <label>Comb Min (T<sub>c_min</sub>)</label>
-                    <span id="val-cmin">2.0</span>
-                </div>
-                <input type="range" id="t-cmin" min="0" max="10" step="0.1" value="2.0">
-            </div>
-
-            <div class="control-group" title="Setup Time: Time data must be stable BEFORE the capture clock edge.">
-                <div class="label-row">
-                    <label>Setup (T<sub>su</sub>)</label>
-                    <span id="val-su">1.0</span>
-                </div>
-                <input type="range" id="t-su" min="0.5" max="4" step="0.1" value="1.0">
-            </div>
-
-            <div class="control-group" title="Hold Time: Time data must remain stable AFTER the capture clock edge.">
-                <div class="label-row">
-                    <label>Hold (T<sub>h</sub>)</label>
-                    <span id="val-h">1.0</span>
-                </div>
-                <input type="range" id="t-h" min="0.5" max="4" step="0.1" value="1.0">
-            </div>
-
-            <div class="control-group" title="Clock Skew: Difference in clock arrival time between launch and capture flip-flops.">
-                <div class="label-row">
-                    <label>Skew (T<sub>skew</sub>)</label>
-                    <span id="val-skew">0.0</span>
-                </div>
-                <input type="range" id="t-skew" min="-2" max="3" step="0.1" value="0.0">
-            </div>
-
-            <div class="control-group highlight-control" title="Clock Uncertainty: Margin reserved for jitter and non-ideal clock behavior.">
-                <div class="label-row">
-                    <label>Uncertainty (T<sub>unc</sub>)</label>
-                    <span id="val-unc">0.5</span>
-                </div>
-                <input type="range" id="t-unc" min="0" max="2" step="0.1" value="0.5">
-            </div>
-            
-            <div class="fmax-box">
-                Max Frequency:<br>
-                <span id="fmax-val">125</span> MHz
-            </div>
-        </div>
-
-        <div class="panel view-panel">
-            <h3>Interactive Timing Waveform</h3>
-            <div class="waveform-container">
-                <svg id="timing-svg" viewBox="0 0 1000 380" preserveAspectRatio="none"></svg>
-            </div>
-
-            <div class="breakdown-container">
-                <div style="font-size: 0.85em; margin-bottom: 8px; color: var(--text-color);">Delay Budget (Setup Path):</div>
-                <div class="progress-bar">
-                    <div id="bar-cq" class="bar-segment" style="background:#89b4fa;" title="Tcq"></div>
-                    <div id="bar-cmax" class="bar-segment" style="background:#cba6f7;" title="Tc_max"></div>
-                    <div id="bar-su" class="bar-segment" style="background:#89dceb;" title="Tsu"></div>
-                    <div id="bar-unc" class="bar-segment" style="background:#f38ba8;" title="Uncertainty"></div>
-                </div>
-            </div>
-
-            <div class="constraint-grid">
-                <div class="constraint-panel" id="panel-setup">
-                    <div class="constraint-title">Setup Constraint Equation:</div>
-                    <div class="eq-line">
-                        <span class="eq-term">T<sub>cq</sub> + T<sub>c_max</sub> + T<sub>su</sub> + T<sub>unc</sub></span> &le; 
+</div>
+<div class="panel view-panel">
+<h3>Interactive Timing Waveform</h3>
+<div class="waveform-container">
+<svg id="timing-svg" preserveaspectratio="none" viewbox="0 0 1000 380"></svg>
+</div>
+<div class="breakdown-container">
+<div style="font-size: 0.85em; margin-bottom: 8px; color: var(--text-color);">Delay Budget (Setup Path):</div>
+<div class="progress-bar">
+<div class="bar-segment" id="bar-cq" style="background:#89b4fa;" title="Tcq"></div>
+<div class="bar-segment" id="bar-cmax" style="background:#cba6f7;" title="Tc_max"></div>
+<div class="bar-segment" id="bar-su" style="background:#89dceb;" title="Tsu"></div>
+<div class="bar-segment" id="bar-unc" style="background:#f38ba8;" title="Uncertainty"></div>
+</div>
+</div>
+<div class="constraint-grid">
+<div class="constraint-panel" id="panel-setup">
+<div class="constraint-title">Setup Constraint Equation:</div>
+<div class="eq-line">
+<span class="eq-term">T<sub>cq</sub> + T<sub>c_max</sub> + T<sub>su</sub> + T<sub>unc</sub></span> ≤ 
                         <span class="eq-term">T<sub>clk</sub> + T<sub>skew</sub></span>
-                    </div>
-                    <div id="eq-su-eval" class="eq-eval"></div>
-                </div>
-
-                <div class="constraint-panel" id="panel-hold">
-                    <div class="constraint-title">Hold Constraint Equation:</div>
-                    <div class="eq-line">
-                        <span class="eq-term">T<sub>cq</sub> + T<sub>c_min</sub></span> &ge; 
+</div>
+<div class="eq-eval" id="eq-su-eval"></div>
+</div>
+<div class="constraint-panel" id="panel-hold">
+<div class="constraint-title">Hold Constraint Equation:</div>
+<div class="eq-line">
+<span class="eq-term">T<sub>cq</sub> + T<sub>c_min</sub></span> ≥ 
                         <span class="eq-term">T<sub>h</sub> + T<sub>skew</sub> + T<sub>unc</sub></span>
-                    </div>
-                    <div id="eq-h-eval" class="eq-eval"></div>
-                </div>
-            </div>
-
-            <div class="analysis-grid">
-                <div class="analysis-card" id="card-setup">
-                    <h3>Setup Analysis</h3>
-                    <div class="math-box">
-                        <div class="data-row"><span>Arrival:</span> <strong id="calc-su-arr">7.0 ns</strong></div>
-                        <div class="data-row"><span>Required:</span> <strong id="calc-su-req">8.5 ns</strong></div>
-                        <div class="slack-line">
-                            <span style="font-size: 0.8em; opacity: 0.8;">Setup Slack (Req - Arr)</span>
-                            <div id="setup-slack-val" class="slack-val">+1.5 ns</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="analysis-card" id="card-hold">
-                    <h3>Hold Analysis</h3>
-                    <div class="math-box">
-                        <div class="data-row"><span>Arrival:</span> <strong id="calc-h-arr">3.0 ns</strong></div>
-                        <div class="data-row"><span>Required:</span> <strong id="calc-h-req">1.5 ns</strong></div>
-                        <div class="slack-line">
-                            <span style="font-size: 0.8em; opacity: 0.8;">Hold Slack (Arr - Req)</span>
-                            <div id="hold-slack-val" class="slack-val">+1.5 ns</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
-        <div class="edu-bar-inner">
-            <span class="edu-bar-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+</div>
+<div class="eq-eval" id="eq-h-eval"></div>
+</div>
+</div>
+<div class="analysis-grid">
+<div class="analysis-card" id="card-setup">
+<h3>Setup Analysis</h3>
+<div class="math-box">
+<div class="data-row"><span>Arrival:</span> <strong id="calc-su-arr">7.0 ns</strong></div>
+<div class="data-row"><span>Required:</span> <strong id="calc-su-req">8.5 ns</strong></div>
+<div class="slack-line">
+<span style="font-size: 0.8em; opacity: 0.8;">Setup Slack (Req - Arr)</span>
+<div class="slack-val" id="setup-slack-val">+1.5 ns</div>
+</div>
+</div>
+</div>
+<div class="analysis-card" id="card-hold">
+<h3>Hold Analysis</h3>
+<div class="math-box">
+<div class="data-row"><span>Arrival:</span> <strong id="calc-h-arr">3.0 ns</strong></div>
+<div class="data-row"><span>Required:</span> <strong id="calc-h-req">1.5 ns</strong></div>
+<div class="slack-line">
+<span style="font-size: 0.8em; opacity: 0.8;">Hold Slack (Arr - Req)</span>
+<div class="slack-val" id="hold-slack-val">+1.5 ns</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script src="script.js"></script>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<span class="edu-bar-title">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 Key Concepts
             </span>
-            <div class="edu-fact-item">
-                  <span class="edu-fact-label">Setup Equation</span>
-                  <span class="edu-fact-text">T_clk ≥ T_cq + T_c_max + T_su − T_skew</span>
-                </div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Hold Equation</span>
-                  <span class="edu-fact-text">T_cq + T_c_min ≥ T_h + T_skew</span>
-                </div>
+<span class="edu-fact-label">Setup Equation</span>
+<span class="edu-fact-text">T_clk ≥ T_cq + T_c_max + T_su − T_skew</span>
+</div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Critical Path</span>
-                  <span class="edu-fact-text">The longest combinational delay path determines the maximum clock frequency.</span>
-                </div>
-        </div>
-    </section>
+<span class="edu-fact-label">Hold Equation</span>
+<span class="edu-fact-text">T_cq + T_c_min ≥ T_h + T_skew</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Critical Path</span>
+<span class="edu-fact-text">The longest combinational delay path determines the maximum clock frequency.</span>
+</div>
+</div>
+</section>
 </body>
 </html>

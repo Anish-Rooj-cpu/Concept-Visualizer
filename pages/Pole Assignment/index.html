@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response.">
-    <meta name="keywords" content="pole placement, state feedback, controller design, gain matrix, controllability, eigenvalue assignment, control systems">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="EE / Control Engineering">
-    <meta name="category" content="Educational Tool, Control Systems">
-    <meta name="language" content="English">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Pole Placement Design | State Feedback Controller Interactive">
-    <meta property="og:description" content="Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response.">
-    <meta property="og:locale" content="en_US">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Pole Placement Design | State Feedback Controller Interactive">
-    <meta name="twitter:description" content="Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response.">
-    <!-- Canonical & Schema -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response." name="description"/>
+<meta content="pole placement, state feedback, controller design, gain matrix, controllability, eigenvalue assignment, control systems" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="EE / Control Engineering" name="subject"/>
+<meta content="Educational Tool, Control Systems" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="Pole Placement Design | State Feedback Controller Interactive" property="og:title"/>
+<meta content="Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Pole Placement Design | State Feedback Controller Interactive" name="twitter:title"/>
+<meta content="Design state-feedback controllers by placing closed-loop poles at desired locations. Compute gain matrix K and simulate the controlled system response." name="twitter:description"/>
+<!-- Canonical & Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -33,126 +33,105 @@
       "teaches": "Control Systems"
     }
     </script>
-    <!-- Shared Design System -->
-    <link rel="stylesheet" href="../shared.css">
-          <title>Pole Placement Design | State Feedback Controller Interactive</title>
-
-          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-          <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-          <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-          <link rel="stylesheet" href="styles.css">
-</head>
-
+<!-- Shared Design System -->
+<link href="../shared.css" rel="stylesheet"/>
+<title>Pole Placement Design | State Feedback Controller Interactive</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script async="" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://enggviz.online/pages/Pole%20Assignment/index.html" rel="canonical"/></head>
 <body><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <div class="container">
-                    <header>
-                              <h1>Pole Assignment Visualization</h1>
-                              <p>Interactive discrete-time control design based on the 2nd-order Servomotor model.</p>
-                    </header>
-
-                    <div class="card">
-                              <h2>The Theory</h2>
-                              <p>In this system, we use full-state feedback to control the motor's position and
+<header>
+<h1>Pole Assignment Visualization</h1>
+<p>Interactive discrete-time control design based on the 2nd-order Servomotor model.</p>
+</header>
+<div class="card">
+<h2>The Theory</h2>
+<p>In this system, we use full-state feedback to control the motor's position and
                                         velocity. The control law is \( u(k) = -Kx(k) \). By carefully calculating the
                                         gain matrix \( K = [K_1, K_2] \), we can place the closed-loop poles (the roots
                                         of the characteristic equation) exactly where we want them in the Z-plane.</p>
-                              <p><strong>Stability Rule:</strong> In discrete-time systems, the system is stable if and
-                                        only if all poles reside strictly <em>inside</em> the unit circle (radius < 1).
+<p><strong>Stability Rule:</strong> In discrete-time systems, the system is stable if and
+                                        only if all poles reside strictly <em>inside</em> the unit circle (radius &lt; 1).
                                                   If they exit the circle, the system becomes unstable and blows up.</p>
-                    </div>
-
-                    <div class="dashboard">
-                              <div class="card controls">
-                                        <h3>Configure Desired Poles</h3>
-                                        <p>Move the sliders to set the Real (\(\alpha\)) and Imaginary (\(\beta\)) parts
+</div>
+<div class="dashboard">
+<div class="card controls">
+<h3>Configure Desired Poles</h3>
+<p>Move the sliders to set the Real (\(\alpha\)) and Imaginary (\(\beta\)) parts
                                                   of the complex conjugate poles: \(n_{1,2} = \alpha \pm j\beta\).</p>
-
-                                        <div class="control-group">
-                                                  <label for="realPart">Real Part (\(\alpha\)): <span id="realVal"
-                                                                      class="value-display">0.80</span></label>
-                                                  <input type="range" id="realPart" min="-1.5" max="1.5" step="0.01"
-                                                            value="0.8">
-                                        </div>
-
-                                        <div class="control-group">
-                                                  <label for="imagPart">Imaginary Part (\(\beta\)): <span id="imagVal"
-                                                                      class="value-display">0.20</span></label>
-                                                  <input type="range" id="imagPart" min="0" max="1.5" step="0.01"
-                                                            value="0.2">
-                                        </div>
-
-                                        <div class="results">
-                                                  <strong>Calculated Gain Matrix:</strong><br><br>
-                                                  K₁ = <span id="k1_val">0.00</span><br>
+<div class="control-group">
+<label for="realPart">Real Part (\(\alpha\)): <span class="value-display" id="realVal">0.80</span></label>
+<input id="realPart" max="1.5" min="-1.5" step="0.01" type="range" value="0.8"/>
+</div>
+<div class="control-group">
+<label for="imagPart">Imaginary Part (\(\beta\)): <span class="value-display" id="imagVal">0.20</span></label>
+<input id="imagPart" max="1.5" min="0" step="0.01" type="range" value="0.2"/>
+</div>
+<div class="results">
+<strong>Calculated Gain Matrix:</strong><br/><br/>
+                                                  K₁ = <span id="k1_val">0.00</span><br/>
                                                   K₂ = <span id="k2_val">0.00</span>
-                                        </div>
-
-                                        <div id="stabilityStatus" class="status stable">
+</div>
+<div class="status stable" id="stabilityStatus">
                                                   System is STABLE (Poles inside unit circle)
                                         </div>
-                              </div>
-
-                              <div class="card">
-                                        <h3>Z-Plane Map</h3>
-                                        <div class="z-plane-container">
-                                                  <canvas id="zPlaneCanvas" width="300" height="300"></canvas>
-                                        </div>
-                              </div>
-                    </div>
-
-                    <div class="card">
-                              <h3>Initial Condition Response</h3>
-                              <p>This plot simulates how the motor's position \(x_1(k)\) behaves when starting from an
+</div>
+<div class="card">
+<h3>Z-Plane Map</h3>
+<div class="z-plane-container">
+<canvas height="300" id="zPlaneCanvas" width="300"></canvas>
+</div>
+</div>
+</div>
+<div class="card">
+<h3>Initial Condition Response</h3>
+<p>This plot simulates how the motor's position \(x_1(k)\) behaves when starting from an
                                         initial angle offset, returning to zero. Notice how the response speed and
                                         oscillations change based on your pole placement.</p>
-                              <canvas id="responseChart" height="100"></canvas>
-                    </div>
-
-          </div>
-
-          <script src="script.js"></script>
-
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
-        <div class="edu-bar-inner">
-            <span class="edu-bar-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+<canvas height="100" id="responseChart"></canvas>
+</div>
+</div>
+<script src="script.js"></script>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<span class="edu-bar-title">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 Key Concepts
             </span>
-            <div class="edu-fact-item">
-                  <span class="edu-fact-label">Ackermann's Formula</span>
-                  <span class="edu-fact-text">K = eₙᵀ · C⁻¹ · φ(A), where φ is the desired characteristic polynomial.</span>
-                </div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Requirement</span>
-                  <span class="edu-fact-text">Pole placement requires the system to be fully controllable.</span>
-                </div>
+<span class="edu-fact-label">Ackermann's Formula</span>
+<span class="edu-fact-text">K = eₙᵀ · C⁻¹ · φ(A), where φ is the desired characteristic polynomial.</span>
+</div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Trade-off</span>
-                  <span class="edu-fact-text">Placing poles farther left → faster response but larger control effort.</span>
-                </div>
-        </div>
-    </section>
+<span class="edu-fact-label">Requirement</span>
+<span class="edu-fact-text">Pole placement requires the system to be fully controllable.</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Trade-off</span>
+<span class="edu-fact-text">Placing poles farther left → faster response but larger control effort.</span>
+</div>
+</div>
+</section>
 </body>
-
 </html>

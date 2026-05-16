@@ -1,297 +1,263 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Interactive PID Controller Tuner — visualize proportional, integral, and derivative responses in real time. Tune Kp, Ki, Kd and observe step response, error, and control signal on live plots.">
-  <meta name="keywords"
-    content="PID controller, proportional integral derivative, control systems, step response, tuning, Kp Ki Kd, engineering visualizer">
-  <meta property="og:title" content="PID Controller Tuner — ECV">
-  <meta property="og:description"
-    content="Tune Kp, Ki, Kd interactively and observe step response, overshoot, rise time, and settling time in real time.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://anish-rooj-cpu.github.io/Concept-Visualizer/pages/pid-controller/">
-  <title>PID Controller Tuner — ECV</title>
-  <link rel="stylesheet" href="../shared.css">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="canonical" href="https://anish-rooj-cpu.github.io/Concept-Visualizer/pages/pid-controller/">
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Interactive PID Controller Tuner — visualize proportional, integral, and derivative responses in real time. Tune Kp, Ki, Kd and observe step response, error, and control signal on live plots." name="description"/>
+<meta content="PID controller, proportional integral derivative, control systems, step response, tuning, Kp Ki Kd, engineering visualizer" name="keywords"/>
+<meta content="PID Controller Tuner — ECV" property="og:title"/>
+<meta content="Tune Kp, Ki, Kd interactively and observe step response, overshoot, rise time, and settling time in real time." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://anish-rooj-cpu.github.io/Concept-Visualizer/pages/pid-controller/" property="og:url"/>
+<title>PID Controller Tuner — ECV</title>
+<link href="../shared.css" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
 
+<link href="https://enggviz.online/pages/PID%20Controller/index.html" rel="canonical"/></head>
 <body>
-
-  <!-- Home Button -->
-  <nav class="global-nav">
-    <div class="nav-left">
-      <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-        <div class="logo-icon">
-          <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-        </div>
-        <div class="brand-text">
-          <span class="brand-title">ECV</span>
-          <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-        </div>
-      </a>
-    </div>
-    <div class="nav-right">
-      <a href="../../index.html" class="nav-link">HOME</a>
-      <a href="../../topics.html" class="nav-link">TOPICS</a>
-      <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
-  </nav>
-
-  <div class="page-wrapper">
-
-    <!-- Page Header -->
-    <header class="page-header">
-      <!-- <span class="topic-tag">&#x25C6; Control Systems</span> -->
-      <h1><span class="accent">PID</span> Controller Tuner</h1>
-      <p class="page-subtitle">Tune Kp, Ki, Kd and watch the closed-loop step response, error, and control effort evolve
+<!-- Home Button -->
+<nav class="global-nav">
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
+</nav>
+<div class="page-wrapper">
+<!-- Page Header -->
+<header class="page-header">
+<!-- <span class="topic-tag">&#x25C6; Control Systems</span> -->
+<h1><span class="accent">PID</span> Controller Tuner</h1>
+<p class="page-subtitle">Tune Kp, Ki, Kd and watch the closed-loop step response, error, and control effort evolve
         in real time.</p>
-    </header>
-
-    <!-- Main Dashboard -->
-    <main class="pid-layout" id="main-dashboard">
-
-      <!-- LEFT: Controls -->
-      <aside class="panel controls-panel" aria-label="PID tuning controls">
-        <div class="panel-header">
-          <h2>Parameters</h2>
-          <span class="status-dot" id="status-dot" title="Simulation running"></span>
-        </div>
-        <div class="panel-content controls-body">
-
-          <!-- Plant -->
-          <section class="ctrl-section">
-            <h3 class="ctrl-section-title">Plant Model</h3>
-            <div class="control-group">
-              <label for="plant-select">Transfer Function G(s)</label>
-              <select id="plant-select">
-                <option value="first">1st Order: K/(τs+1)</option>
-                <option value="second" selected>2nd Order: ωₙ²/(s²+2ζωₙs+ωₙ²)</option>
-                <option value="integrator">Integrator: K/s</option>
-                <option value="delay">1st Order + Delay</option>
-              </select>
-            </div>
-            <div id="plant-params" class="plant-params-grid">
-              <div class="control-group">
-                <label for="p-wn">ωₙ (rad/s)</label>
-                <input type="range" id="p-wn" min="0.5" max="5" step="0.1" value="1.5">
-                <span class="val-badge" id="v-wn">1.5</span>
-              </div>
-              <div class="control-group">
-                <label for="p-zeta">ζ (Damping)</label>
-                <input type="range" id="p-zeta" min="0.1" max="2.0" step="0.05" value="0.5">
-                <span class="val-badge" id="v-zeta">0.50</span>
-              </div>
-              <div class="control-group">
-                <label for="p-gain">Plant Gain K</label>
-                <input type="range" id="p-gain" min="0.1" max="5" step="0.1" value="1.0">
-                <span class="val-badge" id="v-gain">1.0</span>
-              </div>
-            </div>
-          </section>
-
-          <hr>
-
-          <!-- PID Gains -->
-          <section class="ctrl-section">
-            <h3 class="ctrl-section-title">PID Gains</h3>
-            <div class="control-group">
-              <label for="kp">Kp — Proportional</label>
-              <input type="range" id="kp" min="0" max="20" step="0.1" value="4">
-              <span class="val-badge" id="v-kp">4.0</span>
-            </div>
-            <div class="control-group">
-              <label for="ki">Ki — Integral</label>
-              <input type="range" id="ki" min="0" max="10" step="0.05" value="1.5">
-              <span class="val-badge" id="v-ki">1.50</span>
-            </div>
-            <div class="control-group">
-              <label for="kd">Kd — Derivative</label>
-              <input type="range" id="kd" min="0" max="5" step="0.05" value="0.5">
-              <span class="val-badge" id="v-kd">0.50</span>
-            </div>
-            <div class="control-group">
-              <label for="setpoint">Setpoint r(t)</label>
-              <input type="range" id="setpoint" min="0.1" max="2" step="0.1" value="1.0">
-              <span class="val-badge" id="v-sp">1.0</span>
-            </div>
-          </section>
-
-          <hr>
-
-          <!-- Presets -->
-          <section class="ctrl-section">
-            <h3 class="ctrl-section-title">Presets</h3>
-            <div class="preset-grid">
-              <button class="btn preset-btn" data-preset="p-only">P Only</button>
-              <button class="btn preset-btn" data-preset="pd">PD</button>
-              <button class="btn preset-btn" data-preset="pi">PI</button>
-              <button class="btn preset-btn" data-preset="optimal">Optimal</button>
-              <button class="btn preset-btn" data-preset="aggressive">Aggressive</button>
-              <button class="btn btn-amber preset-btn" data-preset="reset">Reset</button>
-            </div>
-          </section>
-
-          <hr>
-
-          <!-- Metrics -->
-          <section class="ctrl-section">
-            <h3 class="ctrl-section-title">Performance Metrics</h3>
-            <div class="metrics-grid">
-              <div class="metric-card">
-                <span class="metric-label">Rise Time</span>
-                <span class="metric-val" id="m-rise">—</span>
-                <span class="metric-unit">s</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-label">Overshoot</span>
-                <span class="metric-val" id="m-overshoot">—</span>
-                <span class="metric-unit">%</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-label">Settling</span>
-                <span class="metric-val" id="m-settle">—</span>
-                <span class="metric-unit">s</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-label">Steady Error</span>
-                <span class="metric-val" id="m-sse">—</span>
-                <span class="metric-unit"></span>
-              </div>
-            </div>
-          </section>
-
-        </div>
-      </aside>
-
-      <!-- CENTER: Charts -->
-      <div class="charts-col">
-
-        <!-- Step Response -->
-        <div class="panel chart-panel">
-          <div class="panel-header">
-            <h2>Step Response y(t)</h2>
-            <div class="legend-row">
-              <span class="legend-dot" style="background:var(--cyan)"></span><span>Output</span>
-              <span class="legend-dot" style="background:var(--amber)"></span><span>Setpoint</span>
-            </div>
-          </div>
-          <div class="panel-content chart-wrap">
-            <canvas id="canvas-step" aria-label="Step response chart"></canvas>
-          </div>
-        </div>
-
-        <!-- Error + Control Signal -->
-        <div class="two-charts">
-          <div class="panel chart-panel">
-            <div class="panel-header">
-              <h2>Error e(t)</h2>
-            </div>
-            <div class="panel-content chart-wrap">
-              <canvas id="canvas-error" aria-label="Error signal chart"></canvas>
-            </div>
-          </div>
-          <div class="panel chart-panel">
-            <div class="panel-header">
-              <h2>Control Effort u(t)</h2>
-            </div>
-            <div class="panel-content chart-wrap">
-              <canvas id="canvas-control" aria-label="Control effort chart"></canvas>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- RIGHT: Theory -->
-      <aside class="panel info-panel" aria-label="PID theory reference">
-        <div class="panel-header">
-          <h2>Theory</h2>
-        </div>
-        <div class="panel-content">
-
-          <p>A PID controller computes a correction signal <em>u(t)</em> from the error between setpoint and output:</p>
-
-          <div class="formula">u(t) = Kp·e + Ki·∫e dt + Kd·ė</div>
-
-          <ul class="concept-list" style="margin-top:14px">
-            <li><strong>Kp — Proportional</strong>Reacts to present error. Higher Kp → faster response but more
+</header>
+<!-- Main Dashboard -->
+<main class="pid-layout" id="main-dashboard">
+<!-- LEFT: Controls -->
+<aside aria-label="PID tuning controls" class="panel controls-panel">
+<div class="panel-header">
+<h2>Parameters</h2>
+<span class="status-dot" id="status-dot" title="Simulation running"></span>
+</div>
+<div class="panel-content controls-body">
+<!-- Plant -->
+<section class="ctrl-section">
+<h3 class="ctrl-section-title">Plant Model</h3>
+<div class="control-group">
+<label for="plant-select">Transfer Function G(s)</label>
+<select id="plant-select">
+<option value="first">1st Order: K/(τs+1)</option>
+<option selected="" value="second">2nd Order: ωₙ²/(s²+2ζωₙs+ωₙ²)</option>
+<option value="integrator">Integrator: K/s</option>
+<option value="delay">1st Order + Delay</option>
+</select>
+</div>
+<div class="plant-params-grid" id="plant-params">
+<div class="control-group">
+<label for="p-wn">ωₙ (rad/s)</label>
+<input id="p-wn" max="5" min="0.5" step="0.1" type="range" value="1.5"/>
+<span class="val-badge" id="v-wn">1.5</span>
+</div>
+<div class="control-group">
+<label for="p-zeta">ζ (Damping)</label>
+<input id="p-zeta" max="2.0" min="0.1" step="0.05" type="range" value="0.5"/>
+<span class="val-badge" id="v-zeta">0.50</span>
+</div>
+<div class="control-group">
+<label for="p-gain">Plant Gain K</label>
+<input id="p-gain" max="5" min="0.1" step="0.1" type="range" value="1.0"/>
+<span class="val-badge" id="v-gain">1.0</span>
+</div>
+</div>
+</section>
+<hr/>
+<!-- PID Gains -->
+<section class="ctrl-section">
+<h3 class="ctrl-section-title">PID Gains</h3>
+<div class="control-group">
+<label for="kp">Kp — Proportional</label>
+<input id="kp" max="20" min="0" step="0.1" type="range" value="4"/>
+<span class="val-badge" id="v-kp">4.0</span>
+</div>
+<div class="control-group">
+<label for="ki">Ki — Integral</label>
+<input id="ki" max="10" min="0" step="0.05" type="range" value="1.5"/>
+<span class="val-badge" id="v-ki">1.50</span>
+</div>
+<div class="control-group">
+<label for="kd">Kd — Derivative</label>
+<input id="kd" max="5" min="0" step="0.05" type="range" value="0.5"/>
+<span class="val-badge" id="v-kd">0.50</span>
+</div>
+<div class="control-group">
+<label for="setpoint">Setpoint r(t)</label>
+<input id="setpoint" max="2" min="0.1" step="0.1" type="range" value="1.0"/>
+<span class="val-badge" id="v-sp">1.0</span>
+</div>
+</section>
+<hr/>
+<!-- Presets -->
+<section class="ctrl-section">
+<h3 class="ctrl-section-title">Presets</h3>
+<div class="preset-grid">
+<button class="btn preset-btn" data-preset="p-only">P Only</button>
+<button class="btn preset-btn" data-preset="pd">PD</button>
+<button class="btn preset-btn" data-preset="pi">PI</button>
+<button class="btn preset-btn" data-preset="optimal">Optimal</button>
+<button class="btn preset-btn" data-preset="aggressive">Aggressive</button>
+<button class="btn btn-amber preset-btn" data-preset="reset">Reset</button>
+</div>
+</section>
+<hr/>
+<!-- Metrics -->
+<section class="ctrl-section">
+<h3 class="ctrl-section-title">Performance Metrics</h3>
+<div class="metrics-grid">
+<div class="metric-card">
+<span class="metric-label">Rise Time</span>
+<span class="metric-val" id="m-rise">—</span>
+<span class="metric-unit">s</span>
+</div>
+<div class="metric-card">
+<span class="metric-label">Overshoot</span>
+<span class="metric-val" id="m-overshoot">—</span>
+<span class="metric-unit">%</span>
+</div>
+<div class="metric-card">
+<span class="metric-label">Settling</span>
+<span class="metric-val" id="m-settle">—</span>
+<span class="metric-unit">s</span>
+</div>
+<div class="metric-card">
+<span class="metric-label">Steady Error</span>
+<span class="metric-val" id="m-sse">—</span>
+<span class="metric-unit"></span>
+</div>
+</div>
+</section>
+</div>
+</aside>
+<!-- CENTER: Charts -->
+<div class="charts-col">
+<!-- Step Response -->
+<div class="panel chart-panel">
+<div class="panel-header">
+<h2>Step Response y(t)</h2>
+<div class="legend-row">
+<span class="legend-dot" style="background:var(--cyan)"></span><span>Output</span>
+<span class="legend-dot" style="background:var(--amber)"></span><span>Setpoint</span>
+</div>
+</div>
+<div class="panel-content chart-wrap">
+<canvas aria-label="Step response chart" id="canvas-step"></canvas>
+</div>
+</div>
+<!-- Error + Control Signal -->
+<div class="two-charts">
+<div class="panel chart-panel">
+<div class="panel-header">
+<h2>Error e(t)</h2>
+</div>
+<div class="panel-content chart-wrap">
+<canvas aria-label="Error signal chart" id="canvas-error"></canvas>
+</div>
+</div>
+<div class="panel chart-panel">
+<div class="panel-header">
+<h2>Control Effort u(t)</h2>
+</div>
+<div class="panel-content chart-wrap">
+<canvas aria-label="Control effort chart" id="canvas-control"></canvas>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT: Theory -->
+<aside aria-label="PID theory reference" class="panel info-panel">
+<div class="panel-header">
+<h2>Theory</h2>
+</div>
+<div class="panel-content">
+<p>A PID controller computes a correction signal <em>u(t)</em> from the error between setpoint and output:</p>
+<div class="formula">u(t) = Kp·e + Ki·∫e dt + Kd·ė</div>
+<ul class="concept-list" style="margin-top:14px">
+<li><strong>Kp — Proportional</strong>Reacts to present error. Higher Kp → faster response but more
               overshoot and potential instability.</li>
-            <li><strong>Ki — Integral</strong>Eliminates steady-state error by accumulating past error. Too high →
+<li><strong>Ki — Integral</strong>Eliminates steady-state error by accumulating past error. Too high →
               integral windup &amp; oscillation.</li>
-            <li><strong>Kd — Derivative</strong>Anticipates future error via rate of change. Adds damping; sensitive to
+<li><strong>Kd — Derivative</strong>Anticipates future error via rate of change. Adds damping; sensitive to
               noise.</li>
-          </ul>
-
-          <div class="edu-callout" style="margin-top:16px">
-            <p class="callout-title">Ziegler–Nichols Rule</p>
-            <p>Increase Kp until sustained oscillations appear (K<sub>u</sub>, period T<sub>u</sub>). Then set Kp =
+</ul>
+<div class="edu-callout" style="margin-top:16px">
+<p class="callout-title">Ziegler–Nichols Rule</p>
+<p>Increase Kp until sustained oscillations appear (K<sub>u</sub>, period T<sub>u</sub>). Then set Kp =
               0.6K<sub>u</sub>, Ti = T<sub>u</sub>/2, Td = T<sub>u</sub>/8.</p>
-          </div>
-
-          <div class="edu-callout" style="margin-top:10px">
-            <p class="callout-title">Closed-Loop TF</p>
-            <p>C(s)G(s) / (1 + C(s)G(s)) where C(s) = Kp + Ki/s + Kd·s</p>
-          </div>
-
-          <hr>
-          <h3 style="margin-bottom:8px;font-size:0.82rem;color:var(--text-secondary)">Key Metrics</h3>
-          <ul class="steps-list">
-            <li data-step="1"><span><strong style="color:var(--cyan)">Rise Time</strong> — time to first reach 90% of
+</div>
+<div class="edu-callout" style="margin-top:10px">
+<p class="callout-title">Closed-Loop TF</p>
+<p>C(s)G(s) / (1 + C(s)G(s)) where C(s) = Kp + Ki/s + Kd·s</p>
+</div>
+<hr/>
+<h3 style="margin-bottom:8px;font-size:0.82rem;color:var(--text-secondary)">Key Metrics</h3>
+<ul class="steps-list">
+<li data-step="1"><span><strong style="color:var(--cyan)">Rise Time</strong> — time to first reach 90% of
                 setpoint.</span></li>
-            <li data-step="2"><span><strong style="color:var(--cyan)">Overshoot</strong> — peak output above setpoint
+<li data-step="2"><span><strong style="color:var(--cyan)">Overshoot</strong> — peak output above setpoint
                 (%).</span></li>
-            <li data-step="3"><span><strong style="color:var(--cyan)">Settling Time</strong> — time to stay within ±2%
+<li data-step="3"><span><strong style="color:var(--cyan)">Settling Time</strong> — time to stay within ±2%
                 band.</span></li>
-            <li data-step="4"><span><strong style="color:var(--cyan)">SSE</strong> — steady-state error as t→∞.</span>
-            </li>
-          </ul>
-
-        </div>
-      </aside>
-
-    </main>
-
-    <!-- Edu Bar -->
-    <div class="edu-bar" role="complementary" aria-label="Quick facts">
-      <div class="edu-bar-inner">
-        <div class="edu-bar-title">
-          <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke-width="2" stroke-linecap="round">
-            <circle cx="10" cy="10" r="9" />
-            <line x1="10" y1="6" x2="10" y2="10" />
-            <circle cx="10" cy="14" r="1" fill="currentColor" />
-          </svg>
+<li data-step="4"><span><strong style="color:var(--cyan)">SSE</strong> — steady-state error as t→∞.</span>
+</li>
+</ul>
+</div>
+</aside>
+</main>
+<!-- Edu Bar -->
+<div aria-label="Quick facts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<div class="edu-bar-title">
+<svg fill="none" height="14" stroke-linecap="round" stroke-width="2" viewbox="0 0 20 20" width="14">
+<circle cx="10" cy="10" r="9"></circle>
+<line x1="10" x2="10" y1="6" y2="10"></line>
+<circle cx="10" cy="14" fill="currentColor" r="1"></circle>
+</svg>
           Quick Facts
         </div>
-        <div class="edu-fact-item">
-          <span class="edu-fact-label">Type I System</span>
-          <span class="edu-fact-text">A plant with one integrator (Type I) has zero SSE for step inputs without integral
+<div class="edu-fact-item">
+<span class="edu-fact-label">Type I System</span>
+<span class="edu-fact-text">A plant with one integrator (Type I) has zero SSE for step inputs without integral
             action needed.</span>
-        </div>
-        <div class="edu-fact-item">
-          <span class="edu-fact-label">Derivative Kick</span>
-          <span class="edu-fact-text">When setpoint jumps, Kd causes a large spike in u(t). Derivative-on-measurement
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Derivative Kick</span>
+<span class="edu-fact-text">When setpoint jumps, Kd causes a large spike in u(t). Derivative-on-measurement
             mitigates this.</span>
-        </div>
-        <div class="edu-fact-item">
-          <span class="edu-fact-label">Windup Guard</span>
-          <span class="edu-fact-text">If the actuator saturates, the integral term keeps growing — anti-windup clamps it
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Windup Guard</span>
+<span class="edu-fact-text">If the actuator saturates, the integral term keeps growing — anti-windup clamps it
             to safe bounds.</span>
-        </div>
-        <div class="edu-fact-item">
-          <span class="edu-fact-label">Stability Margin</span>
-          <span class="edu-fact-text">Gain margin &gt; 6 dB and phase margin &gt; 45° are common design targets for
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Stability Margin</span>
+<span class="edu-fact-text">Gain margin &gt; 6 dB and phase margin &gt; 45° are common design targets for
             robust PID loops.</span>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /page-wrapper -->
-
-  <script src="script.js"></script>
+</div>
+</div>
+</div>
+</div><!-- /page-wrapper -->
+<script src="script.js"></script>
 </body>
-
 </html>

@@ -1,27 +1,28 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability.">
-    <meta name="keywords" content="Laplace transform, s-plane, poles zeros, transfer function, control systems, ROC, region of convergence, complex frequency">
-    <meta name="author" content="Interactive Engineering Learning Suite">
-    <meta name="robots" content="index, follow">
-    <meta name="subject" content="EE / Mathematics">
-    <meta name="category" content="Educational Tool, Control Systems / Signals">
-    <meta name="language" content="English">
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Laplace Transform S-Plane Explorer | Control Systems Interactive">
-    <meta property="og:description" content="Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability.">
-    <meta property="og:locale" content="en_US">
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Laplace Transform S-Plane Explorer | Control Systems Interactive">
-    <meta name="twitter:description" content="Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability.">
-    <!-- Canonical & Schema -->
-    <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO Meta Tags -->
+<meta content="Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability." name="description"/>
+<meta content="Laplace transform, s-plane, poles zeros, transfer function, control systems, ROC, region of convergence, complex frequency" name="keywords"/>
+<meta content="Interactive Engineering Learning Suite" name="author"/>
+<meta content="index, follow" name="robots"/>
+<meta content="EE / Mathematics" name="subject"/>
+<meta content="Educational Tool, Control Systems / Signals" name="category"/>
+<meta content="English" name="language"/>
+<!-- Open Graph -->
+<meta content="website" property="og:type"/>
+<meta content="Laplace Transform S-Plane Explorer | Control Systems Interactive" property="og:title"/>
+<meta content="Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability." property="og:description"/>
+<meta content="en_US" property="og:locale"/>
+<!-- Twitter Card -->
+<meta content="summary" name="twitter:card"/>
+<meta content="Laplace Transform S-Plane Explorer | Control Systems Interactive" name="twitter:title"/>
+<meta content="Visualize the Laplace transform on the complex s-plane. Place poles and zeros, observe the transfer function surface, and understand system stability." name="twitter:description"/>
+<!-- Canonical & Schema -->
+<script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LearningResource",
@@ -32,118 +33,113 @@
       "teaches": "Control Systems / Signals"
     }
     </script>
-    <!-- Shared Design System -->
-    <link rel="stylesheet" href="../shared.css">
-    <title>Laplace Transform S-Plane Explorer | Control Systems Interactive</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+<!-- Shared Design System -->
+<link href="../shared.css" rel="stylesheet"/>
+<title>Laplace Transform S-Plane Explorer | Control Systems Interactive</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://enggviz.online/pages/Laplace%20Transform/index.html" rel="canonical"/></head>
 <body><nav class="global-nav">
-    <div class="nav-left">
-        <a href="../../index.html" class="brand-logo" aria-label="ECV Home">
-            <div class="logo-icon">
-                <img src="../../logo.svg" alt="ECV Logo" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
-            <div class="brand-text">
-                <span class="brand-title">ECV</span>
-                <span class="brand-subtitle">Engineering Concepts Visualizer</span>
-            </div>
-        </a>
-    </div>
-    <div class="nav-right">
-        <a href="../../index.html" class="nav-link">HOME</a>
-        <a href="../../topics.html" class="nav-link">TOPICS</a>
-        <a href="../../about.html" class="nav-link">ABOUT</a>
-    </div>
+<div class="nav-left">
+<a aria-label="ECV Home" class="brand-logo" href="../../index.html">
+<div class="logo-icon">
+<img alt="ECV Logo" src="../../logo.svg" style="width: 100%; height: 100%; object-fit: contain;"/>
+</div>
+<div class="brand-text">
+<span class="brand-title">ECV</span>
+<span class="brand-subtitle">Engineering Concepts Visualizer</span>
+</div>
+</a>
+</div>
+<div class="nav-right">
+<a class="nav-link" href="../../index.html">HOME</a>
+<a class="nav-link" href="../../topics.html">TOPICS</a>
+<a class="nav-link" href="../../about.html">ABOUT</a>
+</div>
 </nav>
 <div class="dashboard">
-        <header>
-            <div class="header-titles">
-                <h1>Advanced Laplace Systems Explorer</h1>
-                <p>Interactive s-plane, time-domain simulation, and frequency response (Bode).</p>
-            </div>
-            <div class="header-controls">
-                <button id="btn-add-pole-real" class="btn pole-btn">+ Add Real Pole (✖)</button>
-                <button id="btn-add-pole-complex" class="btn pole-btn">+ Add Complex Poles (✖)</button>
-                <button id="btn-add-zero" class="btn zero-btn">+ Add Zero (〇)</button>
-                <button id="btn-clear" class="btn clear-btn">Clear All</button>
-            </div>
-        </header>
-
-        <main class="grid-container">
-            <section class="panel">
-                <div class="panel-header">
-                    <h2>s-Plane (Complex Plane)</h2>
-                    <div class="toggles">
-                        <label><input type="checkbox" id="toggle-snap" checked> Snap to Grid</label>
-                    </div>
+<header>
+<div class="header-titles">
+<h1>Advanced Laplace Systems Explorer</h1>
+<p>Interactive s-plane, time-domain simulation, and frequency response (Bode).</p>
+</div>
+<div class="header-controls">
+<button class="btn pole-btn" id="btn-add-pole-real">+ Add Real Pole (✖)</button>
+<button class="btn pole-btn" id="btn-add-pole-complex">+ Add Complex Poles (✖)</button>
+<button class="btn zero-btn" id="btn-add-zero">+ Add Zero (〇)</button>
+<button class="btn clear-btn" id="btn-clear">Clear All</button>
+</div>
+</header>
+<main class="grid-container">
+<section class="panel">
+<div class="panel-header">
+<h2>s-Plane (Complex Plane)</h2>
+<div class="toggles">
+<label><input checked="" id="toggle-snap" type="checkbox"/> Snap to Grid</label>
+</div>
+</div>
+<div class="canvas-wrapper splane-wrapper">
+<canvas id="sPlaneCanvas"></canvas>
+<div class="tooltip" id="tooltip"></div>
+<div class="splane-hint">Scroll to Zoom | Drag to Pan</div>
+</div>
+</section>
+<section class="panel">
+<div class="panel-header">
+<h2>Time Domain Response f(t)</h2>
+<div class="toggles">
+<select id="response-type">
+<option value="impulse">Impulse Response δ(t)</option>
+<option selected="" value="step">Step Response u(t)</option>
+</select>
+<label><input checked="" id="toggle-envelope" type="checkbox"/> Show Envelope</label>
+</div>
+</div>
+<div class="canvas-wrapper time-wrapper">
+<canvas id="timeCanvas"></canvas>
+</div>
+</section>
+<section class="panel math-panel">
+<h2>Mathematical Decomposition (Partial Fractions)</h2>
+<div class="math-content" id="math-decomposition">
+<p class="placeholder-text">Add poles/zeros to see the exact time-domain equation...</p>
+</div>
+<div class="intuition-guide">
+<strong>Intuition Guide:</strong><br/>
+<span style="color:var(--pole-color)">σ (Real axis)</span> controls exponential <strong>Decay / Growth</strong>.<br/>
+<span style="color:var(--zero-color)">jω (Imag axis)</span> controls <strong>Oscillation Frequency</strong>.<br/>
+<span style="color:var(--envelope-color)">ROC</span> (Region of Convergence) must include the jω axis for a stable, causal system.
                 </div>
-                <div class="canvas-wrapper splane-wrapper">
-                    <canvas id="sPlaneCanvas"></canvas>
-                    <div id="tooltip" class="tooltip"></div>
-                    <div class="splane-hint">Scroll to Zoom | Drag to Pan</div>
-                </div>
-            </section>
-
-            <section class="panel">
-                <div class="panel-header">
-                    <h2>Time Domain Response f(t)</h2>
-                    <div class="toggles">
-                        <select id="response-type">
-                            <option value="impulse">Impulse Response δ(t)</option>
-                            <option value="step" selected>Step Response u(t)</option>
-                        </select>
-                        <label><input type="checkbox" id="toggle-envelope" checked> Show Envelope</label>
-                    </div>
-                </div>
-                <div class="canvas-wrapper time-wrapper">
-                    <canvas id="timeCanvas"></canvas>
-                </div>
-            </section>
-
-            <section class="panel math-panel">
-                <h2>Mathematical Decomposition (Partial Fractions)</h2>
-                <div id="math-decomposition" class="math-content">
-                    <p class="placeholder-text">Add poles/zeros to see the exact time-domain equation...</p>
-                </div>
-                <div class="intuition-guide">
-                    <strong>Intuition Guide:</strong><br>
-                    <span style="color:var(--pole-color)">σ (Real axis)</span> controls exponential <strong>Decay / Growth</strong>.<br>
-                    <span style="color:var(--zero-color)">jω (Imag axis)</span> controls <strong>Oscillation Frequency</strong>.<br>
-                    <span style="color:var(--envelope-color)">ROC</span> (Region of Convergence) must include the jω axis for a stable, causal system.
-                </div>
-            </section>
-
-            <section class="panel freq-panel">
-                <h2>Frequency Response (Bode Magnitude Plot)</h2>
-                <p class="subtitle">Evaluated along the jω axis (s = jω)</p>
-                <div class="canvas-wrapper freq-wrapper">
-                    <canvas id="freqCanvas"></canvas>
-                </div>
-            </section>
-        </main>
-    </div>
-    <script src="script.js"></script>
-
-    <!-- Educational Quick Reference -->
-    <section class="edu-bar" aria-label="Key Concepts" role="complementary">
-        <div class="edu-bar-inner">
-            <span class="edu-bar-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+</section>
+<section class="panel freq-panel">
+<h2>Frequency Response (Bode Magnitude Plot)</h2>
+<p class="subtitle">Evaluated along the jω axis (s = jω)</p>
+<div class="canvas-wrapper freq-wrapper">
+<canvas id="freqCanvas"></canvas>
+</div>
+</section>
+</main>
+</div>
+<script src="script.js"></script>
+<!-- Educational Quick Reference -->
+<section aria-label="Key Concepts" class="edu-bar" role="complementary">
+<div class="edu-bar-inner">
+<span class="edu-bar-title">
+<svg aria-hidden="true" fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                 Key Concepts
             </span>
-            <div class="edu-fact-item">
-                  <span class="edu-fact-label">Definition</span>
-                  <span class="edu-fact-text">F(s) = ∫₀^∞ f(t)·e^(−st) dt</span>
-                </div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Inverse via Poles</span>
-                  <span class="edu-fact-text">Partial fractions of F(s) → sum of exponentials. Pole at s=−a → e^(−at)u(t).</span>
-                </div>
+<span class="edu-fact-label">Definition</span>
+<span class="edu-fact-text">F(s) = ∫₀^∞ f(t)·e^(−st) dt</span>
+</div>
 <div class="edu-fact-item">
-                  <span class="edu-fact-label">Initial Value Theorem</span>
-                  <span class="edu-fact-text">f(0⁺) = lim_{s→∞} s·F(s)</span>
-                </div>
-        </div>
-    </section>
+<span class="edu-fact-label">Inverse via Poles</span>
+<span class="edu-fact-text">Partial fractions of F(s) → sum of exponentials. Pole at s=−a → e^(−at)u(t).</span>
+</div>
+<div class="edu-fact-item">
+<span class="edu-fact-label">Initial Value Theorem</span>
+<span class="edu-fact-text">f(0⁺) = lim_{s→∞} s·F(s)</span>
+</div>
+</div>
+</section>
 </body>
 </html>
